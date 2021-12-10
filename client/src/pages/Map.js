@@ -1,11 +1,23 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+
 import ReactMapGl, {Marker} from "react-map-gl"
+import MapMarker from '../components/MapMarker'
+
+
+
+//deployment bug fix
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
+mapboxgl.workerClass = MapboxWorker
 
 
 //components 
-import MapMarker from '../components/MapMarker'
+
 
 
 function Map() {
@@ -27,11 +39,12 @@ function Map() {
     };
 
 
-    
+
     
     const [viewport, setViewport] = useState(berlinViewport)
     const [allArtists, setAllArtists] = useState([])
-    const API_URL = process.env.API_URL
+    //const API_URL = process.env.API_URL
+    const API_URL = 'http://localhost:5005'
 
 
 
