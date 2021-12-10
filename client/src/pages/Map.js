@@ -28,9 +28,10 @@ function Map() {
 
 
     
+    
     const [viewport, setViewport] = useState(berlinViewport)
     const [allArtists, setAllArtists] = useState([])
-    const API_URL = 'http://localhost:5005';
+    const API_URL = process.env.API_URL
 
 
 
