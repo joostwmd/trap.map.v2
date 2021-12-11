@@ -60,6 +60,7 @@ function Map() {
     }, [])
 
 
+    
     return (
     <div>
         <ReactMapGl
