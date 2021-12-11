@@ -8,8 +8,8 @@ function ArtistProfile() {
 
 
     //const API_URL = process.env.API_URL;
-    const API_URL = 'http://localhost:5005'
-    //const API_URL = 'https://trapmapversion2.herokuapp.com/'
+    //const API_URL = 'http://localhost:5005'
+    const API_URL = 'https://trapmapversion2.herokuapp.com/'
 
     const artistDB = window.location.pathname.split("/")[2]
     const requestBody = {artistDB}
@@ -21,7 +21,7 @@ function ArtistProfile() {
     const [links, setLinks] = useState({})
 
 
-    
+
     //tracks
     const [topTracks, setTopTracks] = useState([])
    
