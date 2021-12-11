@@ -20,6 +20,8 @@ function ArtistProfile() {
     const [releasedMusic, setReleasedMusic] = useState("")
     const [links, setLinks] = useState({})
 
+
+    
     //tracks
     const [topTracks, setTopTracks] = useState([])
    
