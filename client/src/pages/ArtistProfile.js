@@ -91,6 +91,8 @@ function ArtistProfile() {
         
     }, [])
 
+
+    
     return (
         <div id="profileWrapper">
             
