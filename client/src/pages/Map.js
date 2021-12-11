@@ -78,7 +78,13 @@ function Map() {
                 }
             }}
         >
-            {allArtists.map(artist => {
+            <Marker 
+                latitude={52.520008}
+                longitude={13.404954}
+            >
+                test
+            </Marker>
+            {/* {allArtists.map(artist => {
                 return (
                     <Marker
                         latitude={artist.coordinates[1]}
@@ -88,7 +94,7 @@ function Map() {
                             <MapMarker artist={artist} />
                         </Link>
                     </Marker>
-            )})}
+            )})} */}
         </ReactMapGl>
     </div>
     )
