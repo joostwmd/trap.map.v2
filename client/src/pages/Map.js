@@ -51,7 +51,7 @@ function Map() {
     useEffect(() => {
         axios.get(`${API_URL}/dataBase/map`)
             .then(res => {
-                console.log("all artists", res)
+                console.log("all artists", res.data)
                 setAllArtists(res.data)
                 // => spotify name and picture already in db
             })
@@ -60,7 +60,7 @@ function Map() {
     }, [])
 
 
-    
+
     return (
     <div>
         <ReactMapGl
