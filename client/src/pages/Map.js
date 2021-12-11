@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 import ReactMapGl, {Marker} from "react-map-gl"
+
+//components
 import MapMarker from '../components/MapMarker'
 
 
@@ -13,11 +15,6 @@ import mapboxgl from 'mapbox-gl';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 mapboxgl.workerClass = MapboxWorker
-
-
-//components 
-
-
 
 function Map() {
 
@@ -79,13 +76,8 @@ function Map() {
                 }
             }}
         >
-            <Marker 
-                latitude={52.520008}
-                longitude={13.404954}
-            >
-                test
-            </Marker>
-            {/* {allArtists.map(artist => {
+            
+            {allArtists.map(artist => {
                 return (
                     <Marker
                         latitude={artist.coordinates[1]}
@@ -95,7 +87,7 @@ function Map() {
                             <MapMarker artist={artist} />
                         </Link>
                     </Marker>
-            )})} */}
+            )})}
         </ReactMapGl>
     </div>
     )
