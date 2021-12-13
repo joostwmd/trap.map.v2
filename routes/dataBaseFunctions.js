@@ -4,7 +4,7 @@ const Artist = require("../models/Artist");
 
 
 router.get("/map", (req, res, next) => {
-    console.log("test map")
+    
     Artist.find({})
          .then(artists => {
            res.status(200).json(artists)
@@ -15,9 +15,8 @@ router.get("/map", (req, res, next) => {
 
 
 router.post("/artistProfile", (req, res, next) => {
-    console.log("artistProfileRoute", req.body.artistDB)
 
-    Artist.findById(req.body.artistDB)
+    Artist.findById(req.body.artistID)
         .then(artist => {
             res.status(200).json(artist)
         })

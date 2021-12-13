@@ -31,6 +31,7 @@ function Map() {
         berlinBounds : [[13.192625881080286, 52.38949809002746], [13.659758765765956, 52.64256574061617]]
     }
 
+
     const isOutOfMaxBounds = (latitude, longitude, maxBounds) => {
         const [[swLng, swLat], [neLng, neLat]] = maxBounds;
     
@@ -48,6 +49,8 @@ function Map() {
 
 
 
+    let size = 40
+
     useEffect(() => {
         axios.get(`${API_URL}/dataBase/map`)
             .then(res => {
@@ -58,7 +61,6 @@ function Map() {
 
         
     }, [])
-
 
 
     return (
@@ -78,17 +80,19 @@ function Map() {
                     setViewport(newViewport)
                 }
             }}
-        >
-            
+        >   
             {allArtists.map(artist => {
                 return (
                     <Marker
                         latitude={artist.coordinates[1]}
                         longitude={artist.coordinates[0]}
+
                     >
-                        <Link to={`${artist._id}`}>
-                            <MapMarker artist={artist} />
-                        </Link>
+                        <div style={{ transform: `translate(${-size / 2}px,${-size}px)` }}>
+                            <Link to={`${artist._id}`}>
+                                <MapMarker artist={artist} />
+                            </Link>
+                        </div>
                     </Marker>
             )})}
         </ReactMapGl>

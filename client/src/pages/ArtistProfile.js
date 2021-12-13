@@ -11,8 +11,8 @@ function ArtistProfile() {
     //const API_URL = 'http://localhost:5005'
     const API_URL = 'https://trapmapversion2.herokuapp.com'
 
-    const artistDB = window.location.pathname.split("/")[2]
-    const requestBody = {artistDB}
+    const artistID = window.location.pathname.split("/")[2]
+    const requestBody = {artistID}
 
     //header
     const [artistName, setArtistName] = useState("")
@@ -67,10 +67,10 @@ function ArtistProfile() {
 
     useEffect( () => {
 
-        
 
         getSpotifyData()
             .then(spotifyData => {
+                console.log(spotifyData)
                 //header
                 setArtistName(spotifyData.data[0].name)
                 setArtistPicture(spotifyData.data[0].images[0].url)
@@ -102,7 +102,7 @@ function ArtistProfile() {
                 if (track.preview_url !== null){
                     return (
                         <div>
-                            <Track track={track} />
+                            <Track track={track} artistName={artistName}/>
                         </div>
                 )
                 }
