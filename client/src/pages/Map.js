@@ -14,6 +14,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
+
 mapboxgl.workerClass = MapboxWorker
 
 
@@ -24,7 +25,7 @@ function Map() {
     const berlinViewport = {
         latitude : 52.520008, 
         longitude : 13.404954,
-        width : "100w",
+        width : "100vw",
         height : "100vh",
         zoom : 9,
         minZoom : 9,
@@ -52,7 +53,7 @@ function Map() {
     let size = 40
 
 
-    
+
     useEffect(() => {
         axios.get(`${API_URL}/dataBase/map`)
             .then(res => {
@@ -64,15 +65,15 @@ function Map() {
         
     }, [])
 
-
     return (
-    <div>
+    <div id="mapWrapper">
         <ReactMapGl
             {...viewport}
             mapboxApiAccessToken = "pk.eyJ1Ijoiam9vc3R3bWQiLCJhIjoiY2t1NDQ3NmJqMXRwbzJwcGM5a3FuY3B3dCJ9.yyon_mO5Y9sI1WgD-XFDRQ"
             mapStyle = "mapbox://styles/joostwmd/ckvwifepf21kj15pflu8gbkdd"
 
             onViewportChange={newViewport => {
+            
                 if (!isOutOfMaxBounds(
                     newViewport.latitude,
                     newViewport.longitude,
@@ -90,9 +91,11 @@ function Map() {
                         longitude={artist.coordinates[0]}
 
                     >
-                        <div style={{ transform: `translate(${-size / 2}px,${-size}px)` }}>
+                        <div style={{ transform: `translate(${-size / 2}px,${-size}px)`}}>
                             <Link to={`${artist._id}`}>
-                                <MapMarker artist={artist} />
+                                
+                                 <MapMarker artist={artist} />
+                                
                             </Link>
                         </div>
                     </Marker>
@@ -103,3 +106,4 @@ function Map() {
 }
 
 export default Map
+
