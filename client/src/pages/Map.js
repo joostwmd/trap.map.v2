@@ -51,6 +51,8 @@ function Map() {
 
     let size = 40
 
+
+    
     useEffect(() => {
         axios.get(`${API_URL}/dataBase/map`)
             .then(res => {
