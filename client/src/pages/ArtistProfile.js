@@ -6,15 +6,21 @@ import ArtistProfileHeader from '../components/ArtistProfileHeader';
 
 function ArtistProfile() {
 
-    const API_URL = 'http://localhost:5005';
-    const artistDB = window.location.pathname.split("/")[2]
-    const requestBody = {artistDB}
+
+    //const API_URL = process.env.API_URL;
+    //const API_URL = 'http://localhost:5005'
+    const API_URL = 'https://trapmapversion2.herokuapp.com'
+
+    const artistID = window.location.pathname.split("/")[2]
+    const requestBody = {artistID}
 
     //header
     const [artistName, setArtistName] = useState("")
     const [artistPicture, setArtistPicture] = useState("")
     const [releasedMusic, setReleasedMusic] = useState("")
     const [links, setLinks] = useState({})
+
+
 
     //tracks
     const [topTracks, setTopTracks] = useState([])
@@ -61,8 +67,10 @@ function ArtistProfile() {
 
     useEffect( () => {
 
+
         getSpotifyData()
             .then(spotifyData => {
+                console.log(spotifyData)
                 //header
                 setArtistName(spotifyData.data[0].name)
                 setArtistPicture(spotifyData.data[0].images[0].url)
@@ -83,6 +91,8 @@ function ArtistProfile() {
         
     }, [])
 
+
+    
     return (
         <div id="profileWrapper">
             
@@ -92,7 +102,7 @@ function ArtistProfile() {
                 if (track.preview_url !== null){
                     return (
                         <div>
-                            <Track track={track} />
+                            <Track track={track} artistName={artistName}/>
                         </div>
                 )
                 }
