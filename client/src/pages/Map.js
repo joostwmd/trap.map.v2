@@ -11,6 +11,10 @@ function Map() {
     const API_URL = 'https://trapmapversion2.herokuapp.com'
     const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
+    //for development
+    //const CLIENT_URL = 'http://localhost:3000'
+    
+    
     //map props
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -50,15 +54,8 @@ function Map() {
 
     const sendArtistIds = (artistDatabaseId, artistSpotifyId) => {
 
-        let ids = {
-            'spotify' : artistSpotifyId,
-            'dataBase' : artistDatabaseId
-        }
-
-        let idsString = JSON.stringify(ids)
-
         if (typeof(Storage) !== "undefined") {
-            localStorage.setItem('data', idsString);
+            localStorage.setItem('artistIds', `${artistSpotifyId}:${artistDatabaseId}`);
         } else {
             // Sorry! No Web Storage support..
         }

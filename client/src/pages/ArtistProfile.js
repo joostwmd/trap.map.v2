@@ -6,9 +6,9 @@ import ArtistProfileHeader from '../components/ArtistProfileHeader';
 
 function ArtistProfile() {
 
-
-    //const API_URL = process.env.API_URL;
+    //for develpoment
     //const API_URL = 'http://localhost:5005'
+    
     const API_URL = 'https://trapmapversion2.herokuapp.com'
 
     //header
@@ -47,9 +47,8 @@ function ArtistProfile() {
     }
 
     const getArtistsIds = async () => {
-        const data = localStorage.getItem('data')
-        //console.log('test', data.split(",")[0].split(":")[1], data.split(",")[1].split(":")[1].slice(0, -1))
-        return [data.split(",")[0].split(":")[1], data.split(",")[1].split(":")[1].slice(0, -1)]
+        const artistIds = localStorage.getItem('artistIds')
+        return artistIds.split(':')
     }
 
     const getSpotifyData = async (spotifyId) => {
@@ -58,7 +57,6 @@ function ArtistProfile() {
         const response = await axios.post(`${API_URL}/spotify/loadArtistProfile`, requestBody)
         const data = await response
 
-        console.log("spotify data", data)
         return data
     }
 
@@ -68,17 +66,16 @@ function ArtistProfile() {
         const response = await axios.post(`${API_URL}/dataBase/artistProfile`, requestBody)
         const data = await response
 
-        console.log("db data", data)
         return data
     }
     
 
     useEffect( () => {
+        
         getArtistsIds()
             .then(ids => {
                 getSpotifyData(ids[0])
-                    .then(spotifyData => {
-                        console.log(spotifyData)
+                    .then(spotifyData => { 
 
                         //header
                         setArtistName(spotifyData.data[0].name)
@@ -91,7 +88,7 @@ function ArtistProfile() {
 
                 getDataBaseData(ids[1])
                     .then(dataBaseData => {
-                        console.log(dataBaseData)
+    
                         //header
                         setLinks({
                             "spotify" : dataBaseData.data.spotifyLink,
@@ -104,7 +101,6 @@ function ArtistProfile() {
     }, [])
 
 
-    
     return (
         <div id="profileWrapper">
             
@@ -113,7 +109,7 @@ function ArtistProfile() {
             {topTracks.map(track => {
                 if (track.preview_url !== null){
                     return (
-                        <div>
+                        <div key={track.name}>
                             <Track track={track} artistName={artistName}/>
                         </div>
                 )

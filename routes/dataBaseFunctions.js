@@ -15,8 +15,8 @@ router.get("/map", (req, res, next) => {
 
 
 router.post("/artistProfile", (req, res, next) => {
-    console.log("profile", req.body)
-    Artist.findById(req.body.dataBaseId.slice(1, (req.body.dataBaseId.length - 1)))
+    console.log(req.body.dataBaseId)
+    Artist.findById(req.body.dataBaseId)
         .then(artist => {
             res.status(200).json(artist)
         })
