@@ -7,8 +7,10 @@ import Home from './pages/Home';
 import ArtistProfile from './pages/ArtistProfile';
 import Map from './pages/Map';
 
+
 //components
 import Nav from './components/Nav'
+
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
           />
 
           <Route 
-            exact path="/map/:artistDB"
+            exact path="/map/:artistName"
             element={<ArtistProfile />}
           />
 

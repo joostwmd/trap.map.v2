@@ -15,11 +15,12 @@ router.get("/map", (req, res, next) => {
 
 
 router.post("/artistProfile", (req, res, next) => {
-
-    Artist.findById(req.body.artistID)
+    console.log("profile", req.body)
+    Artist.findById(req.body.dataBaseId.slice(1, (req.body.dataBaseId.length - 1)))
         .then(artist => {
             res.status(200).json(artist)
         })
 })
+
 
 module.exports = router;
