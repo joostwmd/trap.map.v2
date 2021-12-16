@@ -105,7 +105,8 @@ function Map() {
         //create a marker(img) for each artists (feature) object
         for (let i = 0; i < features.length; i++){
             //create divs
-            const el = document.createElement('img')
+            const el = document.createElement('div')
+            //const el = document.createElement('img')
             el.className = 'marker'
 
             //add the divs to mapboxgl marker 
@@ -120,8 +121,12 @@ function Map() {
                         sendArtistIds(features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId)
                         redirectToArtistProfilePage(features[i].properties.artistName)
                     })
+                    
+                    //add url to background img
+                    markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
+                    
                     //add image src
-                    markers[i].setAttribute('src', `${features[i].properties.artistPicture}`)
+                    //markers[i].setAttribute('src', `${features[i].properties.artistPicture}`)
                     
 
                     //resize markers in zoom

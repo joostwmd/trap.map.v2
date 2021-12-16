@@ -1,6 +1,7 @@
 .marker{
   width: 30px;
   height: 30px;
-  border-radius: 50%;  
+  border-radius: 50%; 
+  background-size: cover;
   transform: translate(-15, -30);
 }
