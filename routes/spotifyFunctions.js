@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const Artist = require("../models/Artist");
 
 const spotifyFetchToken = require('../spotifyApi/fetchTokenConfig')
 const spotifyArtistCalls = require('../spotifyApi/artistCallsConfig');

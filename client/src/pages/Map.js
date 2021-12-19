@@ -8,11 +8,12 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    //const API_URL = 'https://trapmapversion2.herokuapp.com'
     const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
     //const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -132,7 +133,7 @@ function Map() {
                     //resize markers in zoom
                     map.current.on('zoom', () => {
                         const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
-                        let size = (Number((map.current.getZoom()) - initialZoom) * 10) + 30
+                        let size = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
                         markers[i].style.height = `${size}px`
                         markers[i].style.width = `${size}px`
                     })
