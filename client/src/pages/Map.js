@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
 
-
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 
 
@@ -12,8 +11,8 @@ function Map() {
     const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
-    //const CLIENT_URL = 'http://localhost:3000'
-    //const API_URL = 'http://localhost:5005'
+    // const CLIENT_URL = 'http://localhost:3000'
+    // const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -125,7 +124,7 @@ function Map() {
                     
                     //add url to background img
                     markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
-                    
+
                     //add image src
                     //markers[i].setAttribute('src', `${features[i].properties.artistPicture}`)
                     

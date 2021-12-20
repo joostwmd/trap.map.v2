@@ -22,6 +22,9 @@ app.use("/spotify", spotifyFunctions);
 const dataBaseFunctions = require("./routes/dataBaseFunctions")
 app.use("/dataBase", dataBaseFunctions)
 
+const trafficFunctions = require("./routes/trafficFunctions")
+app.use("/traffic", trafficFunctions)
+
 
 
 //deployment

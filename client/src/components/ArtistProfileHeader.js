@@ -1,6 +1,6 @@
 function ArtistProfileHeader({artistName, artistPicture, releasedMusic, links}) {
     return (
-        <div>
+        <div id="artistProfileHeader">
             <h1>{artistName}</h1>
             <img src={artistPicture} />
             <h4>{releasedMusic}</h4>

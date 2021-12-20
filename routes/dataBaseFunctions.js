@@ -15,7 +15,6 @@ router.get("/map", (req, res, next) => {
 
 
 router.post("/artistProfile", (req, res, next) => {
-    console.log(req.body.dataBaseId)
     Artist.findById(req.body.dataBaseId)
         .then(artist => {
             res.status(200).json(artist)
