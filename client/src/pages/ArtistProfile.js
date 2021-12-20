@@ -94,7 +94,7 @@ function ArtistProfile() {
 
     const addInstagramProfileVisit = (dataBaseId) => {
         let requestBody = {dataBaseId}
-        axios.post(`${API_URL}/traffic/addYoutubeProfileVisit`, requestBody)
+        axios.post(`${API_URL}/traffic/addInstagramProfileVisit`, requestBody)
     }
 
 
