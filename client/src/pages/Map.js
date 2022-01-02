@@ -7,12 +7,12 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
-    // const CLIENT_URL = 'http://localhost:3000'
-    // const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -84,7 +84,7 @@ function Map() {
         if (map.current) return; // initialize map only once
             map.current = new mapboxgl.Map({        
             container: mapContainer.current,
-            style: 'mapbox://styles/joostwmd/ckvwifepf21kj15pflu8gbkdd',
+            style: 'mapbox://styles/joostwmd/ckufanbzo4qlm18qj3w744lbx',
             center: berlinCenter,
             zoom: 8.5,
             minZoom : 8.5,

@@ -87,6 +87,11 @@ function ArtistProfile() {
         axios.post(`${API_URL}/traffic/addSpotifyProfileVisit`, requestBody)
     }
 
+    const addAppleMusicProfileVisit = (dataBaseId) => {
+        let requestBody = {dataBaseId}
+        axios.post(`${API_URL}/traffic/addAppleMusicProfileVisit`, requestBody)
+    }
+
     const addYoutubeProfileVisit = (dataBaseId) => {
         let requestBody = {dataBaseId}
         axios.post(`${API_URL}/traffic/addYoutubeProfileVisit`, requestBody)
@@ -126,6 +131,7 @@ function ArtistProfile() {
                         //header
                         setLinks({
                             "spotify" : dataBaseData.data.spotifyLink,
+                            "appleMusic" : dataBaseData.data.appleMusicLink,
                             "youtube" : dataBaseData.data.youtubeLink,
                             "instagram" : dataBaseData.data.instagramLink
                         })
@@ -146,6 +152,10 @@ function ArtistProfile() {
 
                 <div onClick={() => {addSpotifyProfileVisit(artistDatabaseId)}}>
                     <a href={links.spotify}>spotify</a>
+                </div>
+
+                <div onClick={() => {addAppleMusicProfileVisit(artistDatabaseId)}}>
+                    <a href={links.appleMusic}>apple music</a>
                 </div>
 
                 <div onClick={() => {addYoutubeProfileVisit(artistDatabaseId)}}>
@@ -191,15 +201,3 @@ function ArtistProfile() {
 
 export default ArtistProfile
 
-// const getFeaturesOnTrack = () => {
-        
-//     let artistString = "feat: "
-//     for (let artist of artistsOnTrack){
-
-//         if (artistName !== artist.name){
-//             artistString += `${artist.name}, `
-//         }
-         
-//     }
-//     setTheArtists(artistString)
-// }

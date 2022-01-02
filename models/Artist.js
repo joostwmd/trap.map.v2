@@ -7,6 +7,7 @@ const artistSchema = new Schema({
     city : String,
     spotifyID : String,
     spotifyLink : String,
+    appleMusicLink : String,
     youtubeLink : String,
     instagramLink : String   
 })
