@@ -1,15 +1,16 @@
-function ArtistProfileHeader({artistName, artistPicture, releasedMusic, links}) {
-    return (
-        <div id="artistProfileHeader">
-            <h1>{artistName}</h1>
-            <img src={artistPicture} />
-            <h4>{releasedMusic}</h4>
+import React from 'react'
 
-            <a href={links.spotify}>spotify</a>
-            <a href={links.youtube}>youtube</a>
-            <a href={links.instagram}>insta</a>
+function ArtistProfileHeader({artistName, artistPicture, releasedMusic}) {
+    return (
+        <div className="artistProfileHeader">
+            <img src={artistPicture} alt="artist profile" />
+            <div className="artistNameAndReleasedMusic">
+                <h1>{artistName}</h1>
+                <h4>{releasedMusic}</h4>
+            </div>
         </div>
     )
 }
 
 export default ArtistProfileHeader
+

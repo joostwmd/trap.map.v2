@@ -1,62 +1,97 @@
-import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
 
+function Track({artistName, track, artistDatabaseId}) {
 
-function Track({track, artistName}) {
-
-
-   
-
-    const artistsOnTrack = track.artists
-    const [theArtists, setTheArtists] = useState([])
+    //for develpoment
+    const API_URL = 'http://localhost:5005'
     
-    const getArtistsOnTrack = () => {
-        
-        let artistString = "feat: "
-        for (let artist of artistsOnTrack){
+    //const API_URL = 'https://trapmapversion2.herokuapp.com'
 
-            if (artistName !== artist.name){
-                artistString += `${artist.name}, `
-            }
-             
+    const createFeaturesString = (artists) => {
+
+        if (artists.length === 1){
+            return ''
         }
-        setTheArtists(artistString)
+        let featuresString = "feat: "
+        for (let artist of artists){
+            if (artistName !== artist.name){
+                featuresString += `${artist.name}, `
+            } 
+        }
+        return featuresString.slice(0, -2)
+    }
+
+    const playOrPauseTrack = (trackName) => {
+        const audios = document.getElementsByClassName('audioPlayer')
+        const clickedAudio = document.getElementById(`audioPlayer:${trackName}`)
+        
+        const playPauseButtons = document.getElementsByClassName('playPauseButton')
+        const clickedPlayPauseButton = document.getElementById(`playPauseButton:${trackName}`)
+        
+        if (clickedAudio.paused){
+            for (let audio of audios){
+                audio.pause()
+            }
+            clickedAudio.play()
+
+
+            for (let playPauseButton of playPauseButtons){
+                playPauseButton.innerHTML = 'play'
+            }
+            clickedPlayPauseButton.innerHTML = 'pause'
+        
+        } else {
+            clickedAudio.pause()
+            clickedPlayPauseButton.innerHTML = 'play'
+        }
+
+        
+        const currentTime = document.getElementById(`timeInTrack:${trackName}`)
+        
+        clickedAudio.ontimeupdate = () => {
+            if (clickedAudio.currentTime >= 30){
+                clickedPlayPauseButton.innerHTML = 'play'
+                currentTime.style.width = '0px'
+            }
+
+            if (clickedAudio.currentTime < 30){
+                let size = (250 / 30) * clickedAudio.currentTime
+                currentTime.style.width = `${size}px`
+                currentTime.style.height = '10px'
+                currentTime.style.backgroundColor = 'black'
+            }
+        }
     }
 
     
 
-    useEffect(() => {
-        getArtistsOnTrack()
-    }, [])
+    const addSnippetPlayed = (artistDatabaseId) => {
+        let requestBody = {artistDatabaseId}
+        axios.post(`${API_URL}/traffic/addSnippetPlayed`, requestBody)
+    }
 
-   
-    //no feat 
-    if(theArtists === "feat: "){
-       return (
-        <div>
-            <img src={track.album.images[1].url} />
-            <h4>{track.name}</h4>
-        
-            <audio controls>
-                <source src={track.preview_url} />
-            </audio>
+
+    return (
+        <div className="track">
+            <img className="trackCover" src={track.album.images[1].url} alt="track cover"/>
+
+            <div className="trackTitleAndTimebar">
+                <h4>{`${track.name} ${createFeaturesString(track.artists)}`}</h4>
+                <div className="maxTime">
+                    <div id={`timeInTrack:${track.name}`}></div>
+                </div>
+            </div>
+
+            <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => {addSnippetPlayed(artistDatabaseId)}}>
+                <source src={track.preview_url} type="audio/mp3" />
+            </audio> 
+
+            <div className="playPauseButtonWrapper">
+                <button id={`playPauseButton:${track.name}`} className='playPauseButton' onClick={() => {playOrPauseTrack(track.name)}}>play</button>
+            </div>
         </div>
     )
-    }
-
-    if(theArtists !== "feat: "){
-        return (
-        <div>
-            <img src={track.album.images[1].url} />
-            <h4>{track.name}</h4>
-            <h5>{theArtists.slice(0, -2)}</h5>
-
-            <audio controls>
-                <source src={track.preview_url} />
-            </audio>
-        </div>
-        )
-    }
-   
 }
 
 export default Track
