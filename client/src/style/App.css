@@ -1,0 +1,45 @@
+.marker{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
+  background-size: cover;
+  position: absolute;
+}
+
+.artistProfile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.artistProfileHeader{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.artistNameAndReleasedMusic{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.links{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.links > a > img{
+  width: 100px;
+  height : auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+}
+
+
+
+

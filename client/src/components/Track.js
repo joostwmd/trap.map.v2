@@ -1,15 +1,17 @@
 import axios from 'axios'
-import { useState } from 'react'
 
-function Track({artistName, track, artistDatabaseId}) {
+//icons
+
+function Track({artistName, artistDatabaseId, track}) {
 
     //for develpoment
     //const API_URL = 'http://localhost:5005'
     
     const API_URL = 'https://trapmapversion2.herokuapp.com'
 
-    const createFeaturesString = (artists) => {
 
+    //create strings for additional trackrelated info 
+    const createFeaturesInfo = (artists) => {
         if (artists.length === 1){
             return ''
         }
@@ -22,50 +24,81 @@ function Track({artistName, track, artistDatabaseId}) {
         return featuresString.slice(0, -2)
     }
 
+    const createReleaseInfo = (album) => {
+        if (album.album_type === "single"){
+            return `single`
+        }
+
+        if (album.album_type === "album"){
+            return `on album: ${album.name}`
+        }
+    }
+
+
+    //functions to handle track behavior
+    const playTrack = (trackName) => {
+        const track = document.getElementById(`audioPlayer:${trackName}`)
+        track.play()
+        
+        const playPauseButton = document.getElementById(`playPauseButton:${trackName}`)
+        playPauseButton.innerHTML = 'pause'
+
+        
+        //add style attributes to spin
+        const trackCover = document.getElementById(`trackCover:${trackName}`)
+        trackCover.style.animationName = 'spinningCover'
+        trackCover.style.animationDuration = `${track.duration / 5}s`
+        trackCover.style.animationIterationCount = "5"
+        trackCover.style.animationTimingFunction = 'linear'
+        trackCover.style.animationPlayState = 'running'
+    }
+
+    const pauseTrack = (trackName) => {
+        const track = document.getElementById(`audioPlayer:${trackName}`) 
+        track.pause()
+
+        const playPauseButton = document.getElementById(`playPauseButton:${trackName}`)
+        playPauseButton.innerHTML = 'play'
+
+        //add style attribute to pause spinning animation
+        const trackCover = document.getElementById(`trackCover:${trackName}`)
+        trackCover.style.animationPlayState = 'paused'
+    }
+
+    const resetTrack = (trackName) => {
+        const playPauseButton = document.getElementById(`playPauseButton:${trackName}`)
+        playPauseButton.innerHTML = 'play'
+    }
+
+
+    //handle click on play/pause button => All the track functions are used here
     const playOrPauseTrack = (trackName) => {
         const audios = document.getElementsByClassName('audioPlayer')
         const clickedAudio = document.getElementById(`audioPlayer:${trackName}`)
-        
-        const playPauseButtons = document.getElementsByClassName('playPauseButton')
-        const clickedPlayPauseButton = document.getElementById(`playPauseButton:${trackName}`)
-        
+             
         if (clickedAudio.paused){
+            //pause all other tracks
             for (let audio of audios){
-                audio.pause()
+                pauseTrack(audio.id.split(":")[1])
             }
-            clickedAudio.play()
-
-
-            for (let playPauseButton of playPauseButtons){
-                playPauseButton.innerHTML = 'play'
-            }
-            clickedPlayPauseButton.innerHTML = 'pause'
-        
+            //play clicked track
+            playTrack(trackName)
+                
         } else {
-            clickedAudio.pause()
-            clickedPlayPauseButton.innerHTML = 'play'
+            //pause the track 
+            pauseTrack(trackName)
         }
 
-        
-        const currentTime = document.getElementById(`timeInTrack:${trackName}`)
-        
+        //reset track after its finished
         clickedAudio.ontimeupdate = () => {
-            if (clickedAudio.currentTime >= 30){
-                clickedPlayPauseButton.innerHTML = 'play'
-                currentTime.style.width = '0px'
-            }
-
-            if (clickedAudio.currentTime < 30){
-                let size = (250 / 30) * clickedAudio.currentTime
-                currentTime.style.width = `${size}px`
-                currentTime.style.height = '10px'
-                currentTime.style.backgroundColor = 'black'
+            if (clickedAudio.currentTime === clickedAudio.duration){
+                resetTrack(trackName)
             }
         }
     }
 
     
-
+    //traffic
     const addSnippetPlayed = (artistDatabaseId) => {
         let requestBody = {artistDatabaseId}
         axios.post(`${API_URL}/traffic/addSnippetPlayed`, requestBody)
@@ -74,13 +107,15 @@ function Track({artistName, track, artistDatabaseId}) {
 
     return (
         <div className="track">
-            <img className="trackCover" src={track.album.images[1].url} alt="track cover"/>
-
-            <div className="trackTitleAndTimebar">
-                <h4>{`${track.name} ${createFeaturesString(track.artists)}`}</h4>
-                <div className="maxTime">
-                    <div id={`timeInTrack:${track.name}`}></div>
+            <div className="trackCoverWrapper">
+                <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}>
+                    <div className="trackCoverInnerCircle"></div>
                 </div>
+            </div>
+
+            <div className="trackTitleAndAlbum">
+                <h4>{`${track.name} ${createFeaturesInfo(track.artists)}`}</h4>
+                <p>{createReleaseInfo(track.album)}</p>
             </div>
 
             <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => {addSnippetPlayed(artistDatabaseId)}}>
@@ -88,7 +123,7 @@ function Track({artistName, track, artistDatabaseId}) {
             </audio> 
 
             <div className="playPauseButtonWrapper">
-                <button id={`playPauseButton:${track.name}`} className='playPauseButton' onClick={() => {playOrPauseTrack(track.name)}}>play</button>
+                <div id={`playPauseButton:${track.name}`} className='playPauseButton' onClick={() => {playOrPauseTrack(track.name)}}>play</div>
             </div>
         </div>
     )
