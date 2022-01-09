@@ -41,6 +41,18 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.trackTitleAndAlbum{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.trackTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
   
 @keyframes spinningCover {
     from {
@@ -60,14 +72,3 @@
         transform:rotate(360deg);
     }
 }  
-
-.playPauseButtonWrapper{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-  
-.playPauseButton{
-    width: 40px;
-    height : 40px
-}

@@ -39,11 +39,7 @@ function Track({artistName, artistDatabaseId, track}) {
     const playTrack = (trackName) => {
         const track = document.getElementById(`audioPlayer:${trackName}`)
         track.play()
-        
-        const playPauseButton = document.getElementById(`playPauseButton:${trackName}`)
-        playPauseButton.innerHTML = 'pause'
-
-        
+         
         //add style attributes to spin
         const trackCover = document.getElementById(`trackCover:${trackName}`)
         trackCover.style.animationName = 'spinningCover'
@@ -57,19 +53,10 @@ function Track({artistName, artistDatabaseId, track}) {
         const track = document.getElementById(`audioPlayer:${trackName}`) 
         track.pause()
 
-        const playPauseButton = document.getElementById(`playPauseButton:${trackName}`)
-        playPauseButton.innerHTML = 'play'
-
         //add style attribute to pause spinning animation
         const trackCover = document.getElementById(`trackCover:${trackName}`)
         trackCover.style.animationPlayState = 'paused'
     }
-
-    const resetTrack = (trackName) => {
-        const playPauseButton = document.getElementById(`playPauseButton:${trackName}`)
-        playPauseButton.innerHTML = 'play'
-    }
-
 
     //handle click on play/pause button => All the track functions are used here
     const playOrPauseTrack = (trackName) => {
@@ -88,13 +75,6 @@ function Track({artistName, artistDatabaseId, track}) {
             //pause the track 
             pauseTrack(trackName)
         }
-
-        //reset track after its finished
-        clickedAudio.ontimeupdate = () => {
-            if (clickedAudio.currentTime === clickedAudio.duration){
-                resetTrack(trackName)
-            }
-        }
     }
 
     
@@ -106,7 +86,7 @@ function Track({artistName, artistDatabaseId, track}) {
 
 
     return (
-        <div className="track">
+        <div className="track" onClick={() => {playOrPauseTrack(track.name)}}>
             <div className="trackCoverWrapper">
                 <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}>
                     <div className="trackCoverInnerCircle"></div>
@@ -114,17 +94,13 @@ function Track({artistName, artistDatabaseId, track}) {
             </div>
 
             <div className="trackTitleAndAlbum">
-                <h4>{`${track.name} ${createFeaturesInfo(track.artists)}`}</h4>
-                <p>{createReleaseInfo(track.album)}</p>
+                <div className="trackTitle"><h4>{`${track.name} ${createFeaturesInfo(track.artists)}`}</h4></div>
+                {/* <p>{createReleaseInfo(track.album)}</p> */}
             </div>
 
             <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => {addSnippetPlayed(artistDatabaseId)}}>
                 <source src={track.preview_url} type="audio/mp3" />
             </audio> 
-
-            <div className="playPauseButtonWrapper">
-                <div id={`playPauseButton:${track.name}`} className='playPauseButton' onClick={() => {playOrPauseTrack(track.name)}}>play</div>
-            </div>
         </div>
     )
 }
