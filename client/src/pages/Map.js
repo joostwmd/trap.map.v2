@@ -59,10 +59,14 @@ function Map() {
 
     useEffect(() => {
 
+        if(features.length === 0){
+            console.log('make db call')
+        }
+
         //get all artist data form db
         axios.get(`${API_URL}/dataBase/map`)
             .then(res => {
-                //chnage data into mapboxgl format with function
+                //change data into mapboxgl format with function
                 artistToFeatures(res.data)
             })
 
