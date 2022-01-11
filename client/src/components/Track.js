@@ -40,22 +40,22 @@ function Track({artistName, artistDatabaseId, track}) {
         const track = document.getElementById(`audioPlayer:${trackName}`)
         track.play()
          
-        //add style attributes to spin
-        const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
-        vinylRecord.style.animationName = 'spinningVinylRecord'
-        vinylRecord.style.animationDuration = `${track.duration / 5}s`
-        vinylRecord.style.animationIterationCount = "5"
-        vinylRecord.style.animationTimingFunction = 'linear'
-        vinylRecord.style.animationPlayState = 'running'
+        // //add style attributes to spin
+        // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
+        // vinylRecord.style.animationName = 'spinningVinylRecord'
+        // vinylRecord.style.animationDuration = `${track.duration / 5}s`
+        // vinylRecord.style.animationIterationCount = "5"
+        // vinylRecord.style.animationTimingFunction = 'linear'
+        // vinylRecord.style.animationPlayState = 'running'
     }
 
     const pauseTrack = (trackName) => {
         const track = document.getElementById(`audioPlayer:${trackName}`) 
         track.pause()
 
-        //add style attribute to pause spinning animation
-        const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
-        vinylRecord.style.animationPlayState = 'paused'
+        // //add style attribute to pause spinning animation
+        // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
+        // vinylRecord.style.animationPlayState = 'paused'
     }
 
     //handle click on play/pause button => All the track functions are used here
