@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import spotifyLogo from '../logos/spotifyLogo.png'
-import appleMusicLogo from '../logos/appleMusicLogo.png'
-import youtubeLogo from '../logos/youtubeLogo.png'
-import instagramLogo from '../logos/instagramLogo.png'
-
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
 import ArtistProfileHeader from '../components/ArtistProfileHeader'
@@ -59,9 +54,8 @@ function ArtistProfile() {
 
 
     //fetch data function
-    const getArtistsIds =  async () => {
-        const artistIds = localStorage.getItem('artistIds')
-        return artistIds.split(':')
+    const getArtistsIds = async () => {
+        return [window.location.pathname.split(":")[1], window.location.pathname.split(":")[2]]
     }
 
     const getSpotifyData = async (spotifyId) => {
@@ -95,7 +89,22 @@ function ArtistProfile() {
         
         getArtistsIds()
             .then(ids => {
-                getSpotifyData(ids[0])
+                getDataBaseData(ids[0])
+                .then(dataBaseData => {
+                    setArtistDatabaseId(dataBaseData.data._id)
+                    //header
+                    setLinks([
+                        ["spotify",  dataBaseData.data.spotifyLink],
+                        ["appleMusic",  dataBaseData.data.appleMusicLink],
+                        ["youtube" , dataBaseData.data.youtubeLink],
+                        ["instagram" , dataBaseData.data.instagramLink]
+                    ])
+
+                    //add trapMap visits
+                    addTrapMapProfileVisit(dataBaseData.data._id)
+                })
+
+                getSpotifyData(ids[1])
                     .then(spotifyData => { 
                         console.log(spotifyData)
                         //header
@@ -106,22 +115,6 @@ function ArtistProfile() {
                         //tracks
                         setTopTracks(spotifyData.data[1])
                 })
-
-                getDataBaseData(ids[1])
-                    .then(dataBaseData => {
-                        setArtistDatabaseId(dataBaseData.data._id)
-                        //header
-                        setLinks([
-                            ["spotify",  dataBaseData.data.spotifyLink],
-                            ["appleMusic",  dataBaseData.data.appleMusicLink],
-                            ["youtube" , dataBaseData.data.youtubeLink],
-                            ["instagram" , dataBaseData.data.instagramLink]
-                        ])
-
-                        //add trapMap visits
-                        addTrapMapProfileVisit(dataBaseData.data._id)
-                    })
-
             })        
     }, [])
 

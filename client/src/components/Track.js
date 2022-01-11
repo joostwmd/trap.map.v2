@@ -41,12 +41,12 @@ function Track({artistName, artistDatabaseId, track}) {
         track.play()
          
         //add style attributes to spin
-        const trackCover = document.getElementById(`trackCover:${trackName}`)
-        trackCover.style.animationName = 'spinningCover'
-        trackCover.style.animationDuration = `${track.duration / 5}s`
-        trackCover.style.animationIterationCount = "5"
-        trackCover.style.animationTimingFunction = 'linear'
-        trackCover.style.animationPlayState = 'running'
+        const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
+        vinylRecord.style.animationName = 'spinningVinylRecord'
+        vinylRecord.style.animationDuration = `${track.duration / 5}s`
+        vinylRecord.style.animationIterationCount = "5"
+        vinylRecord.style.animationTimingFunction = 'linear'
+        vinylRecord.style.animationPlayState = 'running'
     }
 
     const pauseTrack = (trackName) => {
@@ -54,8 +54,8 @@ function Track({artistName, artistDatabaseId, track}) {
         track.pause()
 
         //add style attribute to pause spinning animation
-        const trackCover = document.getElementById(`trackCover:${trackName}`)
-        trackCover.style.animationPlayState = 'paused'
+        const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
+        vinylRecord.style.animationPlayState = 'paused'
     }
 
     //handle click on play/pause button => All the track functions are used here
@@ -87,11 +87,7 @@ function Track({artistName, artistDatabaseId, track}) {
 
     return (
         <div className="track" onClick={() => {playOrPauseTrack(track.name)}}>
-            <div className="trackCoverWrapper">
-                <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}>
-                    <div className="trackCoverInnerCircle"></div>
-                </div>
-            </div>
+            <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}/>
 
             <div className="trackTitleAndAlbum">
                 <div className="trackTitle"><h4>{`${track.name} ${createFeaturesInfo(track.artists)}`}</h4></div>
@@ -100,7 +96,7 @@ function Track({artistName, artistDatabaseId, track}) {
 
             <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => {addSnippetPlayed(artistDatabaseId)}}>
                 <source src={track.preview_url} type="audio/mp3" />
-            </audio> 
+            </audio>
         </div>
     )
 }

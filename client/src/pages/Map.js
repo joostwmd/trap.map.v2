@@ -51,22 +51,9 @@ function Map() {
         }
     }
 
-
-    //create function that enables the marker onClick function
-    //to send ids to the following page
-
-    const sendArtistIds = (artistDatabaseId, artistSpotifyId) => {
-
-        if (typeof(Storage) !== "undefined") {
-            localStorage.setItem('artistIds', `${artistSpotifyId}:${artistDatabaseId}`);
-        } else {
-            // Sorry! No Web Storage support..
-        }
-    }   
-
     //build redirect url
-    const redirectToArtistProfilePage = (artistName) => {
-        window.location.href = `${CLIENT_URL}/map/${artistName}`
+    const redirectToArtistProfilePage = (artistName, artistDatabaseId, artistSpotifyId) => {
+        window.location.href = `${CLIENT_URL}/map/${artistName}:${artistDatabaseId}:${artistSpotifyId}`
         
     }
 
@@ -118,16 +105,11 @@ function Map() {
                 //add functionality and design (src for marker img and scaleControl)  
                 for (let i = 0; i < markers.length; i++){
                     markers[i].addEventListener('click', () => {
-                        sendArtistIds(features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId)
-                        redirectToArtistProfilePage(features[i].properties.artistName)
+                        redirectToArtistProfilePage(features[i].properties.artistName, features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId)
                     })
                     
                     //add url to background img
                     markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
-
-                    //add image src
-                    //markers[i].setAttribute('src', `${features[i].properties.artistPicture}`)
-                    
 
                     //resize markers in zoom
                     map.current.on('zoom', () => {

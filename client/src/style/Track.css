@@ -34,7 +34,6 @@
 .trackCover{
     width: 125px;
     height: 125px;
-    border-radius: 50%;
     background-size: cover;
   
     display: flex;
@@ -53,8 +52,8 @@
     flex-direction: row;
     justify-content: center;
 }
-  
-@keyframes spinningCover {
+
+@keyframes spinningVinylRecord {
     from {
         transform:rotate(0deg);
     }
@@ -64,7 +63,7 @@
 }
   
   /* Chrome, Safari, Opera */
-@-webkit-keyframes spinningCover {
+@-webkit-keyframes spinningVinylRecord {
     from {
         transform:rotate(0deg);
     }
