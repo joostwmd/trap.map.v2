@@ -133,7 +133,7 @@ function ArtistProfile() {
             <div className="tracks">
                 {topTracks.map(track => {
                     //makes sure that every track is playable
-                    if (track.preview_url !== undefined){
+                    if (track.preview_url !== null){
                         return (
                             <Track track={track} artistName={artistName} artistDatabaseId={artistDatabaseId}/>
                     )
