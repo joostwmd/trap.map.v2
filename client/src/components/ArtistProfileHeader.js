@@ -6,7 +6,7 @@ function ArtistProfileHeader({artistName, artistPicture, releasedMusic}) {
             <img src={artistPicture} alt="artist profile" />
             <div className="artistNameAndReleasedMusic">
                 <h1>{artistName}</h1>
-                <h4>{releasedMusic}</h4>
+                {/* <h4>{releasedMusic}</h4> */}
             </div>
         </div>
     )
