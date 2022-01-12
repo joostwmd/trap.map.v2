@@ -40,6 +40,10 @@ function Track({artistName, artistDatabaseId, track}) {
         const track = document.getElementById(`audioPlayer:${trackName}`)
         track.play()
          
+        //add visual feedback
+        const trackTitle = document.getElementById(`trackTitle:${trackName}`)
+        trackTitle.style.color = 'blue'
+        trackTitle.style.fontSize = '40px'
         // //add style attributes to spin
         // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
         // vinylRecord.style.animationName = 'spinningVinylRecord'
@@ -52,6 +56,11 @@ function Track({artistName, artistDatabaseId, track}) {
     const pauseTrack = (trackName) => {
         const track = document.getElementById(`audioPlayer:${trackName}`) 
         track.pause()
+
+        //remove visual feedback
+        const trackTitle = document.getElementById(`trackTitle:${trackName}`)
+        trackTitle.style.color = 'black'
+        trackTitle.style.fontSize = '25px'
 
         // //add style attribute to pause spinning animation
         // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
@@ -90,7 +99,7 @@ function Track({artistName, artistDatabaseId, track}) {
             <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}/>
 
             <div className="trackTitleAndAlbum">
-                <div className="trackTitle"><h4>{`${track.name} ${createFeaturesInfo(track.artists)}`}</h4></div>
+                <div id={`trackTitle:${track.name}`} className="trackTitle">{`${track.name} ${createFeaturesInfo(track.artists)}`}</div>
                 {/* <p>{createReleaseInfo(track.album)}</p> */}
             </div>
 
