@@ -73,7 +73,7 @@ function Map() {
             if (map.current) return; // initialize map only once
                 map.current = new mapboxgl.Map({        
                 container: mapContainer.current,
-                style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
+                style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv', 
                 center: berlinCenter,
                 zoom: 8.5,
                 minZoom : 8.5,

@@ -5,6 +5,7 @@ import axios from 'axios'
 function Home() {
     
     const API_URL = 'https://trapmapversion2.herokuapp.com'
+
     const [email, setEmail] = useState("")
 
     const singUpForBetaKey = () => {
@@ -20,11 +21,7 @@ function Home() {
             <Link to="/map">
                 <button>check out the demo version</button>
             </Link>
-
-            <p>leveraging blockchain technology to build the plattform with you</p>
-
-            <h5>some timeline</h5>
-
+            
             <h2>sign-up for the beta-key of the official trap map app</h2>
             <input 
                 value={email}
