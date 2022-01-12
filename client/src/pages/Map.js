@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
@@ -7,12 +7,12 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
-    // const CLIENT_URL = 'http://localhost:3000'
-    // const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -45,8 +45,7 @@ function Map() {
                     'type' : 'Point',
                     'coordinates' : artist.coordinates
                 }
-            }
-        
+            }        
             features.push(feature)
         }
     }
@@ -61,7 +60,7 @@ function Map() {
 
         //makes sure that markers are always shown
         if(features.length === 0){
-
+            console.log("test")
             //get all artist data form db
             axios.get(`${API_URL}/dataBase/map`)
             .then(res => {
