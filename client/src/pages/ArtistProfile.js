@@ -106,7 +106,6 @@ function ArtistProfile() {
 
                 getSpotifyData(ids[1])
                     .then(spotifyData => { 
-                        console.log(spotifyData)
                         //header
                         setArtistName(spotifyData.data[0].name)
                         setArtistPicture(spotifyData.data[0].images[0].url)
