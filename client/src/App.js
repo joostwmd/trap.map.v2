@@ -1,5 +1,6 @@
 import '../src/style/App.css';
-import '../src/style/Track.css'
+import '../src/style/Track.css';
+import '../src/style/Home.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
