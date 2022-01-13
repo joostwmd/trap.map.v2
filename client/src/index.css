@@ -12,6 +12,13 @@ code {
     monospace;
 }
 
+.marker{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; 
+  background-size: cover;
+  position: absolute;
+}
 
 .map-container {
   height: 100vh;

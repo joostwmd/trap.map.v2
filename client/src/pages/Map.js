@@ -59,74 +59,71 @@ function Map() {
 
     useEffect(() => {
 
-        //makes sure that markers are always shown
-        if(features.length === 0){
-            console.log("test")
-            //get all artist data form db
-            axios.get(`${API_URL}/dataBase/map`)
-            .then(res => {
-                //change data into mapboxgl format with function
-                artistToFeatures(res.data)
-            })
+       
+        //get all artist data form db
+        axios.get(`${API_URL}/dataBase/map`)
+        .then(res => {
+            //change data into mapboxgl format with function
+            console.log(res.data)
+            artistToFeatures(res.data)
+        })
 
     
-            //create the map object
-            if (map.current) return; // initialize map only once
-                map.current = new mapboxgl.Map({        
-                container: mapContainer.current,
-                style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv', 
-                center: berlinCenter,
-                zoom: 8.5,
-                minZoom : 8.5,
-                maxBounds : berlinBounds
-            })
+        //create the map object
+        if (map.current) return; // initialize map only once
+            map.current = new mapboxgl.Map({        
+            container: mapContainer.current,
+            style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv', 
+            center: berlinCenter,
+            zoom: 8.5,
+            minZoom : 8.5,
+            maxBounds : berlinBounds
+        })
 
-            //load artist data in mapbox format onto the map object
-            map.current.on('load', () => {
-                map.current.addSource('artists', {
-                    'type' : 'geojson', 
-                    'data' : {
-                        'type' : 'FeatureCollection', 
-                        'features' : features
-                    }
-                })
-
-
-            //create a marker(img) for each artists (feature) object
-            for (let i = 0; i < features.length; i++){
-                //create divs
-                const el = document.createElement('div')
-                //const el = document.createElement('img')
-                el.className = 'marker'
-
-                //add the divs to mapboxgl marker 
-                new mapboxgl.Marker(el).setLngLat(features[i].geometry.coordinates).addTo(map.current)
-                
-                //create array for all markers
-                const markers = document.getElementsByClassName('marker')
-            
-                    //add functionality and design (src for marker img and scaleControl)  
-                    for (let i = 0; i < markers.length; i++){
-                        markers[i].addEventListener('click', () => {
-                            redirectToArtistProfilePage(features[i].properties.artistName, features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId)
-                        })
-                
-                        //add url to background img
-                        markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
-
-                        //resize markers in zoom
-                        map.current.on('zoom', () => {
-                            const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
-                            let size = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
-                            markers[i].style.height = `${size}px`
-                            markers[i].style.width = `${size}px`
-                        })
-                    }
+        //load artist data in mapbox format onto the map object
+        map.current.on('load', () => {
+            map.current.addSource('artists', {
+                'type' : 'geojson', 
+                'data' : {
+                    'type' : 'FeatureCollection', 
+                    'features' : features
                 }
             })
-           
-        }      
-    }, [])
+
+
+        //create a marker(img) for each artists (feature) object
+        for (let i = 0; i < features.length; i++){
+            //create divs
+            const el = document.createElement('div')
+            //const el = document.createElement('img')
+            el.className = 'marker'
+
+            //add the divs to mapboxgl marker 
+            new mapboxgl.Marker(el).setLngLat(features[i].geometry.coordinates).addTo(map.current)
+                
+            //create array for all markers
+            const markers = document.getElementsByClassName('marker')
+            
+                //add functionality and design (src for marker img and scaleControl)  
+                for (let i = 0; i < markers.length; i++){
+                    markers[i].addEventListener('click', () => {
+                        redirectToArtistProfilePage(features[i].properties.artistName, features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId)
+                    })
+                
+                    //add url to background img
+                    markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
+
+                    //resize markers in zoom
+                    map.current.on('zoom', () => {
+                        const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
+                        let size = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
+                        markers[i].style.height = `${size}px`
+                        markers[i].style.width = `${size}px`
+                    })
+                }
+            }
+        })   
+}, [])
 
     
 

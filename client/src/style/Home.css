@@ -1,4 +1,4 @@
-body, .signUpButton, .tick {
+.signUpButton, .tick {
     display: flex;
     justify-content: center;
     align-items: center;
