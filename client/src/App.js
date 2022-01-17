@@ -12,14 +12,13 @@ import Map from './pages/Map';
 
 
 //components
-import Nav from './components/Nav'
+//import Nav from './components/Nav'
 
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav />
         <Routes>
 
           <Route

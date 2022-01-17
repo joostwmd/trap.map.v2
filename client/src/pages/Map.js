@@ -5,15 +5,14 @@ import axios from 'axios'
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
-    // const CLIENT_URL = 'http://localhost:3000'
-    // const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -64,7 +63,6 @@ function Map() {
         axios.get(`${API_URL}/dataBase/map`)
         .then(res => {
             //change data into mapboxgl format with function
-            console.log(res.data)
             artistToFeatures(res.data)
         })
 
@@ -94,13 +92,12 @@ function Map() {
         //create a marker(img) for each artists (feature) object
         for (let i = 0; i < features.length; i++){
             //create divs
-            const el = document.createElement('div')
-            //const el = document.createElement('img')
-            el.className = 'marker'
+            const marker = document.createElement('div')
+            marker.className = 'marker'
 
             //add the divs to mapboxgl marker 
-            new mapboxgl.Marker(el).setLngLat(features[i].geometry.coordinates).addTo(map.current)
-                
+            new mapboxgl.Marker(marker).setLngLat(features[i].geometry.coordinates).addTo(map.current)
+            
             //create array for all markers
             const markers = document.getElementsByClassName('marker')
             
@@ -113,12 +110,19 @@ function Map() {
                     //add url to background img
                     markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
 
+                    //artistName
+                    markers[i].innerHTML = `<p className="artistNameInMarker">${features[i].properties.artistName}</p>`
+                    
                     //resize markers in zoom
                     map.current.on('zoom', () => {
                         const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
-                        let size = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
-                        markers[i].style.height = `${size}px`
-                        markers[i].style.width = `${size}px`
+
+                        let markerSize = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
+                        markers[i].style.height = `${markerSize}px`
+                        markers[i].style.width = `${markerSize}px`
+
+                        let nameSize = ((Number((map.current.getZoom()) - initialZoom) * 5) + 10) 
+                        markers[i].innerHTML = `<p className="artistNameInMarker" style='font-size:${nameSize}px'>${features[i].properties.artistName}</p>`
                     })
                 }
             }

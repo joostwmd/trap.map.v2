@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 function Nav() {
     //for development
     //const CLIENT_URL = 'http://localhost:3000'
@@ -12,7 +10,7 @@ function Nav() {
     }
 
     const redirectToMap = () => {
-        window.location.href = `${CLIENT_URL}/map/`
+        window.location.href = `${CLIENT_URL}/map`
         
     }
 

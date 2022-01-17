@@ -1,23 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function Home() {
     
-    const URL = 'https://trapmapversion2.herokuapp.com'
+    //for development
+    const URL = 'http://localhost:3000'
+    
+    //const URL = 'https://trapmapversion2.herokuapp.com'
+
+    //svg for animation
+    const checkIcon = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"none\" d=\"M0 0h24v24H0z\"/><path d=\"M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z\"/></svg>"
+    const paperPlaneIcon = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"none\" d=\"M0 0h24v24H0z\"></path><path d=\"M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z\" fill=\"rgba(255,255,255,1)\"></path></svg>"
+
+
 
     const redirectToMap = () => {
         window.location.href = `${URL}/map/`
         
     }
 
-    const signUpAnimation = () => {
-        let button = document.getElementsByClassName('signUpButton')[0]
-        let buttonText = document.getElementsByClassName('tick')[0]
-        const tickMark = "<svg width=\"58\" height=\"45\" viewBox=\"0 0 58 45\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"#fff\" fill-rule=\"nonzero\" d=\"M19.11 44.64L.27 25.81l5.66-5.66 13.18 13.18L52.07.38l5.65 5.65\"/></svg>"
-
-        if (buttonText.innerHTML === "sign up"){
-            buttonText.innerHTML = tickMark;
-            button.classList.toggle('signUpButton__circle');
+    const signUpAnimation = () => {    
+        if (document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML === paperPlaneIcon){
+            document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = checkIcon;
+            document.getElementsByClassName('signUpButton')[0].classList.toggle('signUpButton__circle');
             document.getElementById('emailInput').disabled = true
             document.getElementById('emailInput').placeholder = 'thank you'
         }
@@ -33,6 +38,11 @@ function Home() {
         signUpAnimation()
     }
 
+    useEffect(() => {
+        document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = paperPlaneIcon
+    })
+
+    
     return (
         <div>
             <h1>welcome to trap map</h1>
@@ -53,7 +63,7 @@ function Home() {
 
                 <div className="signUpButton" onClick={() => singUpForBetaKey()}>
                     <div className="signUpButtonContainer">
-                        <div className="tick">sign up</div>
+                        <div className="signUpButtonIconContainer">{paperPlaneIcon}</div>
                     </div>
                 </div>
             </div>
