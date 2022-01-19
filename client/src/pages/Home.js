@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import chromeGrillz from '../style/chromeGrillz.png' 
+import { chakra } from "@chakra-ui/react"
+import { Input } from '@chakra-ui/react'
+
 function Home() {
     
     //for development
-    const URL = 'http://localhost:3000'
+    //const URL = 'http://localhost:3000'
     
-    //const URL = 'https://trapmapversion2.herokuapp.com'
+    const URL = 'https://trapmapversion2.herokuapp.com'
 
     //svg for animation
     const checkIcon = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"none\" d=\"M0 0h24v24H0z\"/><path d=\"M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z\"/></svg>"
@@ -39,36 +43,54 @@ function Home() {
     }
 
     useEffect(() => {
-        document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = paperPlaneIcon
+        //document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = paperPlaneIcon 
     })
 
     
     return (
         <div>
-            <h1>welcome to trap map</h1>
-
             <p>new plattfrom to discover music: no algorithms, no playlists, just you and the music</p>
-            <button onClick={() => {redirectToMap()}}>check out the demo version</button>
-            
-            <h2>sign-up for the beta-key of the official trap map app</h2>
-           <div id="signUpWithEmailContainer">
-                <input 
-                    id="emailInput"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    placeholder="your email adress"
-                    type="email"
-                />
-            
+            <chakra.button
+                px='5'
+                py='5'
+                bg='brand.200'
+                rounded='md'
+                onClick={() => {redirectToMap()}}
+            >
+                <h1>check out the demo version</h1>
 
+            </chakra.button>
+
+           <div id="betaKeySection">
+                <div id="betaKeyText">
+                    <h1>stay tuned</h1>
+                    <p>we are devoloping an app, q2 release, you can sing-up for an early access key</p>
+                </div>
+
+                <Input
+                id="emailInput"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="your email adress"
+
+                size='md'
+                focusBorderColor='brand.200'
+            />
+        
                 <div className="signUpButton" onClick={() => singUpForBetaKey()}>
                     <div className="signUpButtonContainer">
-                        <div className="signUpButtonIconContainer">{paperPlaneIcon}</div>
+                        <div className="signUpButtonIconContainer">
+                            <h1>sumbit</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <h2>do you want to get on the map? DM us on insta</h2><a href="https://www.instagram.com/mapmusic.berlin/">insta</a>
+                <div id="chromeGrillzWrapper">
+                    <img id="chromeGrillz" src={chromeGrillz} />
+                </div>
+           </div>
+            
+            <h1>do you want to get on the map? DM us on <a href="https://www.instagram.com/mapmusic.berlin/" style={{textDecoration : 'underline' , textDecorationColor : '#9381FF'}}>insta</a></h1>
 
         </div>
     )

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //icons
 
-function Track({artistName, artistDatabaseId, track}) {
+function Track({artistName, artistDatabaseId, track, count}) {
 
     //for develpoment
     //const API_URL = 'http://localhost:5005'
@@ -40,10 +40,11 @@ function Track({artistName, artistDatabaseId, track}) {
         const track = document.getElementById(`audioPlayer:${trackName}`)
         track.play()
          
+        
         //add visual feedback
         const trackTitle = document.getElementById(`trackTitle:${trackName}`)
-        trackTitle.style.color = 'blue'
-        trackTitle.style.fontSize = '40px'
+        trackTitle.style.color = '#9381FF'
+
         // //add style attributes to spin
         // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
         // vinylRecord.style.animationName = 'spinningVinylRecord'
@@ -59,8 +60,7 @@ function Track({artistName, artistDatabaseId, track}) {
 
         //remove visual feedback
         const trackTitle = document.getElementById(`trackTitle:${trackName}`)
-        trackTitle.style.color = 'black'
-        trackTitle.style.fontSize = '25px'
+        trackTitle.style.color = 'white'
 
         // //add style attribute to pause spinning animation
         // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
@@ -84,6 +84,13 @@ function Track({artistName, artistDatabaseId, track}) {
             //pause the track 
             pauseTrack(trackName)
         }
+
+        //reset track
+        clickedAudio.ontimeupdate = () => {
+            if (clickedAudio.currentTime >= 30){
+                pauseTrack(trackName)
+            }
+        }
     }
 
     
@@ -96,10 +103,11 @@ function Track({artistName, artistDatabaseId, track}) {
 
     return (
         <div className="track" onClick={() => {playOrPauseTrack(track.name)}}>
+            <p>{count}</p>
             <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}/>
 
             <div className="trackTitleAndAlbum">
-                <div id={`trackTitle:${track.name}`} className="trackTitle">{`${track.name} ${createFeaturesInfo(track.artists)}`}</div>
+                <div><p id={`trackTitle:${track.name}`} className="trackTitle">{`${track.name.toUpperCase()} ${createFeaturesInfo(track.artists).toUpperCase()}`}</p></div>
                 {/* <p>{createReleaseInfo(track.album)}</p> */}
             </div>
 

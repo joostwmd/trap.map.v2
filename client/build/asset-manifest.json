@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.e2dc2a3f.chunk.css",
-    "main.js": "/static/js/main.8da69cbc.chunk.js",
-    "main.js.map": "/static/js/main.8da69cbc.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.e33b0a56.js",
-    "runtime-main.js.map": "/static/js/runtime-main.e33b0a56.js.map",
+    "main.css": "/static/css/main.ab17d3c4.chunk.css",
+    "main.js": "/static/js/main.ddf0bacf.chunk.js",
+    "main.js.map": "/static/js/main.ddf0bacf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.454a1e24.js",
+    "runtime-main.js.map": "/static/js/runtime-main.454a1e24.js.map",
     "static/css/2.c2cad7ad.chunk.css": "/static/css/2.c2cad7ad.chunk.css",
-    "static/js/2.2d0e780c.chunk.js": "/static/js/2.2d0e780c.chunk.js",
-    "static/js/2.2d0e780c.chunk.js.map": "/static/js/2.2d0e780c.chunk.js.map",
-    "static/js/3.8f425ecd.chunk.js": "/static/js/3.8f425ecd.chunk.js",
-    "static/js/3.8f425ecd.chunk.js.map": "/static/js/3.8f425ecd.chunk.js.map",
+    "static/js/2.87099dc5.chunk.js": "/static/js/2.87099dc5.chunk.js",
+    "static/js/2.87099dc5.chunk.js.map": "/static/js/2.87099dc5.chunk.js.map",
+    "static/js/3.bace79f1.chunk.js": "/static/js/3.bace79f1.chunk.js",
+    "static/js/3.bace79f1.chunk.js.map": "/static/js/3.bace79f1.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.c2cad7ad.chunk.css.map": "/static/css/2.c2cad7ad.chunk.css.map",
-    "static/css/main.e2dc2a3f.chunk.css.map": "/static/css/main.e2dc2a3f.chunk.css.map",
-    "static/js/2.2d0e780c.chunk.js.LICENSE.txt": "/static/js/2.2d0e780c.chunk.js.LICENSE.txt",
+    "static/css/main.ab17d3c4.chunk.css.map": "/static/css/main.ab17d3c4.chunk.css.map",
+    "static/js/2.87099dc5.chunk.js.LICENSE.txt": "/static/js/2.87099dc5.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/PhillySans.44179f8b.woff",
-    "static/media/appleMusicLogo.2228dbd7.png": "/static/media/appleMusicLogo.2228dbd7.png",
-    "static/media/instagramLogo.f3459bc3.png": "/static/media/instagramLogo.f3459bc3.png",
-    "static/media/spotifyLogo.8eef091b.png": "/static/media/spotifyLogo.8eef091b.png",
-    "static/media/youtubeLogo.6b5588fd.png": "/static/media/youtubeLogo.6b5588fd.png"
+    "static/media/chromeGrillz.52438d90.png": "/static/media/chromeGrillz.52438d90.png",
+    "static/media/instagramLogo.dad2e219.png": "/static/media/instagramLogo.dad2e219.png",
+    "static/media/spotifyLogo.dffc4909.png": "/static/media/spotifyLogo.dffc4909.png",
+    "static/media/youtubeLogo.6615ff3f.png": "/static/media/youtubeLogo.6615ff3f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.e33b0a56.js",
+    "static/js/runtime-main.454a1e24.js",
     "static/css/2.c2cad7ad.chunk.css",
-    "static/js/2.2d0e780c.chunk.js",
-    "static/css/main.e2dc2a3f.chunk.css",
-    "static/js/main.8da69cbc.chunk.js"
+    "static/js/2.87099dc5.chunk.js",
+    "static/css/main.ab17d3c4.chunk.css",
+    "static/js/main.ddf0bacf.chunk.js"
   ]
 }

@@ -14,8 +14,15 @@ code {
 
 @font-face {
   font-family: 'PhillySans';
-  src: url('./fonts/PhillySans.woff') format('woff');
+  src: url('./style/fonts/PhillySans.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./style/fonts/Montserrat.woff') format('woff');
+}
+
+
 
 
 .marker{
@@ -32,7 +39,7 @@ code {
 
 .marker > p {
   font-size: 10px;
-  color: #EAF0EE;
+  color:#fff;
   font-family: 'PhillySans';
   display: inline-block;
   position: absolute;

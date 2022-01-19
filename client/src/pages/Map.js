@@ -1,18 +1,19 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
+import Nav from '../components/Nav'
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    // const API_URL = 'https://trapmapversion2.herokuapp.com'
-    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
-    const CLIENT_URL = 'http://localhost:3000'
-    const API_URL = 'http://localhost:5005'
+    // const CLIENT_URL = 'http://localhost:3000'
+    // const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -58,7 +59,6 @@ function Map() {
 
     useEffect(() => {
 
-       
         //get all artist data form db
         axios.get(`${API_URL}/dataBase/map`)
         .then(res => {
@@ -88,7 +88,8 @@ function Map() {
                 }
             })
 
-
+            console.log(map.current.style.stylesheet.layers)
+            console.log(map.current.getLayer('settlement-subdivision-label'))
         //create a marker(img) for each artists (feature) object
         for (let i = 0; i < features.length; i++){
             //create divs
@@ -135,7 +136,7 @@ function Map() {
 
     return (
         <div>
-          <div ref={mapContainer} className="map-container" />
+          <div ref={mapContainer} className="map-container"/>
         </div>
     )
 }

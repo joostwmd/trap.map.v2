@@ -1,9 +1,11 @@
 import axios from 'axios'
 
-import spotifyLogo from '../logos/spotifyLogo.png'
-import appleMusicLogo from '../logos/appleMusicLogo.png'
-import youtubeLogo from '../logos/youtubeLogo.png'
-import instagramLogo from '../logos/instagramLogo.png'
+import spotifyLogo from '../style/logos/spotifyLogo.png'
+import appleMusicLogo from '../style/logos/appleMusicLogo.png'
+import youtubeLogo from '../style/logos/youtubeLogo.png'
+import instagramLogo from '../style/logos/instagramLogo.png'
+
+
 
 function AppLogoWithLink({app, link, artistDatabaseId}) {
 

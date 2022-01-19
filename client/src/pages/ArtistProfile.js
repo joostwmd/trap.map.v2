@@ -23,6 +23,10 @@ function ArtistProfile() {
     
 
     //music related functions
+    
+    //for tracks
+    let count = 0
+
     const countTracks = (albums) => {
         let trackCount = 0
         let singlesCount = 0
@@ -50,6 +54,18 @@ function ArtistProfile() {
             } 
         }
         return featuresString.slice(0, -2)
+    }
+
+    const renderTracks = (topTracks) => {
+        let count = 0
+        for (let i = 0; i < topTracks.length; i++){
+            if (topTracks[i].preview_url !== null){
+                count++
+                return (
+                    <Track track={topTracks[i]} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count}/>
+                )
+            }
+        }
     }
 
 
@@ -130,11 +146,14 @@ function ArtistProfile() {
             </div>
 
             <div className="tracks">
+                {/* {renderTracks(topTracks)} */}
                 {topTracks.map(track => {
+                    
                     //makes sure that every track is playable
                     if (track.preview_url !== null){
+                        count++
                         return (
-                            <Track track={track} artistName={artistName} artistDatabaseId={artistDatabaseId}/>
+                            <Track track={track} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count}/>
                     )
                     }
                 })}
