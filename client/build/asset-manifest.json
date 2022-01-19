@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.ab17d3c4.chunk.css",
-    "main.js": "/static/js/main.ddf0bacf.chunk.js",
-    "main.js.map": "/static/js/main.ddf0bacf.chunk.js.map",
+    "main.css": "/static/css/main.95974724.chunk.css",
+    "main.js": "/static/js/main.a217bad8.chunk.js",
+    "main.js.map": "/static/js/main.a217bad8.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.454a1e24.js",
     "runtime-main.js.map": "/static/js/runtime-main.454a1e24.js.map",
     "static/css/2.c2cad7ad.chunk.css": "/static/css/2.c2cad7ad.chunk.css",
@@ -12,8 +12,9 @@
     "static/js/3.bace79f1.chunk.js.map": "/static/js/3.bace79f1.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.c2cad7ad.chunk.css.map": "/static/css/2.c2cad7ad.chunk.css.map",
-    "static/css/main.ab17d3c4.chunk.css.map": "/static/css/main.ab17d3c4.chunk.css.map",
+    "static/css/main.95974724.chunk.css.map": "/static/css/main.95974724.chunk.css.map",
     "static/js/2.87099dc5.chunk.js.LICENSE.txt": "/static/js/2.87099dc5.chunk.js.LICENSE.txt",
+    "static/media/Home.css": "/static/media/Montserrat.556bfd44.woff",
     "static/media/index.css": "/static/media/PhillySans.44179f8b.woff",
     "static/media/chromeGrillz.52438d90.png": "/static/media/chromeGrillz.52438d90.png",
     "static/media/instagramLogo.dad2e219.png": "/static/media/instagramLogo.dad2e219.png",
@@ -24,7 +25,7 @@
     "static/js/runtime-main.454a1e24.js",
     "static/css/2.c2cad7ad.chunk.css",
     "static/js/2.87099dc5.chunk.js",
-    "static/css/main.ab17d3c4.chunk.css",
-    "static/js/main.ddf0bacf.chunk.js"
+    "static/css/main.95974724.chunk.css",
+    "static/js/main.a217bad8.chunk.js"
   ]
 }

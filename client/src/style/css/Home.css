@@ -44,8 +44,26 @@
 }
 
 
+
+  
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat.woff') format('woff');
+  }
+
 #emailInput{
     height: 42px;
+
+}
+
+#emailInput, textarea{
+   color : #fff;
+   font-family: Montserrat;
+}
+
+#emailInput::placeholder{
+   color : #fff;
+   font-family: Montserrat;
 }
 
 
