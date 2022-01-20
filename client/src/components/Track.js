@@ -1,35 +1,35 @@
 import axios from 'axios'
+import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
 
-//icons
 
-function Track({artistName, artistDatabaseId, track, count}) {
+function Track({ artistName, artistDatabaseId, track, count }) {
 
     //for develpoment
     //const API_URL = 'http://localhost:5005'
-    
+
     const API_URL = 'https://trapmapversion2.herokuapp.com'
 
 
     //create strings for additional trackrelated info 
     const createFeaturesInfo = (artists) => {
-        if (artists.length === 1){
+        if (artists.length === 1) {
             return ''
         }
         let featuresString = "feat: "
-        for (let artist of artists){
-            if (artistName !== artist.name){
+        for (let artist of artists) {
+            if (artistName !== artist.name) {
                 featuresString += `${artist.name}, `
-            } 
+            }
         }
         return featuresString.slice(0, -2)
     }
 
     const createReleaseInfo = (album) => {
-        if (album.album_type === "single"){
+        if (album.album_type === "single") {
             return `single`
         }
 
-        if (album.album_type === "album"){
+        if (album.album_type === "album") {
             return `on album: ${album.name}`
         }
     }
@@ -39,47 +39,38 @@ function Track({artistName, artistDatabaseId, track, count}) {
     const playTrack = (trackName) => {
         const track = document.getElementById(`audioPlayer:${trackName}`)
         track.play()
-         
-        
+
         //add visual feedback
         const trackTitle = document.getElementById(`trackTitle:${trackName}`)
         trackTitle.style.color = '#9381FF'
+        trackTitle.style.fontSize = '110%'
 
-        // //add style attributes to spin
-        // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
-        // vinylRecord.style.animationName = 'spinningVinylRecord'
-        // vinylRecord.style.animationDuration = `${track.duration / 5}s`
-        // vinylRecord.style.animationIterationCount = "5"
-        // vinylRecord.style.animationTimingFunction = 'linear'
-        // vinylRecord.style.animationPlayState = 'running'
     }
 
     const pauseTrack = (trackName) => {
-        const track = document.getElementById(`audioPlayer:${trackName}`) 
+        const track = document.getElementById(`audioPlayer:${trackName}`)
         track.pause()
 
         //remove visual feedback
         const trackTitle = document.getElementById(`trackTitle:${trackName}`)
-        trackTitle.style.color = 'white'
+        trackTitle.style.color = '#fff'
+        trackTitle.style.fontSize = '100%'
 
-        // //add style attribute to pause spinning animation
-        // const vinylRecord = document.getElementById(`vinylRecordCurve:${trackName}`)
-        // vinylRecord.style.animationPlayState = 'paused'
     }
 
     //handle click on play/pause button => All the track functions are used here
     const playOrPauseTrack = (trackName) => {
         const audios = document.getElementsByClassName('audioPlayer')
         const clickedAudio = document.getElementById(`audioPlayer:${trackName}`)
-             
-        if (clickedAudio.paused){
+
+        if (clickedAudio.paused) {
             //pause all other tracks
-            for (let audio of audios){
+            for (let audio of audios) {
                 pauseTrack(audio.id.split(":")[1])
             }
             //play clicked track
             playTrack(trackName)
-                
+
         } else {
             //pause the track 
             pauseTrack(trackName)
@@ -87,31 +78,45 @@ function Track({artistName, artistDatabaseId, track, count}) {
 
         //reset track
         clickedAudio.ontimeupdate = () => {
-            if (clickedAudio.currentTime >= 30){
+            if (clickedAudio.currentTime >= 30) {
                 pauseTrack(trackName)
             }
         }
     }
 
-    
+
     //traffic
     const addSnippetPlayed = (artistDatabaseId) => {
-        let requestBody = {artistDatabaseId}
+        let requestBody = { artistDatabaseId }
         axios.post(`${API_URL}/traffic/addSnippetPlayed`, requestBody)
     }
 
 
     return (
-        <div className="track" onClick={() => {playOrPauseTrack(track.name)}}>
-            <p>{count}</p>
-            <div id={`trackCover:${track.name}`} className='trackCover' style={{'backgroundImage' : `url(${track.album.images[1].url})`}}/>
+        <div onClick={() => { playOrPauseTrack(track.name) }}>
+            <Flex
+                alignItems='center'
+                marginBottom='5vw'
+            >
+                <Flex
+                    alignItems='center'
+                    marginRight="10vw"
+                >
+                    <Text
+                        marginRight="5vw"
+                    >{count}</Text>
+                    <Image
+                        src={track.album.images[1].url}
+                        width='7.5vw'
+                        height='7.5vw'
+                    />
+                </Flex>
 
-            <div className="trackTitleAndAlbum">
-                <div><p id={`trackTitle:${track.name}`} className="trackTitle">{`${track.name.toUpperCase()} ${createFeaturesInfo(track.artists).toUpperCase()}`}</p></div>
-                {/* <p>{createReleaseInfo(track.album)}</p> */}
-            </div>
+                <Text id={`trackTitle:${track.name}`}>{`${track.name} ${createFeaturesInfo(track.artists)}`}</Text>
+            </Flex>
 
-            <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => {addSnippetPlayed(artistDatabaseId)}}>
+
+            <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => { addSnippetPlayed(artistDatabaseId) }}>
                 <source src={track.preview_url} type="audio/mp3" />
             </audio>
         </div>

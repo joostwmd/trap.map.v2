@@ -5,7 +5,7 @@ import appleMusicLogo from '../style/logos/appleMusicLogo.png'
 import youtubeLogo from '../style/logos/youtubeLogo.png'
 import instagramLogo from '../style/logos/instagramLogo.png'
 
-
+import { Image } from '@chakra-ui/react'
 
 function AppLogoWithLink({app, link, artistDatabaseId}) {
 
@@ -39,7 +39,7 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "spotify"){
         return (
             <a href={link} onClick={() => {addSpotifyProfileVisit()}}>
-                <img className="appLogo" src={spotifyLogo} alt="spotify logo"/>
+                <Image className="appLogo" src={spotifyLogo} alt="spotify logo"/>
             </a>
         )
     }
@@ -47,7 +47,7 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "appleMusic"){
         return (
             <a href={link} onClick={() => {addAppleMusicProfileVisit()}}>
-                <img className="appLogo" src={appleMusicLogo} alt="apple music logo"/>
+                <Image className="appLogo" src={appleMusicLogo} alt="apple music logo"/>
             </a>
         )
     }
@@ -55,7 +55,7 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "youtube"){
         return (
             <a href={link} onClick={() => {addYoutubeProfileVisit()}}>
-                <img className="appLogo" src={youtubeLogo} alt="youtube logo"/>
+                <Image className="appLogo" src={youtubeLogo} alt="youtube logo"/>
             </a>
         )
     }
@@ -63,7 +63,7 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "instagram"){
         return (
             <a href={link} onClick={() => {addInstagramProfileVisit()}}>
-                <img  className="appLogo" src={instagramLogo} alt="instagram logo"/>
+                <Image  className="appLogo" src={instagramLogo} alt="instagram logo"/>
             </a>
         )
     }

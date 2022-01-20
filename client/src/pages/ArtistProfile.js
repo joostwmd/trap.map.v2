@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Input, Center, Heading, Text, Flex, Button, Image, Container } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
@@ -55,19 +56,6 @@ function ArtistProfile() {
         }
         return featuresString.slice(0, -2)
     }
-
-    const renderTracks = (topTracks) => {
-        let count = 0
-        for (let i = 0; i < topTracks.length; i++){
-            if (topTracks[i].preview_url !== null){
-                count++
-                return (
-                    <Track track={topTracks[i]} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count}/>
-                )
-            }
-        }
-    }
-
 
     //fetch data function
     const getArtistsIds = async () => {
@@ -137,16 +125,17 @@ function ArtistProfile() {
         <div className="artistProfile">
             <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} releasedMusic={releasedMusic} />
 
-            <div className="links">
+            <Flex
+                alignItems='center'
+                marginBottom='10vh'>
                 {links.map(link => {
                     return (
                         <AppLogoWithLink app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
                     )
                 })}
-            </div>
-
-            <div className="tracks">
-                {/* {renderTracks(topTracks)} */}
+            </Flex>
+            
+            <div>
                 {topTracks.map(track => {
                     
                     //makes sure that every track is playable

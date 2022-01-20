@@ -25,11 +25,18 @@
 }
 
 .links > a > img{
-  width: 100px;
+  width: 10vw;
   height : auto;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 2vw;
+  margin-right: 2vw;
   
+}
+
+.appLogo {
+  width: 10vw;
+  height : auto;
+  margin-left: 2vw;
+  margin-right: 2vw;
 }
 
 

@@ -68,17 +68,10 @@
 
 
 #chromeGrillz{
-    width : 400px; 
-    height: 400px;
-    margin: 0px 0px 0px 130px;
-}
-
-#chromeGrillzWrapper{
-    width: 400px;
-    height: 400px;
-    overflow: hidden;
-
-    position: absolute;
-    right : 0%
+    width : 45vw; 
+    height: auto;
+    margin-bottom: -150px;
+    margin: 0px 0px 0px 0px;
     
 }
+

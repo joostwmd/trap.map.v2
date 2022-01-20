@@ -4,7 +4,7 @@ import { extendTheme } from '@chakra-ui/react'
 const theme = extendTheme({
     fonts: {
         heading: 'PhillySans',
-        body : 'PhillySans',
+        body : 'Montserrat',
     },
 
     styles: {
@@ -34,11 +34,6 @@ const theme = extendTheme({
 
         }
     }
-
-    // config: {
-    //     initialColorMode: 'light',
-    //     useSystemColorMode: false,
-    // }
 })
 
 export default theme

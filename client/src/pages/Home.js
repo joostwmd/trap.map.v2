@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 
-import chromeGrillz from '../style/chromeGrillz.png' 
-import { chakra } from "@chakra-ui/react"
-import { Input } from '@chakra-ui/react'
+import chromeGrillz from '../style/chromeGrillz.png'
+import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
 
 function Home() {
-    
+
     //for development
-    //const URL = 'http://localhost:3000'
-    
-    const URL = 'https://trapmapversion2.herokuapp.com'
+    const URL = 'http://localhost:3000'
+
+    //const URL = 'https://trapmapversion2.herokuapp.com'
 
     //svg for animation
     const checkIcon = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path fill=\"none\" d=\"M0 0h24v24H0z\"/><path d=\"M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z\"/></svg>"
@@ -20,11 +19,11 @@ function Home() {
 
     const redirectToMap = () => {
         window.location.href = `${URL}/map/`
-        
+
     }
 
-    const signUpAnimation = () => {    
-        if (document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML === paperPlaneIcon){
+    const signUpAnimation = () => {
+        if (document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML === 'submit') {
             document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = checkIcon;
             document.getElementsByClassName('signUpButton')[0].classList.toggle('signUpButton__circle');
             document.getElementById('emailInput').disabled = true
@@ -35,62 +34,87 @@ function Home() {
     const [email, setEmail] = useState("")
     const singUpForBetaKey = () => {
         //add email to db
-        const requestBody = {email}
+        const requestBody = { email }
         axios.post(`${URL}/traffic/addSignUpForBetaKey`, requestBody)
 
         //button animation
         signUpAnimation()
     }
 
-    useEffect(() => {
-        //document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = paperPlaneIcon 
-    })
 
-    
     return (
         <div>
-            <p>new plattfrom to discover music: no algorithms, no playlists, just you and the music</p>
-            <chakra.button
-                px='5'
-                py='5'
-                bg='brand.200'
-                rounded='md'
-                onClick={() => {redirectToMap()}}
+            <Center
+                flexDir='column'
             >
-                <h1>check out the demo version</h1>
+                <Heading
+                    mt='20px'
+                    mb='20px'
+                >trap map heading</Heading>
 
-            </chakra.button>
+                <p>new plattfrom to discover music: no algorithms, no playlists, just you and the music</p>
+                <Button
+                    px='5'
+                    py='5'
+                    bg='brand.200'
+                    rounded='md'
+                    onClick={() => { redirectToMap() }}
+                >
+                    <Heading>check out the demo version</Heading>
 
-           <div id="betaKeySection">
-                <div id="betaKeyText">
-                    <h1>stay tuned</h1>
-                    <p>we are devoloping an app, q2 release, you can sing-up for an early access key</p>
-                </div>
+                </Button>
+            </Center>
 
-                <Input
-                id="emailInput"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="your email adress"
+            <Flex
+                flexDir="row"
+                justifyContent="space-between">
+                <Flex
+                    flexDir='column'
+                    justifyContent='center'
+                    ml='10vw'
+                >
+                    <Flex
+                        flexDir='column'
+                        alignItems='center'
+                    >
+                        <Heading
+                            marginBottom='7.5vh'
+                        >stay tuned
+                        </Heading>
 
-                size='md'
-                focusBorderColor='brand.200'
-            />
-        
-                <div className="signUpButton" onClick={() => singUpForBetaKey()}>
-                    <div className="signUpButtonContainer">
-                        <div className="signUpButtonIconContainer">
-                            <h1>sumbit</h1>
-                        </div>
-                    </div>
-                </div>
+                        <Text
+                            marginBottom='7.5vh'
+                        >we are devoloping an app, q2 release,<br></br> you can sing-up for an early access key</Text>
 
-                <div id="chromeGrillzWrapper">
-                    <img id="chromeGrillz" src={chromeGrillz} />
-                </div>
-           </div>
-            
-            <h1>do you want to get on the map? DM us on <a href="https://www.instagram.com/mapmusic.berlin/" style={{textDecoration : 'underline' , textDecorationColor : '#9381FF'}}>insta</a></h1>
+                        <Flex
+                            // w='60%'
+                        >
+                            <Input
+                                id="emailInput"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                placeholder="your email adress"
+
+                                size='lg'
+                                width='20vw'
+                                focusBorderColor='brand.200'
+                                marginRight='2.5vw'
+                                
+                            />
+
+                            <Button onClick={() => singUpForBetaKey()}><Heading>sumbit</Heading></Button>
+                        </Flex>
+                    </Flex>
+                </Flex>
+
+
+                <Image id="chromeGrillz" src={chromeGrillz} />
+
+            </Flex>
+
+            <Center>
+                <Heading>do you want to get on the map? DM us on <a href="https://www.instagram.com/mapmusic.berlin/" style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a></Heading>
+            </Center>
 
         </div>
     )

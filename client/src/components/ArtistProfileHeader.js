@@ -1,13 +1,14 @@
-import React from 'react'
+import { Center, Heading, Image } from '@chakra-ui/react'
 
-function ArtistProfileHeader({artistName, artistPicture, releasedMusic}) {
+function ArtistProfileHeader({artistName, artistPicture}) {
     return (
-        <div className="artistProfileHeader">
-            <img src={artistPicture} alt="artist profile" />
-            <div className="artistNameAndReleasedMusic">
-                <h1>{artistName}</h1>
-                {/* <h4>{releasedMusic}</h4> */}
-            </div>
+        <div>
+            <Image 
+                src={artistPicture}
+                w="100vw" 
+            />
+            
+            <Center><Heading>{artistName}</Heading></Center>
         </div>
     )
 }
