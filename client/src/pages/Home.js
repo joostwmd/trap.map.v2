@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-import chromeGrillz from '../style/chromeGrillz.png'
-import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
+
+import chromeGrillzBottom from '../style/chromeGrillzBottom.png'
+import chromeGrillzTop from '../style/chromeGrillzTop.png'
+
+import { Input, Center, Heading, Text, Flex, Button, Image, Box } from '@chakra-ui/react'
 
 function Home() {
 
@@ -23,12 +26,11 @@ function Home() {
     }
 
     const signUpAnimation = () => {
-        if (document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML === 'submit') {
-            document.getElementsByClassName('signUpButtonIconContainer')[0].innerHTML = checkIcon;
-            document.getElementsByClassName('signUpButton')[0].classList.toggle('signUpButton__circle');
-            document.getElementById('emailInput').disabled = true
-            document.getElementById('emailInput').placeholder = 'thank you'
-        }
+       if (document.getElementById('singUpButton').firstElementChild.innerHTML === 'submit'){
+            document.getElementById('singUpButton').firstChild.innerHTML = 'thanks'
+            document.getElementById('singUpButton').style.backgroundColor = '#fff'
+            document.getElementById('singUpButton').firstChild.style.color = '#9381FF'
+       }
     }
 
     const [email, setEmail] = useState("")
@@ -46,74 +48,113 @@ function Home() {
         <div>
             <Center
                 flexDir='column'
+                ml='5vw'
+                mr='5vw'
+                mb='15vh'
             >
                 <Heading
                     mt='20px'
                     mb='20px'
-                >trap map heading</Heading>
+                    color='#fff'
+                >
+                    trap map heading
+                </Heading>
 
-                <p>new plattfrom to discover music: no algorithms, no playlists, just you and the music</p>
+                <Text
+                    align='center'
+                    mb='2vh'
+                >
+                    new plattfrom to discover music: no algorithms, no playlists, just you and the music
+                </Text>
+
                 <Button
-                    px='5'
-                    py='5'
                     bg='brand.200'
                     rounded='md'
                     onClick={() => { redirectToMap() }}
                 >
-                    <Heading>check out the demo version</Heading>
+                    <Heading
+                        fontSize='2em'
+                        color='#fff'
+                        letterSpacing='widest'
+                    >
+                        demo version
+                    </Heading>
 
                 </Button>
             </Center>
 
-            <Flex
-                flexDir="row"
-                justifyContent="space-between">
+            <Center
+                mr='5vw'
+                ml='5vw'
+                mb='15vh'
+            >
                 <Flex
                     flexDir='column'
-                    justifyContent='center'
-                    ml='10vw'
+                    alignItems='center'
                 >
+                    <Image src={chromeGrillzTop} />
                     <Flex
                         flexDir='column'
                         alignItems='center'
                     >
                         <Heading
-                            marginBottom='7.5vh'
-                        >stay tuned
+                            fontSize='3em'
+                            color='#fff'
+                        >
+                            stay tuned
                         </Heading>
 
                         <Text
-                            marginBottom='7.5vh'
-                        >we are devoloping an app, q2 release,<br></br> you can sing-up for an early access key</Text>
-
-                        <Flex
-                            // w='60%'
+                            align='center'
+                            mb='5vh'
                         >
-                            <Input
-                                id="emailInput"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                placeholder="your email adress"
+                            we are devoloping an app, q2 release,you can sing-up for an early access key
+                        </Text>
 
-                                size='lg'
-                                width='20vw'
-                                focusBorderColor='brand.200'
-                                marginRight='2.5vw'
-                                
-                            />
 
-                            <Button onClick={() => singUpForBetaKey()}><Heading>sumbit</Heading></Button>
-                        </Flex>
+                        <Input
+                            id="emailInput"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder="email adress"
+                            focusBorderColor='brand.200'
+
+                            size='md'
+                            width='90vw'
+                            mb='2vh'
+                            
+
+                        />
+
+                        <Button onClick={() => singUpForBetaKey()}
+                            id="singUpButton"
+                            bg='brand.200'
+                            rounded='md'
+                        >
+                            <Heading
+                                fontSize='2em'
+                                color='#fff'
+                                letterSpacing='widest'
+                            >
+                                submit
+                            </Heading>
+                        </Button>
+
+
                     </Flex>
+                    <Image src={chromeGrillzBottom} />
                 </Flex>
+            </Center>
 
-
-                <Image id="chromeGrillz" src={chromeGrillz} />
-
-            </Flex>
 
             <Center>
-                <Heading>do you want to get on the map? DM us on <a href="https://www.instagram.com/mapmusic.berlin/" style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a></Heading>
+                <Heading
+                    align='center'
+                    fontSize='2.25em'
+                    color='#fff'
+                >
+                    DM us on <a href="https://www.instagram.com/mapmusic.berlin/" style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a>
+                </Heading>
             </Center>
 
         </div>

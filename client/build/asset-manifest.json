@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.1035059c.chunk.css",
-    "main.js": "/static/js/main.d306987a.chunk.js",
-    "main.js.map": "/static/js/main.d306987a.chunk.js.map",
+    "main.css": "/static/css/main.80201b79.chunk.css",
+    "main.js": "/static/js/main.e8bc3dbe.chunk.js",
+    "main.js.map": "/static/js/main.e8bc3dbe.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d45dde56.js",
     "runtime-main.js.map": "/static/js/runtime-main.d45dde56.js.map",
     "static/css/2.c2cad7ad.chunk.css": "/static/css/2.c2cad7ad.chunk.css",
-    "static/js/2.d4d28c7f.chunk.js": "/static/js/2.d4d28c7f.chunk.js",
-    "static/js/2.d4d28c7f.chunk.js.map": "/static/js/2.d4d28c7f.chunk.js.map",
+    "static/js/2.5cac6bf1.chunk.js": "/static/js/2.5cac6bf1.chunk.js",
+    "static/js/2.5cac6bf1.chunk.js.map": "/static/js/2.5cac6bf1.chunk.js.map",
     "static/js/3.c872737c.chunk.js": "/static/js/3.c872737c.chunk.js",
     "static/js/3.c872737c.chunk.js.map": "/static/js/3.c872737c.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.c2cad7ad.chunk.css.map": "/static/css/2.c2cad7ad.chunk.css.map",
-    "static/css/main.1035059c.chunk.css.map": "/static/css/main.1035059c.chunk.css.map",
-    "static/js/2.d4d28c7f.chunk.js.LICENSE.txt": "/static/js/2.d4d28c7f.chunk.js.LICENSE.txt",
+    "static/css/main.80201b79.chunk.css.map": "/static/css/main.80201b79.chunk.css.map",
+    "static/js/2.5cac6bf1.chunk.js.LICENSE.txt": "/static/js/2.5cac6bf1.chunk.js.LICENSE.txt",
     "static/media/Home.css": "/static/media/Montserrat.556bfd44.woff",
     "static/media/index.css": "/static/media/PhillySans.44179f8b.woff",
-    "static/media/chromeGrillz.332f2e85.png": "/static/media/chromeGrillz.332f2e85.png",
+    "static/media/chromeGrillzBottom.1ddb87c3.png": "/static/media/chromeGrillzBottom.1ddb87c3.png",
+    "static/media/chromeGrillzTop.2f6fd0de.png": "/static/media/chromeGrillzTop.2f6fd0de.png",
     "static/media/instagramLogo.dad2e219.png": "/static/media/instagramLogo.dad2e219.png",
     "static/media/spotifyLogo.dffc4909.png": "/static/media/spotifyLogo.dffc4909.png",
     "static/media/youtubeLogo.6615ff3f.png": "/static/media/youtubeLogo.6615ff3f.png"
@@ -24,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.d45dde56.js",
     "static/css/2.c2cad7ad.chunk.css",
-    "static/js/2.d4d28c7f.chunk.js",
-    "static/css/main.1035059c.chunk.css",
-    "static/js/main.d306987a.chunk.js"
+    "static/js/2.5cac6bf1.chunk.js",
+    "static/css/main.80201b79.chunk.css",
+    "static/js/main.e8bc3dbe.chunk.js"
   ]
 }

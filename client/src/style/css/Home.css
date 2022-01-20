@@ -66,12 +66,21 @@
    font-family: Montserrat;
 }
 
-
-#chromeGrillz{
-    width : 45vw; 
-    height: auto;
-    margin-bottom: -150px;
-    margin: 0px 0px 0px 0px;
-    
+#chromeGrillzWrapper{
+    position: relative;
+    width: 30vw;
+    height: 40vh;
 }
+
+
+#chromeGrillzTop{
+    position: absolute;
+    top: 0%;
+}
+
+#chromeGrillzBottom{
+    position: absolute;
+    bottom: 0%;
+}
+
 

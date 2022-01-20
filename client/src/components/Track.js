@@ -43,7 +43,9 @@ function Track({ artistName, artistDatabaseId, track, count }) {
         //add visual feedback
         const trackTitle = document.getElementById(`trackTitle:${trackName}`)
         trackTitle.style.color = '#9381FF'
-        trackTitle.style.fontSize = '110%'
+
+        const trackCount = document.getElementById(`trackCount:${trackName}`)
+        trackCount.style.color = '#9381FF'
 
     }
 
@@ -54,7 +56,9 @@ function Track({ artistName, artistDatabaseId, track, count }) {
         //remove visual feedback
         const trackTitle = document.getElementById(`trackTitle:${trackName}`)
         trackTitle.style.color = '#fff'
-        trackTitle.style.fontSize = '100%'
+
+        const trackCount = document.getElementById(`trackCount:${trackName}`)
+        trackCount.style.color = '#fff'
 
     }
 
@@ -103,8 +107,11 @@ function Track({ artistName, artistDatabaseId, track, count }) {
                     marginRight="10vw"
                 >
                     <Text
+                        id={`trackCount:${track.name}`}
                         marginRight="5vw"
-                    >{count}</Text>
+                    >
+                        {count}
+                    </Text>
                     <Image
                         src={track.album.images[1].url}
                         width='7.5vw'
