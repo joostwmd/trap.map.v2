@@ -39,7 +39,14 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "spotify"){
         return (
             <a href={link} onClick={() => {addSpotifyProfileVisit()}}>
-                <Image className="appLogo" src={spotifyLogo} alt="spotify logo"/>
+                <Image 
+                    src={spotifyLogo} 
+                    alt="spotify logo"
+                    w='12vw'
+                    h='12vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
+                    />
             </a>
         )
     }
@@ -47,7 +54,14 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "appleMusic"){
         return (
             <a href={link} onClick={() => {addAppleMusicProfileVisit()}}>
-                <Image className="appLogo" src={appleMusicLogo} alt="apple music logo"/>
+                <Image 
+                    src={appleMusicLogo} 
+                    alt="apple music logo"
+                    w='12vw'
+                    h='12vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
+                />
             </a>
         )
     }
@@ -55,7 +69,14 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "youtube"){
         return (
             <a href={link} onClick={() => {addYoutubeProfileVisit()}}>
-                <Image className="appLogo" src={youtubeLogo} alt="youtube logo"/>
+                <Image 
+                    src={youtubeLogo} 
+                    alt="youtube logo"
+                    w='12vw'
+                    h='12vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
+                />
             </a>
         )
     }
@@ -63,7 +84,14 @@ function AppLogoWithLink({app, link, artistDatabaseId}) {
     if (app === "instagram"){
         return (
             <a href={link} onClick={() => {addInstagramProfileVisit()}}>
-                <Image  className="appLogo" src={instagramLogo} alt="instagram logo"/>
+                <Image 
+                    src={instagramLogo} 
+                    alt="instagram logo"
+                    w='12vw'
+                    h='12vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
+                />
             </a>
         )
     }

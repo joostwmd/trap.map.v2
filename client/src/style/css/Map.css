@@ -1,0 +1,29 @@
+.marker{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; 
+    background-size: cover;
+    position: absolute;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.marker > p {
+    font-size: 10px;
+    color:#fff;
+    font-family: PhillySans;
+    display: inline-block;
+    position: absolute;
+  
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+}
+  
+  
+.map-container {
+    height: 100vh;
+    width: 100vw;
+}

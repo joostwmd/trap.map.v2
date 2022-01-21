@@ -11,7 +11,7 @@ function ArtistProfile() {
 
     //for develpoment
     //const API_URL = 'http://localhost:5005'
-    
+
     const API_URL = 'https://trapmapversion2.herokuapp.com'
 
     //artist info
@@ -21,10 +21,10 @@ function ArtistProfile() {
     const [releasedMusic, setReleasedMusic] = useState("")
     const [links, setLinks] = useState([])
     const [topTracks, setTopTracks] = useState([])
-    
+
 
     //music related functions
-    
+
     //for tracks
     let count = 0
 
@@ -33,11 +33,11 @@ function ArtistProfile() {
         let singlesCount = 0
         let albumCount = 0
 
-        for (let album of albums){
-            if (album.album_type === "single"){
+        for (let album of albums) {
+            if (album.album_type === "single") {
                 trackCount++
                 singlesCount++
-            } else if (album.album_type === "album"){
+            } else if (album.album_type === "album") {
                 trackCount += album.total_tracks
                 albumCount++
             }
@@ -49,10 +49,10 @@ function ArtistProfile() {
 
     const createFeaturesString = (artists) => {
         let featuresString = "feat: "
-        for (let artist of artists){
-            if (artistName !== artist.name){
+        for (let artist of artists) {
+            if (artistName !== artist.name) {
                 featuresString += `${artist.name}, `
-            } 
+            }
         }
         return featuresString.slice(0, -2)
     }
@@ -63,7 +63,7 @@ function ArtistProfile() {
     }
 
     const getSpotifyData = async (spotifyId) => {
-        const requestBody = {spotifyId}
+        const requestBody = { spotifyId }
 
         const response = await axios.post(`${API_URL}/spotify/loadArtistProfile`, requestBody)
         const data = await response
@@ -72,44 +72,44 @@ function ArtistProfile() {
     }
 
     const getDataBaseData = async (dataBaseId) => {
-        const requestBody = {dataBaseId}
+        const requestBody = { dataBaseId }
 
         const response = await axios.post(`${API_URL}/dataBase/artistProfile`, requestBody)
         const data = await response
 
         return data
     }
-    
+
 
     //traffic functions
     const addTrapMapProfileVisit = (dataBaseId) => {
-        let requestBody = {dataBaseId}
+        let requestBody = { dataBaseId }
         axios.post(`${API_URL}/traffic/addTrapMapProfileVisit`, requestBody)
     }
 
-    
 
-    useEffect( () => {
-        
+
+    useEffect(() => {
+
         getArtistsIds()
             .then(ids => {
                 getDataBaseData(ids[0])
-                .then(dataBaseData => {
-                    setArtistDatabaseId(dataBaseData.data._id)
-                    //header
-                    setLinks([
-                        ["spotify",  dataBaseData.data.spotifyLink],
-                        ["appleMusic",  dataBaseData.data.appleMusicLink],
-                        ["youtube" , dataBaseData.data.youtubeLink],
-                        ["instagram" , dataBaseData.data.instagramLink]
-                    ])
+                    .then(dataBaseData => {
+                        setArtistDatabaseId(dataBaseData.data._id)
+                        //header
+                        setLinks([
+                            ["spotify", dataBaseData.data.spotifyLink],
+                            ["appleMusic", dataBaseData.data.appleMusicLink],
+                            ["youtube", dataBaseData.data.youtubeLink],
+                            ["instagram", dataBaseData.data.instagramLink]
+                        ])
 
-                    //add trapMap visits
-                    addTrapMapProfileVisit(dataBaseData.data._id)
-                })
+                        //add trapMap visits
+                        addTrapMapProfileVisit(dataBaseData.data._id)
+                    })
 
                 getSpotifyData(ids[1])
-                    .then(spotifyData => { 
+                    .then(spotifyData => {
                         //header
                         setArtistName(spotifyData.data[0].name)
                         setArtistPicture(spotifyData.data[0].images[0].url)
@@ -117,8 +117,8 @@ function ArtistProfile() {
 
                         //tracks
                         setTopTracks(spotifyData.data[1])
-                })
-            })        
+                    })
+            })
     }, [])
 
     return (
@@ -126,7 +126,7 @@ function ArtistProfile() {
             <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} releasedMusic={releasedMusic} />
 
             <Flex
-                alignItems='center'
+                justifyContent='center'
                 marginBottom='10vh'>
                 {links.map(link => {
                     return (
@@ -134,16 +134,27 @@ function ArtistProfile() {
                     )
                 })}
             </Flex>
-            
+
+            <Center>
+                <Heading
+                    color='brand.200'
+                    fontSize='2.25em'
+                    mb='2vw'
+                    letterSpacing='wider'
+                >
+                    Snippets
+                </Heading>
+            </Center>
+
             <div>
                 {topTracks.map(track => {
-                    
+
                     //makes sure that every track is playable
-                    if (track.preview_url !== null){
+                    if (track.preview_url !== null) {
                         count++
                         return (
-                            <Track track={track} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count}/>
-                    )
+                            <Track track={track} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count} />
+                        )
                     }
                 })}
             </div>

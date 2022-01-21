@@ -13,9 +13,9 @@ function Track({ artistName, artistDatabaseId, track, count }) {
     //create strings for additional trackrelated info 
     const createFeaturesInfo = (artists) => {
         if (artists.length === 1) {
-            return ''
+            return `${artistName}`
         }
-        let featuresString = "feat: "
+        let featuresString = `${artistName}, `
         for (let artist of artists) {
             if (artistName !== artist.name) {
                 featuresString += `${artist.name}, `
@@ -100,26 +100,44 @@ function Track({ artistName, artistDatabaseId, track, count }) {
         <div onClick={() => { playOrPauseTrack(track.name) }}>
             <Flex
                 alignItems='center'
-                marginBottom='5vw'
+                marginBottom='7.5vw'
             >
                 <Flex
                     alignItems='center'
                     marginRight="10vw"
+                    marginLeft='5vw'
                 >
                     <Text
                         id={`trackCount:${track.name}`}
                         marginRight="5vw"
+                        fontSize='1.5em'
                     >
                         {count}
                     </Text>
                     <Image
                         src={track.album.images[1].url}
-                        width='7.5vw'
-                        height='7.5vw'
+                        width='10vw'
+                        height='10vw'
                     />
                 </Flex>
 
-                <Text id={`trackTitle:${track.name}`}>{`${track.name} ${createFeaturesInfo(track.artists)}`}</Text>
+                <Flex
+                    flexDir='column'
+                    alignItems='left'
+                >
+                    <Text 
+                        id={`trackTitle:${track.name}`}
+                        fontSize='1.25em'
+                    >
+                        {`${track.name}`}
+                    </Text>
+                    <Text 
+                        id={`artistsOnTrack:${track.name}`}
+                        fontSize='1em'
+                    >
+                        {`${createFeaturesInfo(track.artists)}`}
+                    </Text>
+                </Flex>
             </Flex>
 
 

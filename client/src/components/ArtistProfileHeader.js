@@ -1,4 +1,5 @@
-import { Center, Heading, Image } from '@chakra-ui/react'
+import { Heading, Image } from '@chakra-ui/react'
+
 
 function ArtistProfileHeader({artistName, artistPicture}) {
     return (
@@ -7,14 +8,16 @@ function ArtistProfileHeader({artistName, artistPicture}) {
                 <Image  
                     src={artistPicture}
                     w='100vw'
-                    mb='-25vh'
-                    roundedBottom='5%'
+                    mb='10vh'
                     />
                 <Heading
+                    className='artistNameInProfileHeader'
                     fontSize='4.2em'
-                    color='brand.200'
+                    color='#fff'
+                    
                     ml='5vw'
-                    mb='25vh'
+                    pos='absolute'
+                    top='5vw'
                 >
                     {artistName}
                 </Heading>
