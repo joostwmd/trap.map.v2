@@ -10,15 +10,15 @@ import { Input, Center, Heading, Text, Flex, Button, Image, Box } from '@chakra-
 function Home() {
 
     //for development
-    const URL = 'http://localhost:3000'
+    //const URL = 'http://localhost:3000'
 
-    //const URL = 'https://trapmapversion2.herokuapp.com'
+    const URL = 'https://trapmapversion2.herokuapp.com'
 
     const redirectToMap = () => {
         window.location.href = `${URL}/map`
 
     }
-    
+
     const [email, setEmail] = useState("")
     const singUpForBetaKey = () => {
         //add email to db
