@@ -5,11 +5,7 @@ const spotifyArtistCalls = require('../spotifyApi/artistCallsConfig');
 
 
 
-router.post("/loadArtistProfile", (req ,res, next) => {
-    
-  //test
-  console.log("spotify", req.body.spotifyId)
-
+router.post("/artistProfile", (req ,res, next) => {
   spotifyFetchToken.fetchPublicToken()
     .then(token => {
       spotifyArtistCalls.loadArtistProfile(token, req.body.spotifyId)

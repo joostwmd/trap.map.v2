@@ -7,5 +7,5 @@ const snippetPlayedSchema = new Schema({
     }
 })
 
-const SnippetPlayed = model("snippetPlayed", snippetPlayedSchema);
+const SnippetPlayed = model("PlayedSnippet", snippetPlayedSchema);
 module.exports = SnippetPlayed;

@@ -7,5 +7,5 @@ const trapMapVisitSchema = new Schema({
     }
 })
 
-const TrapMapVisit = model("trapMapVisit", trapMapVisitSchema);
+const TrapMapVisit = model("TrapmapProfileVisit", trapMapVisitSchema);
 module.exports = TrapMapVisit;

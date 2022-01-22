@@ -5,28 +5,31 @@ import axios from 'axios'
 import chromeGrillzBottom from '../style/chromeGrillzBottom.png'
 import chromeGrillzTop from '../style/chromeGrillzTop.png'
 
-import { Input, Center, Heading, Text, Flex, Button, Image, Box } from '@chakra-ui/react'
+import { Input, Center, Heading, Text, Flex, Button, Image} from '@chakra-ui/react'
 
 function Home() {
 
     //for development
-    //const URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
 
-    const URL = 'https://trapmapversion2.herokuapp.com'
+    //const API_URL = 'https://trapmapversion2.herokuapp.com'
+    //const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     const redirectToMap = () => {
-        window.location.href = `${URL}/map`
+        window.location.href = `${CLIENT_URL}/map`
 
     }
 
+
     const [email, setEmail] = useState("")
     const singUpForBetaKey = () => {
-        //add email to db
-        const requestBody = { email }
-        axios.post(`${URL}/traffic/addSignUpForBetaKey`, requestBody)
-
-        //ui feedback
         if (document.getElementById('singUpButton').firstElementChild.innerHTML === 'submit'){
+            //add email to db
+            const requestBody = { email }
+            axios.post(`${API_URL}/traffic/addSignUpForBetaKey`, requestBody)
+
+            //ui feedback
             document.getElementById('singUpButton').firstChild.innerHTML = 'thanks'
             document.getElementById('singUpButton').style.backgroundColor = '#fff'
             document.getElementById('singUpButton').firstChild.style.color = '#9381FF'

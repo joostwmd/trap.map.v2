@@ -10,9 +10,9 @@ import ArtistProfileHeader from '../components/ArtistProfileHeader'
 function ArtistProfile() {
 
     //for develpoment
-    //const API_URL = 'http://localhost:5005'
+    const API_URL = 'http://localhost:5005'
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    //const API_URL = 'https://trapmapversion2.herokuapp.com'
 
     //artist info
     const [artistName, setArtistName] = useState("")
@@ -28,34 +28,34 @@ function ArtistProfile() {
     //for tracks
     let count = 0
 
-    const countTracks = (albums) => {
-        let trackCount = 0
-        let singlesCount = 0
-        let albumCount = 0
+    // const countTracks = (albums) => {
+    //     let trackCount = 0
+    //     let singlesCount = 0
+    //     let albumCount = 0
 
-        for (let album of albums) {
-            if (album.album_type === "single") {
-                trackCount++
-                singlesCount++
-            } else if (album.album_type === "album") {
-                trackCount += album.total_tracks
-                albumCount++
-            }
-        }
+    //     for (let album of albums) {
+    //         if (album.album_type === "single") {
+    //             trackCount++
+    //             singlesCount++
+    //         } else if (album.album_type === "album") {
+    //             trackCount += album.total_tracks
+    //             albumCount++
+    //         }
+    //     }
 
 
-        return `tracks : ${trackCount}, singles : ${singlesCount}, albums : ${albumCount}`
-    }
+    //     return `tracks : ${trackCount}, singles : ${singlesCount}, albums : ${albumCount}`
+    // }
 
-    const createFeaturesString = (artists) => {
-        let featuresString = "feat: "
-        for (let artist of artists) {
-            if (artistName !== artist.name) {
-                featuresString += `${artist.name}, `
-            }
-        }
-        return featuresString.slice(0, -2)
-    }
+    // const createFeaturesString = (artists) => {
+    //     let featuresString = "feat: "
+    //     for (let artist of artists) {
+    //         if (artistName !== artist.name) {
+    //             featuresString += `${artist.name}, `
+    //         }
+    //     }
+    //     return featuresString.slice(0, -2)
+    // }
 
     //fetch data function
     const getArtistsIds = async () => {
@@ -65,7 +65,7 @@ function ArtistProfile() {
     const getSpotifyData = async (spotifyId) => {
         const requestBody = { spotifyId }
 
-        const response = await axios.post(`${API_URL}/spotify/loadArtistProfile`, requestBody)
+        const response = await axios.post(`${API_URL}/spotify/artistProfile`, requestBody)
         const data = await response
 
         return data
@@ -82,8 +82,8 @@ function ArtistProfile() {
 
 
     //traffic functions
-    const addTrapMapProfileVisit = (dataBaseId) => {
-        let requestBody = { dataBaseId }
+    const addTrapMapProfileVisit = (artistDatabaseId) => {
+        let requestBody = { artistDatabaseId }
         axios.post(`${API_URL}/traffic/addTrapMapProfileVisit`, requestBody)
     }
 
@@ -113,7 +113,7 @@ function ArtistProfile() {
                         //header
                         setArtistName(spotifyData.data[0].name)
                         setArtistPicture(spotifyData.data[0].images[0].url)
-                        setReleasedMusic(countTracks(spotifyData.data[2]))
+                        // setReleasedMusic(countTracks(spotifyData.data[2]))
 
                         //tracks
                         setTopTracks(spotifyData.data[1])
@@ -130,7 +130,7 @@ function ArtistProfile() {
                 marginBottom='10vh'>
                 {links.map(link => {
                     return (
-                        <AppLogoWithLink app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
+                        <AppLogoWithLink key={link[0]} app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
                     )
                 })}
             </Flex>
@@ -153,7 +153,7 @@ function ArtistProfile() {
                     if (track.preview_url !== null) {
                         count++
                         return (
-                            <Track track={track} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count} />
+                            <Track key={track.name} track={track} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count} />
                         )
                     }
                 })}

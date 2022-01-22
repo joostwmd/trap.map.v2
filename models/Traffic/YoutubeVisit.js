@@ -7,5 +7,5 @@ const youtubeVisitSchema = new Schema({
     }
 })
 
-const YoutubeVisit = model("youtubeVisit", youtubeVisitSchema);
+const YoutubeVisit = model("YoutubeReroute", youtubeVisitSchema);
 module.exports = YoutubeVisit

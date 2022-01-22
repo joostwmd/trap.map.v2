@@ -33,25 +33,26 @@ const getArtistTopTracks = (artistId) => {
     return res
 }
 
-const getArtistAlbums = (artistId) => {
+// const getArtistAlbums = (artistId) => {
     
-    const res = publicSpotifyApi.getArtistAlbums(artistId)
-        .then(function(data){
-            return data.body.items
-        }, function(err){
-            console.log('Something went wrong!', err)
-        })
-    return res
-}
+//     const res = publicSpotifyApi.getArtistAlbums(artistId)
+//         .then(function(data){
+//             return data.body.items
+//         }, function(err){
+//             console.log('Something went wrong!', err)
+//         })
+//     return res
+// }
 
 const loadArtistProfile = async (token, artistId) => {
     setPublicSpotifyApiToken(token)
 
     const info = await getArtistInfo(artistId)
     const topTracks = await getArtistTopTracks(artistId)
-    const artistAlbum = await getArtistAlbums(artistId)
+    //const artistAlbum = await getArtistAlbums(artistId)
 
-    return [info, topTracks, artistAlbum]
+    //return [info, topTracks, artistAlbum]
+    return [info, topTracks]
 }
 
 module.exports = {loadArtistProfile}

@@ -8,12 +8,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
     
     //for development
-    // const CLIENT_URL = 'http://localhost:3000'
-    // const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
     
     
     //map props
@@ -58,15 +58,13 @@ function Map() {
     }
 
     useEffect(() => {
-
         //get all artist data form db
         axios.get(`${API_URL}/dataBase/map`)
         .then(res => {
             //change data into mapboxgl format with function
             artistToFeatures(res.data)
         })
-
-    
+ 
         //create the map object
         if (map.current) return; // initialize map only once
             map.current = new mapboxgl.Map({        
@@ -88,8 +86,6 @@ function Map() {
                 }
             })
 
-            console.log(map.current.style.stylesheet.layers)
-            console.log(map.current.getLayer('settlement-subdivision-label'))
         //create a marker(img) for each artists (feature) object
         for (let i = 0; i < features.length; i++){
             //create divs

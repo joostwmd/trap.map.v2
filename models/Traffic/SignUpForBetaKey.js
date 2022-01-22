@@ -5,5 +5,5 @@ const singUpForBetaKeySchema = new Schema({
 })
 
 
-const SingUpForBetaKey = model("singUpForBetaKeySchema", singUpForBetaKeySchema);
+const SingUpForBetaKey = model("BetaKey", singUpForBetaKeySchema);
 module.exports = SingUpForBetaKey;

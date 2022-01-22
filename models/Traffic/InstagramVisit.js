@@ -7,5 +7,5 @@ const instagramVisitSchema = new Schema({
     }
 })
 
-const InstagramVisit = model("instagramVisit", instagramVisitSchema);
+const InstagramVisit = model("InstagramReroute", instagramVisitSchema);
 module.exports = InstagramVisit;

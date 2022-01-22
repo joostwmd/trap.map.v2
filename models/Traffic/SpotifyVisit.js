@@ -7,5 +7,5 @@ const spotifyVisitSchema = new Schema({
     }
 })
 
-const SpotifyVisit = model("spotifyVisit", spotifyVisitSchema);
+const SpotifyVisit = model("SpotifyReroute", spotifyVisitSchema);
 module.exports = SpotifyVisit;
