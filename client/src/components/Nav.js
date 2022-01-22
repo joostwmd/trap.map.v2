@@ -1,8 +1,8 @@
 function Nav() {
     //for development
-    const CLIENT_URL = 'http://localhost:3000'
+    //const CLIENT_URL = 'http://localhost:3000'
 
-    //const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}/`
