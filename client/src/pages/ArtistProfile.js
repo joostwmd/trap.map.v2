@@ -5,14 +5,15 @@ import { Input, Center, Heading, Text, Flex, Button, Image, Container } from '@c
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
 import ArtistProfileHeader from '../components/ArtistProfileHeader'
+import Nav from '../components/Nav'
 
 
 function ArtistProfile() {
 
     //for develpoment
-    //const API_URL = 'http://localhost:5005'
+    const API_URL = 'http://localhost:5005'
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    //const API_URL = 'https://trapmapversion2.herokuapp.com'
 
     //artist info
     const [artistName, setArtistName] = useState("")
@@ -123,24 +124,34 @@ function ArtistProfile() {
 
     return (
         <div className="artistProfile">
+            <Nav />
             <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} releasedMusic={releasedMusic} />
 
             <Flex
                 justifyContent='center'
-                marginBottom='10vh'>
+                h='20vw'
+                mb='2vh'
+
+                borderBottomStyle='solid'
+                borderBottomWidth='1vw'
+                borderBottomColor='#fff'
+            >
                 {links.map(link => {
-                    return (
-                        <AppLogoWithLink key={link[0]} app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
-                    )
+                    //makes sure that every app logo is a working link
+                    if (link[1] !== ''){
+                        return (
+                            <AppLogoWithLink key={link[0]} app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
+                        )
+                    }
                 })}
             </Flex>
 
             <Center>
                 <Heading
                     color='brand.200'
-                    fontSize='2.25em'
-                    mb='2vw'
+                    mb='5vh'
                     letterSpacing='wider'
+                    fontSize='15vw'
                 >
                     Snippets
                 </Heading>

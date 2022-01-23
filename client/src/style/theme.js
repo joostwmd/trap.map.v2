@@ -1,4 +1,14 @@
 import { extendTheme } from '@chakra-ui/react'
+import { createBreakpoints } from '@chakra-ui/theme-tools'
+
+
+
+const breakpoints = createBreakpoints({
+    sm: '45em',
+    md: '55em',
+    lg: '65em',
+    xl: '75em',
+})
 
 
 const theme = extendTheme({
@@ -15,13 +25,11 @@ const theme = extendTheme({
 
             h1: {
                 fontFamily : 'PhillySans',
-                fontSize: '35px',
                 color: '#fff'
             },
     
             p: {
                 fontFamily : 'Montserrat',
-                fontSize : '15px',
                 color : '#fff'
             }
         }    
@@ -33,7 +41,9 @@ const theme = extendTheme({
             200: '#9381FF' //purple
 
         }
-    }
+    },
+    
+    breakpoints
 })
 
 export default theme

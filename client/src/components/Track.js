@@ -5,17 +5,17 @@ import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/re
 function Track({ artistName, artistDatabaseId, track, count }) {
 
     //for develpoment
-    //const API_URL = 'http://localhost:5005'
+    const API_URL = 'http://localhost:5005'
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    //const API_URL = 'https://trapmapversion2.herokuapp.com'
 
 
     //create strings for additional trackrelated info 
     const createFeaturesInfo = (artists) => {
         if (artists.length === 1) {
-            return `${artistName}`
+            return ''
         }
-        let featuresString = `${artistName}, `
+        let featuresString = `feat: `
         for (let artist of artists) {
             if (artistName !== artist.name) {
                 featuresString += `${artist.name}, `
@@ -100,24 +100,29 @@ function Track({ artistName, artistDatabaseId, track, count }) {
         <div onClick={() => { playOrPauseTrack(track.name) }}>
             <Flex
                 alignItems='center'
-                marginBottom='7.5vw'
+                mb='7.5vh'
             >
                 <Flex
                     alignItems='center'
-                    marginRight="10vw"
-                    marginLeft='5vw'
+                    mr="10vw"
+                    ml='5vw'
                 >
-                    <Text
-                        id={`trackCount:${track.name}`}
-                        marginRight="5vw"
-                        fontSize='1.5em'
+                    <Center
+                        w='10vw'
+                        h='10vw'
                     >
-                        {count}
-                    </Text>
+                        <Text
+                            id={`trackCount:${track.name}`}
+                            marginRight="5vw"
+                            fontSize='5vw'
+                        >
+                            {count}
+                        </Text>
+                    </Center>
                     <Image
                         src={track.album.images[1].url}
-                        width='10vw'
-                        height='10vw'
+                        width='12.5vw'
+                        height='12.5vw'
                     />
                 </Flex>
 
@@ -125,15 +130,15 @@ function Track({ artistName, artistDatabaseId, track, count }) {
                     flexDir='column'
                     alignItems='left'
                 >
-                    <Text 
+                    <Text
                         id={`trackTitle:${track.name}`}
-                        fontSize='1.25em'
+                        fontSize='5vw'
                     >
                         {`${track.name}`}
                     </Text>
-                    <Text 
+                    <Text
                         id={`artistsOnTrack:${track.name}`}
-                        fontSize='1em'
+                        fontSize='3.5vw'
                     >
                         {`${createFeaturesInfo(track.artists)}`}
                     </Text>

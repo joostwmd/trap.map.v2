@@ -8,11 +8,11 @@ function ArtistProfileHeader({artistName, artistPicture}) {
                 <Image  
                     src={artistPicture}
                     w='100vw'
-                    mb='10vh'
+                    mb='5vh'
                     />
                 <Heading
                     className='artistNameInProfileHeader'
-                    fontSize='4.2em'
+                    fontSize='20vw'
                     color='#fff'
                     
                     ml='5vw'

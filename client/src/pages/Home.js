@@ -10,11 +10,11 @@ import { Input, Center, Heading, Text, Flex, Button, Image} from '@chakra-ui/rea
 function Home() {
 
     //for development
-    // const API_URL = 'http://localhost:5005'
-    // const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}/map`
@@ -57,6 +57,7 @@ function Home() {
                 <Text
                     align='center'
                     mb='2vh'
+                    fontSize='5vw'
                 >
                     new plattfrom to discover music: no algorithms, no playlists, just you and the music
                 </Text>
@@ -64,10 +65,12 @@ function Home() {
                 <Button
                     bg='brand.200'
                     rounded='md'
+                    w='75vw'
+                    h='15vw'
                     onClick={() => {redirectToMap() }}
                 >
                     <Heading
-                        fontSize='2em'
+                        fontSize='10vw'
                         color='#fff'
                         letterSpacing='wider'
                     >
@@ -92,7 +95,7 @@ function Home() {
                         alignItems='center'
                     >
                         <Heading
-                            fontSize='3em'
+                            fontSize='15vw'
                             color='#fff'
                         >
                             stay tuned
@@ -101,6 +104,7 @@ function Home() {
                         <Text
                             align='center'
                             mb='5vh'
+                            fontSize='5vw'
                         >
                             we are devoloping an app, q2 release,you can sing-up for an early access key
                         </Text>
@@ -116,17 +120,18 @@ function Home() {
                             size='md'
                             width='90vw'
                             mb='2vh'
-                            
-
                         />
 
                         <Button onClick={() => singUpForBetaKey()}
                             id="singUpButton"
                             bg='brand.200'
                             rounded='md'
+                            w='75vw'
+                            h='15vw'
+                            mb='2vh'
                         >
                             <Heading
-                                fontSize='2em'
+                                fontSize='10vw'
                                 color='#fff'
                                 letterSpacing='wider'
                             >
@@ -144,7 +149,7 @@ function Home() {
             <Center>
                 <Heading
                     align='center'
-                    fontSize='2.25em'
+                    fontSize='12vw'
                     color='#fff'
                 >
                     DM us on <a href="https://www.instagram.com/mapmusic.berlin/" style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a>
