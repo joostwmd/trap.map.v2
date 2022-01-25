@@ -5,7 +5,7 @@ import appleMusicLogo from '../style/logos/appleMusicLogo.png'
 import youtubeLogo from '../style/logos/youtubeLogo.png'
 import instagramLogo from '../style/logos/instagramLogo.png'
 
-import { Image, Flex } from '@chakra-ui/react'
+import { Image } from '@chakra-ui/react'
 
 function AppLogoWithLink({ app, link, artistDatabaseId }) {
 

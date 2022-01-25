@@ -1,26 +1,52 @@
-import { Heading, Image } from '@chakra-ui/react'
+import { Heading, Image, Button, Center } from '@chakra-ui/react'
+
 
 
 function ArtistProfileHeader({artistName, artistPicture}) {
+
+    //const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+
+    //for development
+    const CLIENT_URL = 'http://localhost:3000'
+
+    const redirectToMap = () => {
+        window.location.href = `${CLIENT_URL}/map`
+    }
+    
     return (
         <div>
-            <div>
+            <div style={{position : 'relative'}}>
                 <Image  
                     src={artistPicture}
                     w='100vw'
                     mb='5vh'
-                    />
+                />
                 <Heading
-                    className='artistNameInProfileHeader'
-                    fontSize='20vw'
-                    color='#fff'
-                    
-                    ml='5vw'
+                    onClick={() => redirectToMap()}
                     pos='absolute'
-                    top='5vw'
+                    top='3vh'
+                    ml='5vw'
+
+                    fontSize='4vw'
+                    color='#fff'
+                    textDecorationLine='underline'
+                    textDecorationColor='brand.200'
                 >
-                    {artistName}
+                    map
                 </Heading>
+                <Center
+                    pos='absolute'
+                    top='75%'
+                >
+                    <Heading
+                        className='artistNameInProfileHeader'
+                        fontSize='12vw'
+                        color='#fff'
+                        ml='7.5vw'
+                    >
+                        {artistName}
+                    </Heading>
+                </Center>
             </div>
         </div>
     )

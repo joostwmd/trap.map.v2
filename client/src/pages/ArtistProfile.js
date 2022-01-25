@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Input, Center, Heading, Text, Flex, Button, Image, Container } from '@chakra-ui/react'
+import { Center, Heading, Flex } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
 import ArtistProfileHeader from '../components/ArtistProfileHeader'
-import Nav from '../components/Nav'
+
 
 
 function ArtistProfile() {
@@ -124,7 +124,6 @@ function ArtistProfile() {
 
     return (
         <div className="artistProfile">
-            <Nav />
             <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} releasedMusic={releasedMusic} />
 
             <Flex
