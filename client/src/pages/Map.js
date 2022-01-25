@@ -92,9 +92,11 @@ function Map() {
             // maxBounds : berlinBounds
 
             attributionControl : false,
-            dragRotate : false,
-            //maxPitch : 0
         })
+
+        //disable roation 
+        map.current.dragRotate.disable()
+        map.current.touchZoomRotate.disableRotation()
 
         //get all artist data form db
         axios.get(`${API_URL}/dataBase/map`)
