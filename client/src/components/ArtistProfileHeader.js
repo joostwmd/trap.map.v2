@@ -1,13 +1,13 @@
-import { Heading, Image, Button, Center } from '@chakra-ui/react'
+import { Heading, Image, Center } from '@chakra-ui/react'
 
 
 
 function ArtistProfileHeader({artistName, artistPicture}) {
 
-    //const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     //for development
-    const CLIENT_URL = 'http://localhost:3000'
+    //const CLIENT_URL = 'http://localhost:3000'
 
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}/map`
