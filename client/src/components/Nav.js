@@ -1,4 +1,4 @@
-import { Input, Center, Heading, Text, Flex, Button, Image, Container } from '@chakra-ui/react'
+import { Text, Flex } from '@chakra-ui/react'
 
 function Nav() {
     //for development

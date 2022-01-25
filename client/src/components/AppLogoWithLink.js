@@ -42,10 +42,10 @@ function AppLogoWithLink({ app, link, artistDatabaseId }) {
                 <Image
                     src={spotifyLogo}
                     alt="spotify logo"
-                    w='15vw'
-                    h='15vw'
-                    ml='7.5vw'
-                    mr='7.5vw'
+                    w='12vw'
+                    h='12vw'
+                    ml='6vw'
+                    mr='6vw'
                 />
             </a>
         )
@@ -57,10 +57,10 @@ function AppLogoWithLink({ app, link, artistDatabaseId }) {
                     <Image
                         src={appleMusicLogo}
                         alt="apple music logo"
-                        w='15vw'
-                        h='15vw'
-                        ml='7.5vw'
-                        mr='7.5vw'
+                        w='12vw'
+                        h='12vw'
+                        ml='6vw'
+                        mr='6vw'
                     />
             </a>
         )
@@ -72,10 +72,10 @@ function AppLogoWithLink({ app, link, artistDatabaseId }) {
                 <Image
                     src={youtubeLogo}
                     alt="youtube logo"
-                    w='15vw'
-                    h='15vw'
-                    ml='7.5vw'
-                    mr='7.5vw'
+                    w='12vw'
+                    h='12vw'
+                    ml='6vw'
+                    mr='6vw'
                 />
             </a>
         )
@@ -87,10 +87,10 @@ function AppLogoWithLink({ app, link, artistDatabaseId }) {
                 <Image
                     src={instagramLogo}
                     alt="instagram logo"
-                    w='15vw'
-                    h='15vw'
-                    ml='7.5vw'
-                    mr='7.5vw'
+                    w='12vw'
+                    h='12vw'
+                    ml='6vw'
+                    mr='6vw'
                 />
             </a>
         )

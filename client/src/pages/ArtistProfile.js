@@ -131,10 +131,6 @@ function ArtistProfile() {
                 justifyContent='center'
                 h='20vw'
                 mb='2vh'
-
-                borderBottomStyle='solid'
-                borderBottomWidth='1vw'
-                borderBottomColor='#fff'
             >
                 {links.map(link => {
                     //makes sure that every app logo is a working link

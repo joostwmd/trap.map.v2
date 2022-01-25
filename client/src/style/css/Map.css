@@ -21,8 +21,23 @@
     overflow: hidden; 
     white-space: nowrap;
 }
-  
-  
+
+.homeButton {
+    margin-left: 12vw;
+    margin-top: 5vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homeButton > p {
+    font-size: 10vw;
+    color:#9381FF;
+    font-family: PhillySans;
+    text-decoration-line: underline;
+    text-decoration-color: #fff;
+}
+    
 .map-container {
     height: 100vh;
     width: 100vw;

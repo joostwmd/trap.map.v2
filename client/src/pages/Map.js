@@ -1,21 +1,20 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
-import Nav from '../components/Nav'
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
-    
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+
     //for development
-    // const CLIENT_URL = 'http://localhost:3000'
-    // const API_URL = 'http://localhost:5005'
-    
-    
+    const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
+
+
     //map props
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -31,22 +30,22 @@ function Map() {
     //change the db artist data into mapboxgl format
     const features = []
     const artistToFeatures = (artists) => {
-        for (let artist of artists){
+        for (let artist of artists) {
             const feature = {
-                'type' : 'feature',
+                'type': 'feature',
 
-                'properties' : {
-                    'artistName' : artist.name,
-                    'artistPicture' : artist.picture, 
-                    'artistDatabaseId' : artist._id,
-                    'artistSpotifyId' : artist.spotifyID
+                'properties': {
+                    'artistName': artist.name,
+                    'artistPicture': artist.picture,
+                    'artistDatabaseId': artist._id,
+                    'artistSpotifyId': artist.spotifyID
                 },
 
-                'geometry' : {
-                    'type' : 'Point',
-                    'coordinates' : artist.coordinates
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': artist.coordinates
                 }
-            }        
+            }
             features.push(feature)
         }
     }
@@ -54,86 +53,124 @@ function Map() {
     //build redirect url
     const redirectToArtistProfilePage = (artistName, artistDatabaseId, artistSpotifyId) => {
         window.location.href = `${CLIENT_URL}/map/${artistName}:${artistDatabaseId}:${artistSpotifyId}`
-        
+
     }
 
-    useEffect(() => {
-        //get all artist data form db
-        axios.get(`${API_URL}/dataBase/map`)
-        .then(res => {
-            //change data into mapboxgl format with function
-            artistToFeatures(res.data)
+    const redirectToHomepage = () => {
+        window.location.href = `${CLIENT_URL}/` 
+    }
+
+    const createHomeButton = (currentMap) => {
+        const homeButton = document.createElement('div')
+        homeButton.className = 'homeButton'
+        homeButton.innerHTML = '<p className="textInHomeButton">home</p>'
+        homeButton.addEventListener('click', () => {
+            redirectToHomepage()
         })
- 
+        return new mapboxgl.Marker(homeButton).setLngLat(getTopLeftCoordinates(currentMap)).addTo(currentMap)
+    }
+
+    const getTopLeftCoordinates = (currentMap) => {
+        let lng = currentMap.getBounds()._sw.lng
+        let lat = currentMap.getBounds()._ne.lat
+
+        return [lng, lat]
+    }
+
+
+    useEffect(() => {
+
         //create the map object
         if (map.current) return; // initialize map only once
-            map.current = new mapboxgl.Map({        
+        map.current = new mapboxgl.Map({
             container: mapContainer.current,
-            style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv', 
+            style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: berlinCenter,
             zoom: 8.5,
-            minZoom : 8.5,
-            maxBounds : berlinBounds
+            // minZoom : 8.5,
+            // maxBounds : berlinBounds
         })
+
+        //get all artist data form db
+        axios.get(`${API_URL}/dataBase/map`)
+            .then(res => {
+                //change data into mapboxgl format with function
+                artistToFeatures(res.data)
+            })
+
+        //create home button
+        const homeButtonMarker = createHomeButton(map.current)
 
         //load artist data in mapbox format onto the map object
         map.current.on('load', () => {
             map.current.addSource('artists', {
-                'type' : 'geojson', 
-                'data' : {
-                    'type' : 'FeatureCollection', 
-                    'features' : features
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': features
                 }
             })
 
-        //create a marker(img) for each artists (feature) object
-        for (let i = 0; i < features.length; i++){
-            //create divs
-            const marker = document.createElement('div')
-            marker.className = 'marker'
+            //create a marker(img) for each artists (feature) object
+            for (let i = 0; i < features.length; i++) {
 
-            //add the divs to mapboxgl marker 
-            new mapboxgl.Marker(marker).setLngLat(features[i].geometry.coordinates).addTo(map.current)
-            
-            //create array for all markers
-            const markers = document.getElementsByClassName('marker')
-            
+                //create divs
+                const marker = document.createElement('div')
+                marker.className = 'marker'
+                //marker.id = `marker${features.properties.artistName}`
+
+                //add the divs to mapboxgl marker 
+                new mapboxgl.Marker(marker).setLngLat(features[i].geometry.coordinates).addTo(map.current)
+
+                //create array for all markers
+                const markers = document.getElementsByClassName('marker')
+
                 //add functionality and design (src for marker img and scaleControl)  
-                for (let i = 0; i < markers.length; i++){
+                for (let i = 0; i < markers.length; i++) {
                     markers[i].addEventListener('click', () => {
                         redirectToArtistProfilePage(features[i].properties.artistName, features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId)
                     })
-                
+
                     //add url to background img
                     markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
 
                     //artistName
                     markers[i].innerHTML = `<p className="artistNameInMarker">${features[i].properties.artistName}</p>`
-                    
+
                     //resize markers in zoom
                     map.current.on('zoom', () => {
                         const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
-
                         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
+                        let nameSize = ((Number((map.current.getZoom()) - initialZoom) * 5) + 10)
+
                         markers[i].style.height = `${markerSize}px`
                         markers[i].style.width = `${markerSize}px`
-
-                        let nameSize = ((Number((map.current.getZoom()) - initialZoom) * 5) + 10) 
-                        markers[i].innerHTML = `<p className="artistNameInMarker" style='font-size:${nameSize}px'>${features[i].properties.artistName}</p>`
+                        markers[i].innerHTML = `<p className="artistNameInMarker" style='font-size:${nameSize}px'>${features[i].properties.artistName}</p>`         
                     })
                 }
             }
-        })   
-}, [])
+        })
 
-    
+        map.current.on('zoom', () => {
+            homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+        })
+
+
+       
+        map.current.on('move', () => {
+            homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+        })
+    }, [])
+
+
 
 
 
     return (
         <div>
-          <Nav />
-          <div ref={mapContainer} className="map-container"/>
+            <div ref={mapContainer} className="map-container">
+                <div id='homeButton'>home</div>
+            </div>
         </div>
     )
 }
