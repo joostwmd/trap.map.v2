@@ -87,8 +87,13 @@ function Map() {
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: berlinCenter,
             zoom: 8.5,
+            
             // minZoom : 8.5,
             // maxBounds : berlinBounds
+
+            attributionControl : false,
+            dragRotate : false,
+            //maxPitch : 0
         })
 
         //get all artist data form db
