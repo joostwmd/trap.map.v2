@@ -1,9 +1,10 @@
-import { Heading, Image, Center } from '@chakra-ui/react'
+import { Image, Center } from '@chakra-ui/react'
 
 
 
-function ArtistProfileHeader({artistName, artistPicture}) {
-
+function ArtistProfileHeader({artistPicture}) {
+    
+    const arrowLeftIcon = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="90%" height="90%"><path fill="none" d="M0 0h24v24H0z"/><path d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z" fill="rgba(147,129,255,1)"/></svg>
     const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     //for development
@@ -21,31 +22,18 @@ function ArtistProfileHeader({artistName, artistPicture}) {
                     w='100vw'
                     mb='5vh'
                 />
-                <Heading
-                    onClick={() => redirectToMap()}
-                    pos='absolute'
-                    top='3vh'
-                    ml='5vw'
-
-                    fontSize='4vw'
-                    color='#fff'
-                    textDecorationLine='underline'
-                    textDecorationColor='brand.200'
-                >
-                    map
-                </Heading>
                 <Center
+                    onClick={() => redirectToMap()}
+                    w='7.5vw'
+                    h='7.5vw'
                     pos='absolute'
-                    top='75%'
+                    top='1vh'
+                    ml='2vw'
+
+                    backgroundColor='#fff'
+                    borderRadius='50%'
                 >
-                    <Heading
-                        className='artistNameInProfileHeader'
-                        fontSize='12vw'
-                        color='#fff'
-                        ml='7.5vw'
-                    >
-                        {artistName}
-                    </Heading>
+                    {arrowLeftIcon}
                 </Center>
             </div>
         </div>
@@ -53,4 +41,5 @@ function ArtistProfileHeader({artistName, artistPicture}) {
 }
 
 export default ArtistProfileHeader
+
 

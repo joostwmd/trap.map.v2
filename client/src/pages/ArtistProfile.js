@@ -143,12 +143,13 @@ function ArtistProfile() {
 
             <Center>
                 <Heading
-                    color='brand.200'
+                    className='artistNameInProfileHeader'
+                    color='#fff'
                     mb='5vh'
                     letterSpacing='wider'
-                    fontSize='15vw'
+                    fontSize='17.5vw'
                 >
-                    Snippets
+                   {artistName}
                 </Heading>
             </Center>
 

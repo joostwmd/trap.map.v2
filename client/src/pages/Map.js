@@ -7,12 +7,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    // const API_URL = 'https://trapmapversion2.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     //for development
-    // const CLIENT_URL = 'http://localhost:3000'
-    // const API_URL = 'http://localhost:5005'
+    const CLIENT_URL = 'http://localhost:3000'
+    const API_URL = 'http://localhost:5005'
 
 
     //map props
@@ -61,9 +61,11 @@ function Map() {
     }
 
     const createHomeButton = (currentMap) => {
+        const arrowLeftIcon = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"90%\" height=\"90%\"><path fill=\"none\" d=\"M0 0h24v24H0z\"/><path d=\"M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z\" fill=\"rgba(147,129,255,1)\"/></svg>"
         const homeButton = document.createElement('div')
         homeButton.className = 'homeButton'
-        homeButton.innerHTML = '<p className="textInHomeButton">home</p>'
+        homeButton.innerHTML = arrowLeftIcon
+
         homeButton.addEventListener('click', () => {
             redirectToHomepage()
         })
