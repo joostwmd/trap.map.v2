@@ -7,12 +7,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    // const API_URL = 'https://trapmapversion2.herokuapp.com'
-    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     //for development
-    const CLIENT_URL = 'http://localhost:3000'
-    const API_URL = 'http://localhost:5005'
+    // const CLIENT_URL = 'http://localhost:3000'
+    // const API_URL = 'http://localhost:5005'
 
 
     //map props
@@ -97,8 +97,8 @@ function Map() {
         })
 
         //disable roation 
-        map.current.dragRotate.disable()
-        map.current.touchZoomRotate.disableRotation()
+        // map.current.dragRotate.disable()
+        // map.current.touchZoomRotate.disableRotation()
 
         //get all artist data form db
         axios.get(`${API_URL}/dataBase/map`)
@@ -167,6 +167,10 @@ function Map() {
 
        
         map.current.on('move', () => {
+            homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+        })
+
+        map.current.on('rotate', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
         })
     }, [])

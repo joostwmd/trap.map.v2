@@ -10,11 +10,11 @@ import { Input, Center, Heading, Text, Flex, Button, Image} from '@chakra-ui/rea
 function Home() {
 
     //for development
-    const API_URL = 'http://localhost:5005'
-    const CLIENT_URL = 'http://localhost:3000'
+    // const API_URL = 'http://localhost:5005'
+    // const CLIENT_URL = 'http://localhost:3000'
 
-    // const API_URL = 'https://trapmapversion2.herokuapp.com'
-    // const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}/map`
