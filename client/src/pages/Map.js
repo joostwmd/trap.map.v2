@@ -165,7 +165,7 @@ function Map() {
         map.current.on('move', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
         })
-        
+
     }, [])
 
 
