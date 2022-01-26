@@ -89,16 +89,14 @@ function Map() {
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: berlinCenter,
             zoom: 8.5,
-            
-            // minZoom : 8.5,
-            // maxBounds : berlinBounds
-
+            minZoom : 8.5,
+            maxBounds : berlinBounds,
             attributionControl : false,
         })
 
         //disable roation 
-        // map.current.dragRotate.disable()
-        // map.current.touchZoomRotate.disableRotation()
+        map.current.dragRotate.disable()
+        map.current.touchZoomRotate.disableRotation()
 
         //get all artist data form db
         axios.get(`${API_URL}/dataBase/map`)
@@ -163,16 +161,11 @@ function Map() {
         map.current.on('zoom',  () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
         })
-
-
-       
+ 
         map.current.on('move', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
         })
-
-        map.current.on('rotate', () => {
-            homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
-        })
+        
     }, [])
 
 
