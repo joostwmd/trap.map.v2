@@ -11,28 +11,28 @@ function Track({ artistName, artistDatabaseId, track, count }) {
 
 
     //create strings for additional trackrelated info 
-    const createFeaturesInfo = (artists) => {
-        if (artists.length === 1) {
-            return ''
-        }
-        let featuresString = `feat: `
-        for (let artist of artists) {
-            if (artistName !== artist.name) {
-                featuresString += `${artist.name}, `
-            }
-        }
-        return featuresString.slice(0, -2)
-    }
+    // const createFeaturesInfo = (artists) => {
+    //     if (artists.length === 1) {
+    //         return ''
+    //     }
+    //     let featuresString = `feat: `
+    //     for (let artist of artists) {
+    //         if (artistName !== artist.name) {
+    //             featuresString += `${artist.name}, `
+    //         }
+    //     }
+    //     return featuresString.slice(0, -2)
+    // }
 
-    const createReleaseInfo = (album) => {
-        if (album.album_type === "single") {
-            return `single`
-        }
+    // const createReleaseInfo = (album) => {
+    //     if (album.album_type === "single") {
+    //         return `single`
+    //     }
 
-        if (album.album_type === "album") {
-            return `on album: ${album.name}`
-        }
-    }
+    //     if (album.album_type === "album") {
+    //         return `on album: ${album.name}`
+    //     }
+    // }
 
 
     //functions to handle track behavior
@@ -135,12 +135,6 @@ function Track({ artistName, artistDatabaseId, track, count }) {
                         fontSize='5vw'
                     >
                         {`${track.name}`}
-                    </Text>
-                    <Text
-                        id={`artistsOnTrack:${track.name}`}
-                        fontSize='3.5vw'
-                    >
-                        {`${createFeaturesInfo(track.artists)}`}
                     </Text>
                 </Flex>
             </Flex>

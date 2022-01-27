@@ -174,9 +174,7 @@ function Map() {
 
     return (
         <div>
-            <div ref={mapContainer} className="map-container">
-                <div id='homeButton'>home</div>
-            </div>
+            <div ref={mapContainer} className="map-container" />
         </div>
     )
 }

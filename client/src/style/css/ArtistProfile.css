@@ -2,6 +2,11 @@
   text-shadow: 3px 0 #9381FF, 0 3px #9381FF, 3px 0 #9381FF, 0 3px #9381FF;
 }
 
+.arrowLeftIcon{
+  position: absolute;
+  top: calc(50% - 24px);
+  left: calc(50% - 24px);
+}
 
 
 
