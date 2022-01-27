@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
+import { Center, Text, Flex, Image } from '@chakra-ui/react'
 
 
 function Track({ artistName, artistDatabaseId, track, count }) {
