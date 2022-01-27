@@ -17,7 +17,7 @@ function Home() {
     const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
 
     const redirectToMap = () => {
-        window.location.href = `${CLIENT_URL}/map`
+        window.location.href = `${CLIENT_URL}`
 
     }
 
