@@ -4,7 +4,11 @@ function Nav({currentMap, hamburgCenter, wienCenter}) {
     //for development
     //const CLIENT_URL = 'http://localhost:3000'
 
-    const CLIENT_URL = 'https://trapmap.herokuapp.com'
+    //for deployment
+    //const CLIENT_URL = 'https://trapmap.herokuapp.com'
+
+    //public url
+    const CLIENT_URL = 'https://trapmap.eu'
 
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}/`

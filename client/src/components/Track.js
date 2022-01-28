@@ -7,8 +7,11 @@ function Track({ artistName, artistDatabaseId, track, count }) {
     //for develpoment
     //const API_URL = 'http://localhost:5005'
 
-    const API_URL = 'https://trapmap.herokuapp.com'
+    //for deployment
+    //const API_URL = 'https://trapmap.herokuapp.com'
 
+    //public url
+    const API_URL = 'https://trapmap.eu'
 
     //create strings for additional trackrelated info 
     // const createFeaturesInfo = (artists) => {

@@ -13,7 +13,11 @@ function ArtistProfile() {
     //for develpoment
     //const API_URL = 'http://localhost:5005'
 
-    const API_URL = 'https://trapmap.herokuapp.com'
+    //for deployment
+    //const API_URL = 'https://trapmap.herokuapp.com'
+
+    //public url
+    const API_URL = 'https://trapmap.eu'
 
     //artist info
     const [artistName, setArtistName] = useState("")

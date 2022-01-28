@@ -7,13 +7,18 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    const API_URL = 'https://trapmap.herokuapp.com'
-    const CLIENT_URL = 'https://trapmap.herokuapp.com'
-
     //for development
     // const CLIENT_URL = 'http://localhost:3000'
     // const API_URL = 'http://localhost:5005'
 
+    //for deployment
+    // const API_URL = 'https://trapmap.herokuapp.com'
+    // const CLIENT_URL = 'https://trapmap.herokuapp.com'
+
+
+    //public url
+    const API_URL = 'https://trapmap.eu'
+    const CLIENT_URL = 'https://trapmap.eu'
 
     //map props
     const mapContainer = useRef(null);
