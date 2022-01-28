@@ -69,9 +69,9 @@ function Home() {
                     <span style={{ color: '#9381FF' }}>don't </span>
                     let the
                     <span style={{ color: '#9381FF' }}> algorithms dictate </span>
-                    what the best
-                    <span style={{ color: '#9381FF' }}> trapmusic </span>
-                    is
+                    what 
+                    <span style={{ color: '#9381FF' }}> music </span>
+                    you listen to
                     <span style={{ color: '#9381FF' }}> anymore </span>
                 </Heading>
 
@@ -88,8 +88,7 @@ function Home() {
                     mb='2vh'
                     fontSize='3.5vw'
                 >
-                    Every trapper is linked on our map in the hood he represents with his music. No marker is bigger or smaller, lighter or darker, all trappers are displayed equally.
-                    And all you need to do is to browse the map
+                    Every trapper is linked on our map in the hood he represents with his music. No marker is bigger or smaller, lighter or darker, all trappers are displayed equally. All you need to do is to browse the map
                 </Text>
 
                 <Button
