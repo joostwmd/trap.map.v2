@@ -17,8 +17,8 @@ function Map() {
 
 
     //public url
-    const API_URL = 'https://trapmap.eu'
-    const CLIENT_URL = 'https://trapmap.eu'
+    const API_URL = 'https://www.trapmap.eu'
+    const CLIENT_URL = 'https://www.trapmap.eu'
 
     //map props
     const mapContainer = useRef(null);

@@ -17,7 +17,7 @@ function ArtistProfile() {
     //const API_URL = 'https://trapmap.herokuapp.com'
 
     //public url
-    const API_URL = 'https://trapmap.eu'
+    const API_URL = 'https://www.trapmap.eu'
 
     //artist info
     const [artistName, setArtistName] = useState("")
