@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-
 import chromeGrillzBottom from '../style/chromeGrillzBottom.png'
 import chromeGrillzTop from '../style/chromeGrillzTop.png'
+import trapmapLettering from '../style/trapmapLetteringRectangle.png'
 
 import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
 
@@ -45,19 +45,12 @@ function Home() {
 
     return (
         <div>
-            <Center
-                flexDir='column'
-                ml='5vw'
-                mr='5vw'
-                mb='15vh'
-            >
-                <Heading
-                    mt='20px'
-                    mb='20px'
-                    color='#fff'
-                >
-                    trap map heading
-                </Heading>
+            <Center>
+                <Image
+                    src={trapmapLettering}
+                    w='90vw'
+                    mb='3vh'
+                />
             </Center>
 
             <Center
@@ -67,10 +60,19 @@ function Home() {
                 mb='15vh'
             >
                 <Heading
-                    fontSize='15vw'
+                    align='center'
+                    fontSize='7.5vw'
                     color='#fff'
+                    letterSpacing='wider'
+                    mb='4vh'
                 >
-                    about
+                    <span style={{ color: '#9381FF' }}>don't </span>
+                    let the
+                    <span style={{ color: '#9381FF' }}> algorithms dictate </span>
+                    what the best
+                    <span style={{ color: '#9381FF' }}> trapmusic </span>
+                    is
+                    <span style={{ color: '#9381FF' }}> anymore </span>
                 </Heading>
 
                 <Text
@@ -78,18 +80,7 @@ function Home() {
                     mb='2vh'
                     fontSize='3.5vw'
                 >
-                    For years, we've relied on algorithms to discover new trap songs and artists.  But now these algorithms have become so important that trappers
-                    have to adapt their music to them in order to have a fair chance of success.  The tool we created to find the best music for us now determines what the best music is.
-                    And we are here to change that.
-
-                </Text>
-
-                <Text
-                    align='center'
-                    mb='2vh'
-                    fontSize='3.5vw'
-                >
-                    We have created a way for you to discover rap music without having to rely on a playlist or algorithms: We've mapped the world of trap music.
+                    we have mapped the world of trapmusic and thus created a way for you to discover new artists without playlists or algorithms.
                 </Text>
 
                 <Text
@@ -98,13 +89,13 @@ function Home() {
                     fontSize='3.5vw'
                 >
                     Every trapper is linked on our map in the hood he represents with his music. No marker is bigger or smaller, lighter or darker, all trappers are displayed equally.
-                    And all you need to do to find your next favorite track is to browse our map
+                    And all you need to do is to browse the map
                 </Text>
 
                 <Button
                     bg='brand.200'
                     rounded='md'
-                    w='75vw'
+                    w='50vw'
                     h='15vw'
                     onClick={() => { redirectToMap() }}
                 >
@@ -167,7 +158,7 @@ function Home() {
                             id="singUpButton"
                             bg='brand.200'
                             rounded='md'
-                            w='75vw'
+                            w='50vw'
                             h='15vw'
                             mb='2vh'
                         >
