@@ -21,17 +21,17 @@ function App() {
         <Routes>
 
           <Route
-            exact path="/home"
+            exact path="/"
             element={<Home />}
           />
 
           <Route 
-            exact path="/"
+            exact path="/map"
             element={<Map />}
           />
 
           <Route 
-            exact path="/:artistName"
+            exact path="/map/:artistName"
             element={<ArtistProfile />}
           />
 

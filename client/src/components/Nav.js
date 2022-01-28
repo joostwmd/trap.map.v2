@@ -11,7 +11,7 @@ function Nav({currentMap, hamburgCenter, wienCenter}) {
     //const CLIENT_URL = 'https://trapmap.eu'
 
     const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}/`
+        window.location.href = `${CLIENT_URL}`
         
     }
 

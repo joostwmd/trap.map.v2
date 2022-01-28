@@ -111,12 +111,12 @@ function Map() {
 
     //build redirect url
     const redirectToArtistProfilePage = (artistName, artistDatabaseId, artistSpotifyId) => {
-        window.location.href = `${CLIENT_URL}/${artistName}:${artistDatabaseId}:${artistSpotifyId}`
+        window.location.href = `${CLIENT_URL}/map/${artistName}:${artistDatabaseId}:${artistSpotifyId}`
 
     }
 
     const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}/home`
+        window.location.href = `${CLIENT_URL}`
     }
 
     const createHomeButton = (currentMap) => {

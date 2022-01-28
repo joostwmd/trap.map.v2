@@ -22,7 +22,7 @@ function Home() {
     // const CLIENT_URL = 'https://trapmap.eu'
 
     const redirectToMap = () => {
-        window.location.href = `${CLIENT_URL}`
+        window.location.href = `${CLIENT_URL}/map`
 
     }
 
