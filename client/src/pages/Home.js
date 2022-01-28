@@ -13,8 +13,8 @@ function Home() {
     // const API_URL = 'http://localhost:5005'
     // const CLIENT_URL = 'http://localhost:3000'
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const API_URL = 'https://trapmap.herokuapp.com'
+    const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}`

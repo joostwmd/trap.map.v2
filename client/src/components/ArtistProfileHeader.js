@@ -6,7 +6,7 @@ function ArtistProfileHeader({artistPicture}) {
     
     //for development
     //const CLIENT_URL = 'http://localhost:3000'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}`

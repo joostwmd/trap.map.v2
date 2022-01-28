@@ -1,19 +1,32 @@
 import { Text, Flex } from '@chakra-ui/react'
 
-function Nav() {
+function Nav({currentMap, hamburgCenter, wienCenter}) {
     //for development
     //const CLIENT_URL = 'http://localhost:3000'
 
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}/`
         
     }
 
-    const redirectToMap = () => {
-        window.location.href = `${CLIENT_URL}/map`
-        
+    const flyToCity = (city) => {
+        if (city === 'berlin'){
+            console.log('berlin')
+        }
+
+        if (city === 'hamburg'){
+            console.log('hamburg')
+            console.log(currentMap)
+            // currentMap.flyTo({
+            //     center : hamburgCenter
+            // })
+        }
+
+        if (city === 'wien'){
+            console.log('wien')
+        }
     }
 
     return (
@@ -32,12 +45,27 @@ function Nav() {
                     home
                 </Text>
 
-                <Text 
-                    onclick={() => {redirectToMap()}}
-                    fontSize='5vw'
+            <select 
+                onChange={e => flyToCity(e.target.value)}
+            >
+                <option
+                    value='berlin'
                 >
-                    map
-                </Text>
+                    berlin
+                </option>
+
+                <option
+                    value='hamburg'
+                >
+                    hamburg
+                </option>
+
+                <option
+                    value='wien'
+                >
+                    wien
+                </option>
+            </select>
             
             </Flex>
         </div>

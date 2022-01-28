@@ -12,7 +12,7 @@ function AppLogoWithLink({ app, link, artistDatabaseId }) {
     //for develpoment
     //onst API_URL = 'http://localhost:5005'
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
+    const API_URL = 'https://trapmap.herokuapp.com'
 
     const addSpotifyProfileVisit = () => {
         let requestBody = { artistDatabaseId }

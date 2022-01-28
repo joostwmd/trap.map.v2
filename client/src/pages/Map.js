@@ -7,8 +7,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
 
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-    const CLIENT_URL = 'https://trapmapversion2.herokuapp.com'
+    const API_URL = 'https://trapmap.herokuapp.com'
+    const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
     //for development
     // const CLIENT_URL = 'http://localhost:3000'
@@ -18,11 +18,65 @@ function Map() {
     //map props
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const berlinCenter = [13.404954, 52.520008]
     const berlinBounds = [
         [12.75, 52.25],
         [14, 52.75]
     ]
+
+
+    const berlinCenter = [13.404954, 52.520008]
+    const hamburgCenter = [10.020145509856745, 53.57073340285103]
+    const wienCenter = [16.399278140182776, 48.216024738236314]
+
+
+    //handel city change with mapbox fly to animation
+    // const flyToCity = (currentMap, city) => {
+    //     if (city === 'berlin') {
+    //         currentMap.setMaxBounds(undefined)
+    //         currentMap.setMinZoom(undefined)
+
+    //         currentMap.flyTo({
+    //             center: berlinCenter,
+    //             zoom: 9.255562090280671
+    //         })
+
+    //         currentMap.once('moveend', () => {
+    //             currentMap.setMaxBounds(berlinBounds)
+    //         })
+    //     }
+
+    //     if (city === 'hamburg') {
+    //         currentMap.setMaxBounds(undefined)
+    //         currentMap.setMinZoom(undefined)
+
+    //         //disable bounds and minZoom
+    //         currentMap.flyTo({
+    //             center: hamburgCenter,
+    //         })
+
+
+    //         currentMap.once('moveend', () => {
+    //             currentMap.setMaxBounds()
+    //         })
+    //     }
+
+    //     if (city === 'wien') {
+    //         currentMap.setMaxBounds(undefined)
+    //         currentMap.setMinZoom(undefined)
+
+    //         //disable bounds and min zoom
+    //         currentMap.flyTo({
+    //             center: wienCenter,
+    //             zoom: 9.255562090280671
+    //         })
+
+
+    //         currentMap.once('moveend', () => {
+    //             currentMap.setMaxBounds()
+    //         })
+
+    //     }
+    // }
 
     mapboxgl.accessToken = "pk.eyJ1Ijoiam9vc3R3bWQiLCJhIjoiY2t1NDQ3NmJqMXRwbzJwcGM5a3FuY3B3dCJ9.yyon_mO5Y9sI1WgD-XFDRQ"
 
@@ -57,7 +111,7 @@ function Map() {
     }
 
     const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}/home` 
+        window.location.href = `${CLIENT_URL}/home`
     }
 
     const createHomeButton = (currentMap) => {
@@ -89,9 +143,9 @@ function Map() {
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: berlinCenter,
             zoom: 8.5,
-            minZoom : 8.5,
-            maxBounds : berlinBounds,
-            attributionControl : false,
+            minZoom: 8.5,
+            maxBounds: berlinBounds,
+            attributionControl: false,
         })
 
         //disable roation 
@@ -104,9 +158,6 @@ function Map() {
                 //change data into mapboxgl format with function
                 artistToFeatures(res.data)
             })
-
-        //create home button
-        const homeButtonMarker = createHomeButton(map.current)
 
         //load artist data in mapbox format onto the map object
         map.current.on('load', () => {
@@ -147,21 +198,24 @@ function Map() {
                     //resize markers in zoom
                     map.current.on('zoom', () => {
                         const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
+
                         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
                         let nameSize = ((Number((map.current.getZoom()) - initialZoom) * 5) + 10)
-
                         markers[i].style.height = `${markerSize}px`
                         markers[i].style.width = `${markerSize}px`
-                        markers[i].innerHTML = `<p className="artistNameInMarker" style='font-size:${nameSize}px'>${features[i].properties.artistName}</p>`         
+                        markers[i].innerHTML = `<p className="artistNameInMarker" style='font-size:${nameSize}px'>${features[i].properties.artistName}</p>`
                     })
                 }
             }
         })
 
-        map.current.on('zoom',  () => {
+        //create home button
+        const homeButtonMarker = createHomeButton(map.current)
+
+        map.current.on('zoom', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
         })
- 
+
         map.current.on('move', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
         })
@@ -174,6 +228,49 @@ function Map() {
 
     return (
         <div>
+            {/* <div>
+                <Flex
+                    bg='brand.200'
+                    w='100vw'
+                    h='10vw'
+                    alignItems='center'
+                    justifyContent='space-around'
+                >
+                    <Text
+                        onClick={() => { redirectToHomepage() }}
+                        fontSize='5vw'
+                    >
+                        home
+                    </Text>
+
+                    <select
+                        // onChange={e => flyToCity(map.current, e.target.value)}
+                    >
+                        <option
+                            value='berlin'
+                        >
+                            berlin
+                        </option>
+
+                        <option
+                            value='hamburg'
+                            disabled
+                        >
+                            hamburg - coming soon
+                        </option>
+
+                        <option
+                            value='wien'
+                            disabled
+                        >
+                            wien - coming soon
+                        </option>
+                    </select>
+
+                </Flex>
+            </div> */}
+
+
             <div ref={mapContainer} className="map-container" />
         </div>
     )
