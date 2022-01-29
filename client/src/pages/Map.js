@@ -24,8 +24,8 @@ function Map() {
     const mapContainer = useRef(null);
     const map = useRef(null);
     const berlinBounds = [
-        [12.75, 52.25],
-        [14, 52.75]
+        [12.25, 51.75],
+        [14.75, 53.25]
     ]
 
 
@@ -140,6 +140,8 @@ function Map() {
 
 
     useEffect(() => {
+        
+        
 
         //create the map object
         if (map.current) return; // initialize map only once
@@ -147,11 +149,14 @@ function Map() {
             container: mapContainer.current,
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: berlinCenter,
-            zoom: 8.5,
-            minZoom: 8.5,
+            zoom: 8,
+            minZoom: 8,
             maxBounds: berlinBounds,
             attributionControl: false,
         })
+
+
+        console.log(map.current.getZoom())
 
         //disable roation 
         map.current.dragRotate.disable()
@@ -202,7 +207,7 @@ function Map() {
 
                     //resize markers in zoom
                     map.current.on('zoom', () => {
-                        const initialZoom = 9.255562090280671 //even if zoom is set to 8.5???
+                        const initialZoom = 8 
 
                         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 15) + 30
                         let nameSize = ((Number((map.current.getZoom()) - initialZoom) * 5) + 10)
