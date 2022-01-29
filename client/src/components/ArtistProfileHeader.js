@@ -32,8 +32,8 @@ function ArtistProfileHeader({artistPicture}) {
                     w='7.5vw'
                     h='7.5vw'
                     pos='absolute'
-                    top='1vh'
-                    ml='2vw'
+                    top='5vh'
+                    ml='5vh'
 
                     backgroundColor='#fff'
                     borderRadius='50%'

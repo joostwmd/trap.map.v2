@@ -23,7 +23,6 @@ function ArtistProfile() {
     const [artistName, setArtistName] = useState("")
     const [artistDatabaseId, setArtistDatabaseId] = useState("")
     const [artistPicture, setArtistPicture] = useState("")
-    const [releasedMusic, setReleasedMusic] = useState("")
     const [links, setLinks] = useState([])
     const [topTracks, setTopTracks] = useState([])
 
@@ -128,7 +127,7 @@ function ArtistProfile() {
 
     return (
         <div className="artistProfile">
-            <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} releasedMusic={releasedMusic} />
+            <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} />
 
             <Flex
                 justifyContent='center'

@@ -64,21 +64,20 @@ function Home() {
                     fontSize='7.5vw'
                     color='#fff'
                     letterSpacing='wider'
-                    mb='4vh'
+                    mb='5vh'
                 >
                     <span style={{ color: '#9381FF' }}>don't </span>
                     let the
                     <span style={{ color: '#9381FF' }}> algorithms dictate </span>
-                    what 
+                    what
                     <span style={{ color: '#9381FF' }}> music </span>
                     you listen to
-                    <span style={{ color: '#9381FF' }}> anymore </span>
                 </Heading>
 
                 <Text
                     align='center'
                     mb='2vh'
-                    fontSize='3.5vw'
+                    fontSize='4vw'
                 >
                     we have mapped the world of trapmusic and thus created a way for you to discover new artists without playlists or algorithms.
                 </Text>
@@ -86,9 +85,9 @@ function Home() {
                 <Text
                     align='center'
                     mb='2vh'
-                    fontSize='3.5vw'
+                    fontSize='4vw'
                 >
-                    Every trapper is linked on our map in the hood he represents with his music. No marker is bigger or smaller, lighter or darker, all trappers are displayed equally. All you need to do is to browse the map
+                    every trapper is linked on our map in the hood he represents with his music. no marker is bigger or smaller, lighter or darker, all artists are displayed equally. all you need to do is to browse the map
                 </Text>
 
                 <Button
@@ -126,6 +125,8 @@ function Home() {
                         <Heading
                             fontSize='15vw'
                             color='#fff'
+                            textDecorationLine='underline'
+                            textDecorationColor='brand.200'
                         >
                             stay tuned
                         </Heading>
@@ -135,8 +136,8 @@ function Home() {
                             mb='5vh'
                             fontSize='3.5vw'
                         >
-                            we are currently developing an app that we would like to release in summer 22.
-                            You can enter your email address to receive an early access key and the opportunity to
+                            we are currently developing an app that we release in summer 22.
+                            you can enter your email address to receive an early access key and the opportunity to
                             contribute your ideas and develop this platform together with us.
                         </Text>
 
@@ -159,7 +160,7 @@ function Home() {
                             rounded='md'
                             w='50vw'
                             h='15vw'
-                            mb='2vh'
+                            mb='5vh'
                         >
                             <Heading
                                 fontSize='10vw'
@@ -181,23 +182,26 @@ function Home() {
                 flexDir='column'
                 ml='5vw'
                 mr='5vw'
+                mb='5vh'
             >
-                <Text
-                    align='center'
-                    fontSize='3.5vw'
-                    color='#fff'
-                >
-                    if you have ideas or suggestions for improvements or if you miss a trapper on our map,
-                    DM on us on
-                </Text>
 
                 <Heading
                     aling='center'
                     fontSize='12vw'
                     color='#fff'
+                    textDecorationLine='underline'
+                    textDecorationColor='brand.200'
                 >
-                    <a href="https://www.instagram.com/mapmusic.berlin/" style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a>
+                    contact
                 </Heading>
+                <Text
+                    align='center'
+                    fontSize='3.5vw'
+                    color='#fff'
+                >
+                    if you have ideas or suggestions for improvements or if you miss an artist on our map,
+                    DM on us on <a href='https://www.instagram.com/trapmap.berlin/' style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a>
+                </Text>
             </Center>
 
         </div>

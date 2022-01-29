@@ -30,8 +30,8 @@ function Map() {
 
 
     const berlinCenter = [13.404954, 52.520008]
-    const hamburgCenter = [10.020145509856745, 53.57073340285103]
-    const wienCenter = [16.399278140182776, 48.216024738236314]
+    // const hamburgCenter = [10.020145509856745, 53.57073340285103]
+    // const wienCenter = [16.399278140182776, 48.216024738236314]
 
 
     //handel city change with mapbox fly to animation
