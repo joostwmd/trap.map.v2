@@ -146,11 +146,12 @@ function ArtistProfile() {
 
             <Center>
                 <Heading
-                    className='artistNameInProfileHeader'
                     color='#fff'
                     mb='5vh'
                     letterSpacing='wider'
                     fontSize='17.5vw'
+                    textDecorationLine='underline'
+                    textDecorationColor='brand.200'
                 >
                    {artistName}
                 </Heading>
