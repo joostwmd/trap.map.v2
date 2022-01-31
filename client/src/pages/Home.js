@@ -17,10 +17,6 @@ function Home() {
     const API_URL = 'https://trapmap.herokuapp.com'
     const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
-    //public url
-    // const API_URL = 'https://trapmap.eu'
-    // const CLIENT_URL = 'https://trapmap.eu'
-
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}/map`
 

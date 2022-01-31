@@ -1,76 +1,67 @@
-import { Text, Flex } from '@chakra-ui/react'
+import { Heading, Flex, Select } from '@chakra-ui/react'
 
-function Nav({currentMap, hamburgCenter, wienCenter}) {
+
+function Nav({ currentMap, flyToCity }) {
     //for development
     //const CLIENT_URL = 'http://localhost:3000'
 
     //for deployment
     const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
-    //public url
-    //const CLIENT_URL = 'https://trapmap.eu'
 
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}`
-        
-    }
-
-    const flyToCity = (city) => {
-        if (city === 'berlin'){
-            console.log('berlin')
-        }
-
-        if (city === 'hamburg'){
-            console.log('hamburg')
-            console.log(currentMap)
-            // currentMap.flyTo({
-            //     center : hamburgCenter
-            // })
-        }
-
-        if (city === 'wien'){
-            console.log('wien')
-        }
     }
 
     return (
-        <div>
-            <Flex  
+        <div className='mapNav'>
+            <Flex
                 bg='brand.200'
                 w='100vw'
                 h='10vw'
                 alignItems='center'
                 justifyContent='space-around'
             >
-                <Text 
-                    onClick={() => {redirectToHomepage()}}
-                    fontSize='5vw'
+
+                <Heading
+                    onClick={() => { redirectToHomepage() }}
+                    fontSize='7.5vw'
+                    color='#fff'
+                    letterSpacing='wider'
+                    mr='5vw'
+                    ml='5vw'
                 >
                     home
-                </Text>
+                </Heading>
 
-            <select 
-                onChange={e => flyToCity(e.target.value)}
-            >
-                <option
-                    value='berlin'
+                <Select
+                    onChange={e => flyToCity(currentMap, e.target.value)}
+                    bg='#fff'
+                    fontFamily='PhillySans'
+                    letterSpacing='wider'
+                    h='8vw'
+                    mr='5vw'
+                    ml='5vw'
                 >
-                    berlin
-                </option>
+                    <option
+                        value='berlin'
+                    >
+                        berlin
+                    </option>
 
-                <option
-                    value='hamburg'
-                >
-                    hamburg
-                </option>
+                    <option
+                        value='hamburg'
+                    >
+                        hamburg
+                    </option>
 
-                <option
-                    value='wien'
-                >
-                    wien
-                </option>
-            </select>
-            
+                    <option
+                        value='vienna'
+                    >
+                        vienna
+                    </option>
+                </Select>
+
             </Flex>
         </div>
     )

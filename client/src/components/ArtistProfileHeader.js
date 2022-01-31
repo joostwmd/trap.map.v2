@@ -10,9 +10,6 @@ function ArtistProfileHeader({artistPicture}) {
     //for deployment
     const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
-    //public url
-    //const CLIENT_URL = 'https://trapmap.eu'
-
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}/map`
     }
@@ -32,8 +29,8 @@ function ArtistProfileHeader({artistPicture}) {
                     w='7.5vw'
                     h='7.5vw'
                     pos='absolute'
-                    top='5vh'
-                    ml='5vh'
+                    top='2vw'
+                    ml='2vw'
 
                     backgroundColor='#fff'
                     borderRadius='50%'

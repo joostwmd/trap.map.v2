@@ -16,9 +16,6 @@ function ArtistProfile() {
     //for deployment
     const API_URL = 'https://trapmap.herokuapp.com'
 
-    //public url
-    //const API_URL = 'https://trapmap.eu'
-
     //artist info
     const [artistName, setArtistName] = useState("")
     const [artistDatabaseId, setArtistDatabaseId] = useState("")
@@ -138,9 +135,9 @@ function ArtistProfile() {
                     //makes sure that every app logo is a working link
                     if (link[1] !== ''){
                         return (
-                            <AppLogoWithLink key={link[0]} app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
+                            <AppLogoWithLink key={link[1]} app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
                         )
-                    }
+                    } 
                 })}
             </Flex>
 
