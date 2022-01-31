@@ -237,7 +237,7 @@ function Map() {
 
                     //resize markers in zoom
                     map.current.on('zoom', () => {
-                        const initialZoom = 8 
+                        const initialZoom = 8.75 
 
                         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22 
                         let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
