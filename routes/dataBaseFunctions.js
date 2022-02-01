@@ -6,7 +6,7 @@ const mapboxgl = require('mapbox-gl')
 
 
 router.get("/map", (req, res, next) => { 
-    Artist.find({'city' : 'demo'})
+    Artist.find({})
          .then(artists => {
            res.status(200).json(artists)
          })

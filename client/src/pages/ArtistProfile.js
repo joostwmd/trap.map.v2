@@ -6,15 +6,9 @@ import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
 import ArtistProfileHeader from '../components/ArtistProfileHeader'
 
-
+import { SERVER_URL } from '../clientVariables'
 
 function ArtistProfile() {
-
-    //for develpoment
-    //const API_URL = 'http://localhost:5005'
-
-    //for deployment
-    const API_URL = 'https://trapmap.herokuapp.com'
 
     //artist info
     const [artistName, setArtistName] = useState("")
@@ -63,10 +57,14 @@ function ArtistProfile() {
         return [window.location.pathname.split(":")[1], window.location.pathname.split(":")[2]]
     }
 
+    const getArtistCity = async () => {
+        return window.location.pathname.split(":")[3]
+    }
+
     const getSpotifyData = async (spotifyId) => {
         const requestBody = { spotifyId }
 
-        const response = await axios.post(`${API_URL}/spotify/artistProfile`, requestBody)
+        const response = await axios.post(`${SERVER_URL}/spotify/artistProfile`, requestBody)
         const data = await response
 
         return data
@@ -75,7 +73,7 @@ function ArtistProfile() {
     const getDataBaseData = async (dataBaseId) => {
         const requestBody = { dataBaseId }
 
-        const response = await axios.post(`${API_URL}/dataBase/artistProfile`, requestBody)
+        const response = await axios.post(`${SERVER_URL}/dataBase/artistProfile`, requestBody)
         const data = await response
 
         return data
@@ -85,14 +83,21 @@ function ArtistProfile() {
     //traffic functions
     const addTrapMapProfileVisit = (artistDatabaseId) => {
         let requestBody = { artistDatabaseId }
-        axios.post(`${API_URL}/traffic/addTrapMapProfileVisit`, requestBody)
+        axios.post(`${SERVER_URL}/traffic/addTrapMapProfileVisit`, requestBody)
     }
 
 
 
     useEffect(() => {
 
+        getArtistCity()
+            .then(city => {
+                sessionStorage.setItem('currentCity', city);
+            })
+
+
         getArtistsIds()
+
             .then(ids => {
                 getDataBaseData(ids[0])
                     .then(dataBaseData => {

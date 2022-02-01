@@ -2,6 +2,7 @@ import '../src/style/css/ArtistProfile.css';
 import '../src/style/css/Home.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react'
 
 
 //pages
@@ -15,6 +16,8 @@ import Map from './pages/Map';
 
 
 function App() {
+  const [currentCity, setCurrentCity] = useState('berlin')
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,7 +30,7 @@ function App() {
 
           <Route 
             exact path="/map"
-            element={<Map />}
+            element={<Map  currentCity={currentCity} setCurrentCity={setCurrentCity}/>}
           />
 
           <Route 

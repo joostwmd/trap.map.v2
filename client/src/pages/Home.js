@@ -7,28 +7,21 @@ import trapmapLettering from '../style/trapmapLetteringRectangle.png'
 
 import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
 
+import {SERVER_URL, CLIENT_URL} from '../clientVariables'
+
 function Home() {
-
-    //for development
-    // const API_URL = 'http://localhost:5005'
-    // const CLIENT_URL = 'http://localhost:3000'
-
-    //for deployment
-    const API_URL = 'https://trapmap.herokuapp.com'
-    const CLIENT_URL = 'https://trapmap.herokuapp.com'
 
     const redirectToMap = () => {
         window.location.href = `${CLIENT_URL}/map`
 
     }
 
-
     const [email, setEmail] = useState("")
     const singUpForBetaKey = () => {
         if (document.getElementById('singUpButton').firstElementChild.innerHTML === 'submit') {
             //add email to db
             const requestBody = { email }
-            axios.post(`${API_URL}/traffic/addSignUpForBetaKey`, requestBody)
+            axios.post(`${SERVER_URL}/traffic/addSignUpForBetaKey`, requestBody)
 
             //ui feedback
             document.getElementById('singUpButton').firstChild.innerHTML = 'thanks'

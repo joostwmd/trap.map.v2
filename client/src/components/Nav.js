@@ -1,67 +1,56 @@
-import { Heading, Flex, Select } from '@chakra-ui/react'
+import { Heading, Flex } from '@chakra-ui/react'
+import { CLIENT_URL } from '../clientVariables'
 
-
-function Nav({ currentMap, flyToCity }) {
-    //for development
-    //const CLIENT_URL = 'http://localhost:3000'
-
-    //for deployment
-    const CLIENT_URL = 'https://trapmap.herokuapp.com'
-
+function Nav({ currentMap, currentCity, jumpToCity }) {
 
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}`
     }
 
+    const citys = ['hamburg', 'berlin', 'vienna']
+
     return (
         <div className='mapNav'>
             <Flex
-                bg='brand.200'
+                bg='brand.100'
                 w='100vw'
                 h='10vw'
                 alignItems='center'
                 justifyContent='space-around'
             >
 
-                <Heading
-                    onClick={() => { redirectToHomepage() }}
-                    fontSize='7.5vw'
-                    color='#fff'
-                    letterSpacing='wider'
-                    mr='5vw'
-                    ml='5vw'
-                >
-                    home
-                </Heading>
+                {citys.map(city => {
+                    if (currentCity === city) {
+                        return (
+                            <Heading
+                                key={city}
+                                onClick={() => jumpToCity(currentMap, city)}
+                                fontSize='7.5vw'
+                                color='brand.200'
+                                letterSpacing='wider'
+                                mr='5vw'
+                                ml='5vw'
+                            >
+                                {city}
+                            </Heading>
+                        )
+                    } else {
+                        return (
+                            <Heading
+                                key={city}
+                                onClick={() => jumpToCity(currentMap, city)}
+                                fontSize='7.5vw'
+                                color='#fff'
+                                letterSpacing='wider'
+                                mr='5vw'
+                                ml='5vw'
+                            >
+                                {city}
+                            </Heading>
+                        )
+                    }
 
-                <Select
-                    onChange={e => flyToCity(currentMap, e.target.value)}
-                    bg='#fff'
-                    fontFamily='PhillySans'
-                    letterSpacing='wider'
-                    h='8vw'
-                    mr='5vw'
-                    ml='5vw'
-                >
-                    <option
-                        value='berlin'
-                    >
-                        berlin
-                    </option>
-
-                    <option
-                        value='hamburg'
-                    >
-                        hamburg
-                    </option>
-
-                    <option
-                        value='vienna'
-                    >
-                        vienna
-                    </option>
-                </Select>
-
+                })}
             </Flex>
         </div>
     )

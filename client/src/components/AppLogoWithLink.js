@@ -7,32 +7,29 @@ import instagramLogo from '../style/logos/instagramLogo.png'
 
 import { Image } from '@chakra-ui/react'
 
+import { SERVER_URL } from '../clientVariables'
+
 function AppLogoWithLink({ app, link, artistDatabaseId }) {
 
-    //for develpoment
-    //const API_URL = 'http://localhost:5005'
-
-    //for deployment
-    const API_URL = 'https://trapmap.herokuapp.com'
 
     const addSpotifyProfileVisit = () => {
         let requestBody = { artistDatabaseId }
-        axios.post(`${API_URL}/traffic/addSpotifyProfileVisit`, requestBody)
+        axios.post(`${SERVER_URL}/traffic/addSpotifyProfileVisit`, requestBody)
     }
 
     const addAppleMusicProfileVisit = () => {
         let requestBody = { artistDatabaseId }
-        axios.post(`${API_URL}/traffic/addAppleMusicProfileVisit`, requestBody)
+        axios.post(`${SERVER_URL}/traffic/addAppleMusicProfileVisit`, requestBody)
     }
 
     const addYoutubeProfileVisit = () => {
         let requestBody = { artistDatabaseId }
-        axios.post(`${API_URL}/traffic/addYoutubeProfileVisit`, requestBody)
+        axios.post(`${SERVER_URL}/traffic/addYoutubeProfileVisit`, requestBody)
     }
 
     const addInstagramProfileVisit = () => {
         let requestBody = { artistDatabaseId }
-        axios.post(`${API_URL}/traffic/addInstagramProfileVisit`, requestBody)
+        axios.post(`${SERVER_URL}/traffic/addInstagramProfileVisit`, requestBody)
     }
 
 

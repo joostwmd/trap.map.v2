@@ -1,14 +1,9 @@
 import axios from 'axios'
 import { Center, Text, Flex, Image } from '@chakra-ui/react'
+import { SERVER_URL } from '../clientVariables'
 
 
 function Track({ artistDatabaseId, track, count }) {
-
-    //for develpoment
-    //const API_URL = 'http://localhost:5005'
-
-    //for deployment
-    const API_URL = 'https://trapmap.herokuapp.com'
 
     //create strings for additional trackrelated info 
     // const createFeaturesInfo = (artists) => {
@@ -92,7 +87,7 @@ function Track({ artistDatabaseId, track, count }) {
     //traffic
     const addSnippetPlayed = (artistDatabaseId) => {
         let requestBody = { artistDatabaseId }
-        axios.post(`${API_URL}/traffic/addSnippetPlayed`, requestBody)
+        axios.post(`${SERVER_URL}/traffic/addSnippetPlayed`, requestBody)
     }
 
 
