@@ -25,7 +25,7 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                                 <Heading
                                     key={city}
                                     onClick={() => jumpToCity(currentMap, city)}
-                                    fontSize='7.5vw'
+                                    fontSize='6vw'
                                     color='brand.200'
                                     letterSpacing='wider'
                                     mr='5vw'
@@ -39,11 +39,11 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                                 <Heading
                                     key={city}
                                     onClick={() => jumpToCity(currentMap, city)}
-                                    fontSize='7.5vw'
+                                    fontSize='6vw'
                                     color='#fff'
                                     letterSpacing='wider'
-                                    mr='5vw'
-                                    ml='5vw'
+                                    mr='2.5vw'
+                                    ml='2.5vw'
                                 >
                                     {city}
                                 </Heading>
