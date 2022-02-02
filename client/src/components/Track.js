@@ -32,27 +32,27 @@ function Track({ artistDatabaseId, track, count }) {
 
     //functions to handle track behavior
     const playTrack = (trackName) => {
-        const track = document.getElementById(`audioPlayer:${trackName}`)
+        const track = document.getElementById(`audioPlayer${trackName}`)
         track.play()
 
         //add visual feedback
-        const trackTitle = document.getElementById(`trackTitle:${trackName}`)
+        const trackTitle = document.getElementById(`trackTitle${trackName}`)
         trackTitle.style.color = '#9381FF'
 
-        const trackCount = document.getElementById(`trackCount:${trackName}`)
+        const trackCount = document.getElementById(`trackCount${trackName}`)
         trackCount.style.color = '#9381FF'
 
     }
 
     const pauseTrack = (trackName) => {
-        const track = document.getElementById(`audioPlayer:${trackName}`)
+        const track = document.getElementById(`audioPlayer${trackName}`)
         track.pause()
-
+        
         //remove visual feedback
-        const trackTitle = document.getElementById(`trackTitle:${trackName}`)
+        const trackTitle = document.getElementById(`trackTitle${trackName}`)
         trackTitle.style.color = '#fff'
 
-        const trackCount = document.getElementById(`trackCount:${trackName}`)
+        const trackCount = document.getElementById(`trackCount${trackName}`)
         trackCount.style.color = '#fff'
 
     }
@@ -60,12 +60,13 @@ function Track({ artistDatabaseId, track, count }) {
     //handle click on play/pause button => All the track functions are used here
     const playOrPauseTrack = (trackName) => {
         const audios = document.getElementsByClassName('audioPlayer')
-        const clickedAudio = document.getElementById(`audioPlayer:${trackName}`)
+        const clickedAudio = document.getElementById(`audioPlayer${trackName}`)
 
         if (clickedAudio.paused) {
             //pause all other tracks
+            const replace = 'audioPlayer'
             for (let audio of audios) {
-                pauseTrack(audio.id.split(":")[1])
+                pauseTrack(audio.id.replaceAll(replace, ''))
             }
             //play clicked track
             playTrack(trackName)
@@ -107,7 +108,7 @@ function Track({ artistDatabaseId, track, count }) {
                         h='10vw'
                     >
                         <Text
-                            id={`trackCount:${track.name}`}
+                            id={`trackCount${track.name}`}
                             marginRight="5vw"
                             fontSize='5vw'
                         >
@@ -126,7 +127,7 @@ function Track({ artistDatabaseId, track, count }) {
                     alignItems='left'
                 >
                     <Text
-                        id={`trackTitle:${track.name}`}
+                        id={`trackTitle${track.name}`}
                         fontSize='5vw'
                     >
                         {`${track.name}`}
@@ -135,7 +136,7 @@ function Track({ artistDatabaseId, track, count }) {
             </Flex>
 
 
-            <audio id={`audioPlayer:${track.name}`} className='audioPlayer' onPlay={() => { addSnippetPlayed(artistDatabaseId) }}>
+            <audio id={`audioPlayer${track.name}`} className='audioPlayer' onPlay={() => { addSnippetPlayed(artistDatabaseId) }}>
                 <source src={track.preview_url} type="audio/mp3" />
             </audio>
         </div>
