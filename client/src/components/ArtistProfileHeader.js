@@ -1,6 +1,6 @@
 import { Image, Center } from '@chakra-ui/react'
 import { CLIENT_URL } from '../clientVariables'
-import { Link } from 'react-router-dom'
+
 
 
 function ArtistProfileHeader({ artistPicture }) {
@@ -19,21 +19,21 @@ function ArtistProfileHeader({ artistPicture }) {
                     w='100vw'
                     mb='5vh'
                 />
-                <Link to='/map'>
-                    <Center
-                        //onClick={() => redirectToMap()}
-                        w='7.5vw'
-                        h='7.5vw'
-                        pos='absolute'
-                        top='2vw'
-                        ml='2vw'
 
-                        backgroundColor='#fff'
-                        borderRadius='50%'
-                    >
-                        {arrowLeftIcon}
-                    </Center>
-                </Link>
+                <Center
+                    onClick={() => redirectToMap()}
+                    w='7.5vw'
+                    h='7.5vw'
+                    pos='absolute'
+                    top='2vw'
+                    ml='2vw'
+
+                    backgroundColor='#fff'
+                    borderRadius='50%'
+                >
+                    {arrowLeftIcon}
+                </Center>
+
             </div>
         </div>
     )

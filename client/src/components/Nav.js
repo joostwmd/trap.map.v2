@@ -1,11 +1,8 @@
 import { Heading, Flex } from '@chakra-ui/react'
-import { CLIENT_URL } from '../clientVariables'
 
 function Nav({ currentMap, currentCity, jumpToCity }) {
 
-    const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}`
-    }
+   
 
     const citys = ['hamburg', 'berlin', 'vienna']
 
@@ -18,39 +15,44 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                 alignItems='center'
                 justifyContent='space-around'
             >
+                <Flex
+                    ml='5vw'
+                    mr='5vw'
+                >
+                    {citys.map(city => {
+                        if (currentCity === city) {
+                            return (
+                                <Heading
+                                    key={city}
+                                    onClick={() => jumpToCity(currentMap, city)}
+                                    fontSize='7.5vw'
+                                    color='brand.200'
+                                    letterSpacing='wider'
+                                    mr='5vw'
+                                    ml='5vw'
+                                >
+                                    {city}
+                                </Heading>
+                            )
+                        } else {
+                            return (
+                                <Heading
+                                    key={city}
+                                    onClick={() => jumpToCity(currentMap, city)}
+                                    fontSize='7.5vw'
+                                    color='#fff'
+                                    letterSpacing='wider'
+                                    mr='5vw'
+                                    ml='5vw'
+                                >
+                                    {city}
+                                </Heading>
+                            )
+                        }
 
-                {citys.map(city => {
-                    if (currentCity === city) {
-                        return (
-                            <Heading
-                                key={city}
-                                onClick={() => jumpToCity(currentMap, city)}
-                                fontSize='7.5vw'
-                                color='brand.200'
-                                letterSpacing='wider'
-                                mr='5vw'
-                                ml='5vw'
-                            >
-                                {city}
-                            </Heading>
-                        )
-                    } else {
-                        return (
-                            <Heading
-                                key={city}
-                                onClick={() => jumpToCity(currentMap, city)}
-                                fontSize='7.5vw'
-                                color='#fff'
-                                letterSpacing='wider'
-                                mr='5vw'
-                                ml='5vw'
-                            >
-                                {city}
-                            </Heading>
-                        )
-                    }
+                    })}
+                </Flex>
 
-                })}
             </Flex>
         </div>
     )
