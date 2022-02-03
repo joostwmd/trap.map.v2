@@ -16,8 +16,8 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                 justifyContent='space-around'
             >
                 <Flex
-                    ml='5vw'
-                    mr='5vw'
+                    ml='2.5vw'
+                    mr='2.5vw'
                 >
                     {citys.map(city => {
                         if (currentCity === city) {
@@ -28,8 +28,8 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                                     fontSize='6vw'
                                     color='brand.200'
                                     letterSpacing='wider'
-                                    mr='5vw'
-                                    ml='5vw'
+                                    mr='4.25vw'
+                                    ml='4.25vw'
                                 >
                                     {city}
                                 </Heading>
@@ -42,8 +42,8 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                                     fontSize='6vw'
                                     color='#fff'
                                     letterSpacing='wider'
-                                    mr='2.5vw'
-                                    ml='2.5vw'
+                                    mr='4.25vw'
+                                    ml='4.25vw'
                                 >
                                     {city}
                                 </Heading>

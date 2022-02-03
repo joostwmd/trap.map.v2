@@ -14,23 +14,20 @@
     font-size: 5px;
     color:#fff;
     font-family: PhillySans;
-
     display: inline-block;
     position: absolute;
     text-overflow: ellipsis; 
-    white-space: nowrap;
-    
+    white-space: nowrap;   
 }
 
 .homeButton > p { 
     font-family: PhillySans;
-    font-size: 25px;
+    font-size: 6vw;
     text-decoration-line: underline;
     text-decoration-color: #9381FF;
-    
     margin-top: 10vw; 
-    
 }
+
 
 
  

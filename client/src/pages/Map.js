@@ -23,31 +23,43 @@ function Map({ currentCity, setCurrentCity }) {
 
     //handel city change with mapbox fly to animation
     const jumpToCity = (currentMap, city) => {
-
+        
         if (city === 'berlin') {
-            currentMap.setCenter(berlinCenter)
+            currentMap.setMinZoom(undefined)
+            currentMap.flyTo({
+                center : berlinCenter,
+                speed : 1.25
+            })
+
             setCurrentCity('berlin')
-            currentMap.once('movestart', () => {
+            currentMap.once('moveend', () => {
                 currentMap.setMinZoom(8.65)
 
             })
         }
 
         if (city === 'hamburg') {
-
-            currentMap.setCenter(hamburgCenter)
+            currentMap.setMinZoom(undefined)
+            currentMap.flyTo({
+                center : hamburgCenter,
+                speed : 1.25
+            })
             setCurrentCity('hamburg')
-            currentMap.once('movestart', () => {
+            currentMap.once('moveend', () => {
                 currentMap.setMinZoom(8.65)
 
             })
         }
 
         if (city === 'vienna') {
+            currentMap.setMinZoom(undefined)
+            currentMap.flyTo({
+                center : viennaCenter,
+                speed : 1.25
+            })
             setCurrentCity('vienna')
-            currentMap.setCenter(viennaCenter)
 
-            currentMap.once('movestart', () => {
+            currentMap.once('moveend', () => {
                 currentMap.setMinZoom(8.65)
 
             })
