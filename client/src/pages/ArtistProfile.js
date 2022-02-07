@@ -57,10 +57,6 @@ function ArtistProfile() {
         return [window.location.pathname.split(":")[1], window.location.pathname.split(":")[2]]
     }
 
-    const getArtistCity = async () => {
-        return window.location.pathname.split(":")[3]
-    }
-
     const getSpotifyData = async (spotifyId) => {
         const requestBody = { spotifyId }
 
@@ -90,14 +86,7 @@ function ArtistProfile() {
 
     useEffect(() => {
 
-        getArtistCity()
-            .then(city => {
-                sessionStorage.setItem('currentCity', city);
-            })
-
-
         getArtistsIds()
-
             .then(ids => {
                 getDataBaseData(ids[0])
                     .then(dataBaseData => {
@@ -112,6 +101,10 @@ function ArtistProfile() {
 
                         //add trapMap visits
                         addTrapMapProfileVisit(dataBaseData.data._id)
+
+                        //set current coords / city ad session storage item
+                        sessionStorage.setItem('coords', dataBaseData.data.coordinates)
+                        sessionStorage.setItem('city', dataBaseData.data.city)
                     })
 
                 getSpotifyData(ids[1])

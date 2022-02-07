@@ -16,7 +16,7 @@ import Map from './pages/Map';
 
 
 function App() {
-  const [currentCity, setCurrentCity] = useState('berlin')
+  
 
   return (
     <div className="App">
@@ -30,7 +30,7 @@ function App() {
 
           <Route 
             exact path="/map"
-            element={<Map  currentCity={currentCity} setCurrentCity={setCurrentCity}/>}
+            element={<Map />}
           />
 
           <Route 

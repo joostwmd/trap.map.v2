@@ -2,8 +2,6 @@ import { Heading, Flex } from '@chakra-ui/react'
 
 function Nav({ currentMap, currentCity, jumpToCity }) {
 
-   
-
     const citys = ['hamburg', 'berlin', 'vienna']
 
     return (

@@ -6,15 +6,17 @@ import Nav from '../components/Nav';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { SERVER_URL, CLIENT_URL } from '../clientVariables'
+import { SERVER_URL, CLIENT_URL, MAPBOX_TOKEN } from '../clientVariables'
 
 
-function Map({ currentCity, setCurrentCity }) {
+function Map() {
 
     //map props
+    mapboxgl.accessToken = MAPBOX_TOKEN
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [currentMap, setCurrentMap] = useState()
+    const [currentCity, setCurrentCity] = useState('')
 
     const berlinCenter = [13.404954, 52.520008]
     const viennaCenter = [16.399278140182776, 48.216024738236314]
@@ -23,12 +25,12 @@ function Map({ currentCity, setCurrentCity }) {
 
     //handel city change with mapbox fly to animation
     const jumpToCity = (currentMap, city) => {
-        
+
         if (city === 'berlin') {
             currentMap.setMinZoom(undefined)
             currentMap.flyTo({
-                center : berlinCenter,
-                speed : 1.25
+                center: berlinCenter,
+                speed: 1.25
             })
 
             setCurrentCity('berlin')
@@ -41,8 +43,8 @@ function Map({ currentCity, setCurrentCity }) {
         if (city === 'hamburg') {
             currentMap.setMinZoom(undefined)
             currentMap.flyTo({
-                center : hamburgCenter,
-                speed : 1.25
+                center: hamburgCenter,
+                speed: 1.25
             })
             setCurrentCity('hamburg')
             currentMap.once('moveend', () => {
@@ -54,8 +56,8 @@ function Map({ currentCity, setCurrentCity }) {
         if (city === 'vienna') {
             currentMap.setMinZoom(undefined)
             currentMap.flyTo({
-                center : viennaCenter,
-                speed : 1.25
+                center: viennaCenter,
+                speed: 1.25
             })
             setCurrentCity('vienna')
 
@@ -67,8 +69,16 @@ function Map({ currentCity, setCurrentCity }) {
         }
     }
 
+    const getCity = async () => {
+        const city = await sessionStorage.getItem('city')
 
-    mapboxgl.accessToken = "pk.eyJ1Ijoiam9vc3R3bWQiLCJhIjoiY2t1NDQ3NmJqMXRwbzJwcGM5a3FuY3B3dCJ9.yyon_mO5Y9sI1WgD-XFDRQ"
+        if (city === null){
+            return 'berlin'
+        } else {
+            return city
+        }
+        
+    }
 
     //change the db artist data into mapboxgl format
     const features = []
@@ -95,75 +105,52 @@ function Map({ currentCity, setCurrentCity }) {
     }
 
     //build redirect url
-    const redirectToArtistProfilePage = (artistName, artistDatabaseId, artistSpotifyId, artistCity) => {
-        window.location.href = `${CLIENT_URL}/map/${artistName}:${artistDatabaseId}:${artistSpotifyId}:${artistCity}`
+    const redirectToArtistProfilePage = (artistDatabaseId, artistSpotifyId, zoom) => {
+        sessionStorage.setItem('zoom', zoom)
+        window.location.href = `${CLIENT_URL}/map/:${artistDatabaseId}:${artistSpotifyId}`
 
     }
 
-    const getCurrentCity = async () => {
-        const city = await sessionStorage.getItem('currentCity')
+    const getMapProps = async () => {
+        const coords = await sessionStorage.getItem('coords')
+        const zoom = await sessionStorage.getItem('zoom')
 
-        if (city === null) {
-            setCurrentCity('berlin')
-        } else {
-            setCurrentCity(city)
+        if (coords !== null && zoom !== null) {
+            return [[Number(coords.split(',')[0]), Number(coords.split(',')[1])], Number(zoom)]
+        } else if (coords !== null && zoom === null) {
+            return [[Number(coords.split(',')[0]), Number(coords.split(',')[1])], 12]
+        } else if (coords === null && zoom === null) {
+            return [berlinCenter, 8.75]
         }
 
-        return city
     }
 
 
-    const createMap = (city) => {
-        if (city === 'berlin' || city === null) {
-            if (map.current) return;
-            map.current = new mapboxgl.Map({
-                container: mapContainer.current,
-                style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
-                center: berlinCenter,
-                zoom: 8.75,
-                minZoom: 8.65,
+    const createMap = (coords, zoom) => {
+        if (map.current) return;
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
+            center: coords,
+            zoom: zoom,
+            minZoom: 8.65,
 
-                attributionControl: false,
-            })
+            attributionControl: false,
+        })
 
-            return map.current
-        }
-
-        if (city === 'hamburg') {
-            if (map.current) return;
-            map.current = new mapboxgl.Map({
-                container: mapContainer.current,
-                style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
-                center: hamburgCenter,
-                zoom: 8.75,
-                minZoom: 8.65,
-
-                attributionControl: false,
-            })
-
-            return map.current
-        }
-
-        if (city === 'vienna') {
-            if (map.current) return;
-            map.current = new mapboxgl.Map({
-                container: mapContainer.current,
-                style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
-                center: viennaCenter,
-                zoom: 8.75,
-                minZoom: 8.65,
-                //maxBounds : berlinBounds,
-                attributionControl: false,
-            })
-
-            return map.current
-        }
-
-
+        return map.current
     }
 
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}`
+    }
+
+    const resizeArtistMarkers = (marker, markerProps, initialZoom) => {
+        let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22
+        let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
+        marker.style.height = `${markerSize}px`
+        marker.style.width = `${markerSize}px`
+        marker.innerHTML = `<p style='font-size:${nameSize}px'>${markerProps.properties.artistName}</p>`
     }
 
     const createHomeButton = (currentMap) => {
@@ -190,14 +177,20 @@ function Map({ currentCity, setCurrentCity }) {
                 artistToFeatures(res.data)
             })
 
-        getCurrentCity()
+        getCity()
             .then(city => {
-                map.current = createMap(city)
+                setCurrentCity(city)
+            })
 
+
+
+        getMapProps()
+            .then(props => {
+                map.current = createMap(props[0], props[1])
                 setCurrentMap(map.current)
+
                 map.current.dragRotate.disable()
                 map.current.touchZoomRotate.disableRotation()
-
 
                 map.current.on('load', () => {
                     map.current.addSource('artists', {
@@ -225,7 +218,7 @@ function Map({ currentCity, setCurrentCity }) {
                         //add functionality and design (src for marker img and scaleControl)  
                         for (let i = 0; i < markers.length; i++) {
                             markers[i].addEventListener('click', () => {
-                                redirectToArtistProfilePage(features[i].properties.artistName, features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId, features[i].properties.city)
+                                redirectToArtistProfilePage(features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId, map.current.getZoom())
                             })
 
                             //add url to background img
@@ -236,33 +229,24 @@ function Map({ currentCity, setCurrentCity }) {
 
                             //resize markers in zoom
                             map.current.on('zoom', () => {
-                                const initialZoom = 8.75
-
-                                let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22
-                                let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
-                                markers[i].style.height = `${markerSize}px`
-                                markers[i].style.width = `${markerSize}px`
-                                markers[i].innerHTML = `<p style='font-size:${nameSize}px'>${features[i].properties.artistName}</p>`
+                                resizeArtistMarkers(markers[i], features[i], 8.75)
                             })
+
+                            resizeArtistMarkers(markers[i], features[i], 8.75)
                         }
                     }
                 })
 
                 const homeButtonMarker = createHomeButton(map.current)
-
                 map.current.on('zoom', () => {
                     homeButtonMarker.setLngLat(getTopMiddleCoordinates(map.current))
                 })
 
                 map.current.on('move', () => {
                     homeButtonMarker.setLngLat(getTopMiddleCoordinates(map.current))
-                    console.log(map.current.getCenter())
                 })
 
             })
-
-
-
     }, [])
 
 

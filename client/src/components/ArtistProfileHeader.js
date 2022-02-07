@@ -3,6 +3,7 @@ import { CLIENT_URL } from '../clientVariables'
 
 
 
+
 function ArtistProfileHeader({ artistPicture }) {
 
     const redirectToMap = () => {

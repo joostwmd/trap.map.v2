@@ -8,4 +8,6 @@ const CLIENT_URL = 'https://trapmap.herokuapp.com'
 const SERVER_URL = 'https://trapmap.herokuapp.com'
 
 
-module.exports = {CLIENT_URL, SERVER_URL}
+const MAPBOX_TOKEN = "pk.eyJ1Ijoiam9vc3R3bWQiLCJhIjoiY2t1NDQ3NmJqMXRwbzJwcGM5a3FuY3B3dCJ9.yyon_mO5Y9sI1WgD-XFDRQ"
+
+module.exports = {CLIENT_URL, SERVER_URL, MAPBOX_TOKEN}
