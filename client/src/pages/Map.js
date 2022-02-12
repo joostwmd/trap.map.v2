@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import Nav from '../components/Nav';
+import SelectCity from '../components/SelectCity';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -10,6 +11,32 @@ import { SERVER_URL, CLIENT_URL, MAPBOX_TOKEN } from '../clientVariables'
 
 
 function Map() {
+
+    const [selectCityMenuOpen, setSelectCityMenuOpen] = useState(false)
+
+    const toggleSetSelectCityMenuOpen = (action) => {
+        if (action === 'open'){
+            setSelectCityMenuOpen(true)
+        } else if (action === 'close'){
+            setSelectCityMenuOpen(false)
+        }
+    }
+    
+    const renderNav = () => {
+        if (selectCityMenuOpen === false){
+            return (
+                <Nav currentCity={currentCity} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} redirectToHomepage={redirectToHomepage}/>
+            )
+        }
+    }
+
+    const renderSelectCity = () => {
+        if (selectCityMenuOpen === true){
+            return (
+                <SelectCity currentCity={currentCity} currentMap={currentMap} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} jumpToCity={jumpToCity}/>
+            )
+        }
+    } 
 
     //map props
     mapboxgl.accessToken = MAPBOX_TOKEN
@@ -21,11 +48,12 @@ function Map() {
     const berlinCenter = [13.404954, 52.520008]
     const viennaCenter = [16.399278140182776, 48.216024738236314]
     const hamburgCenter = [10.020145509856745, 53.57073340285103]
+    const frankfurtCenter = [8.676046683139553, 50.119403081008265]
+    const stuttgartCenter = [9.190939013758715, 48.79088672173038]
 
 
     //handel city change with mapbox fly to animation
     const jumpToCity = (currentMap, city) => {
-
         if (city === 'berlin') {
             currentMap.setMinZoom(undefined)
             currentMap.flyTo({
@@ -66,6 +94,34 @@ function Map() {
 
             })
 
+        }
+
+        if (city === 'frankfurt'){
+            currentMap.setMinZoom(undefined)
+            currentMap.flyTo({
+                center: frankfurtCenter,
+                speed: 1.25
+            })
+            setCurrentCity('frankfurt')
+
+            currentMap.once('moveend', () => {
+                //currentMap.setMinZoom(8.65)
+
+            })
+        }
+
+        if (city === 'stuttgart'){
+            currentMap.setMinZoom(undefined)
+            currentMap.flyTo({
+                center: stuttgartCenter,
+                speed: 1.25
+            })
+            setCurrentCity('stuttgart')
+
+            currentMap.once('moveend', () => {
+                //currentMap.setMinZoom(8.65)
+
+            })
         }
     }
 
@@ -236,16 +292,6 @@ function Map() {
                         }
                     }
                 })
-
-                const homeButtonMarker = createHomeButton(map.current)
-                map.current.on('zoom', () => {
-                    homeButtonMarker.setLngLat(getTopMiddleCoordinates(map.current))
-                })
-
-                map.current.on('move', () => {
-                    homeButtonMarker.setLngLat(getTopMiddleCoordinates(map.current))
-                })
-
             })
     }, [])
 
@@ -255,7 +301,9 @@ function Map() {
 
     return (
         <div>
-            <Nav currentMap={currentMap} currentCity={currentCity} jumpToCity={jumpToCity} />
+            {/* <Nav currentMap={currentMap} currentCity={currentCity} jumpToCity={jumpToCity} /> */}
+            {renderNav()}
+            {renderSelectCity()}
             <div ref={mapContainer} className="map-container" />
         </div>
     )

@@ -1,8 +1,7 @@
 import { Heading, Flex } from '@chakra-ui/react'
 
-function Nav({ currentMap, currentCity, jumpToCity }) {
 
-    const citys = ['hamburg', 'berlin', 'vienna']
+function Nav({ currentCity, toggleSetSelectCityMenuOpen, redirectToHomepage }) {
 
     return (
         <div className='mapNav'>
@@ -13,43 +12,32 @@ function Nav({ currentMap, currentCity, jumpToCity }) {
                 alignItems='center'
                 justifyContent='space-around'
             >
-                <Flex
-                    ml='2.5vw'
-                    mr='2.5vw'
+                <Heading
+                    onClick={() => {redirectToHomepage()}}
+                    color='#fff'
+                    fontSize='7.5vw'
+                    textDecorationLine='underline'
+                    textDecorationColor='brand.200'
                 >
-                    {citys.map(city => {
-                        if (currentCity === city) {
-                            return (
-                                <Heading
-                                    key={city}
-                                    onClick={() => jumpToCity(currentMap, city)}
-                                    fontSize='6vw'
-                                    color='brand.200'
-                                    letterSpacing='wider'
-                                    mr='4.25vw'
-                                    ml='4.25vw'
-                                >
-                                    {city}
-                                </Heading>
-                            )
-                        } else {
-                            return (
-                                <Heading
-                                    key={city}
-                                    onClick={() => jumpToCity(currentMap, city)}
-                                    fontSize='6vw'
-                                    color='#fff'
-                                    letterSpacing='wider'
-                                    mr='4.25vw'
-                                    ml='4.25vw'
-                                >
-                                    {city}
-                                </Heading>
-                            )
-                        }
+                    home
+                </Heading>
 
-                    })}
-                </Flex>
+                <Heading
+                    color='brand.200'
+                    fontSize='7.5vw'
+                >
+                    {currentCity}
+                </Heading>
+
+                <Heading
+                    onClick={() => {toggleSetSelectCityMenuOpen('open')}}
+                    color='#fff'
+                    fontSize='7.5vw'
+                    textDecorationLine='underline'
+                    textDecorationColor='brand.200'
+                >
+                    citys
+                </Heading>
 
             </Flex>
         </div>
