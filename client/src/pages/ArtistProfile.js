@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Center, Text, Flex } from '@chakra-ui/react'
+import { Center, Heading, Flex } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
@@ -140,16 +140,14 @@ function ArtistProfile() {
             </Flex>
 
             <Center>
-                <Text
+                <Heading
                     color='#fff'
                     mb='5vh'
                     letterSpacing='wider'
                     fontSize='17.5vw'
-                    textDecorationLine='underline'
-                    textDecorationColor='brand.200'
                 >
-                   {artistName}
-                </Text>
+                   {artistName.replaceAll('$', 'S')}
+                </Heading>
             </Center>
 
             <div>
