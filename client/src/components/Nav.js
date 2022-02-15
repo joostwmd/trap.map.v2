@@ -36,7 +36,7 @@ function Nav({ currentCity, toggleSetSelectCityMenuOpen, redirectToHomepage }) {
                     textDecorationLine='underline'
                     textDecorationColor='brand.200'
                 >
-                    citys
+                    areas
                 </Heading>
 
             </Flex>

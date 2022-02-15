@@ -63,7 +63,7 @@ function Map() {
 
             setCurrentCity('berlin')
             currentMap.once('moveend', () => {
-                currentMap.setMinZoom(8.65)
+                //currentMap.setMinZoom(8.65)
 
             })
         }
@@ -76,7 +76,7 @@ function Map() {
             })
             setCurrentCity('hamburg')
             currentMap.once('moveend', () => {
-                currentMap.setMinZoom(8.65)
+                //currentMap.setMinZoom(8.65)
 
             })
         }
@@ -90,7 +90,7 @@ function Map() {
             setCurrentCity('vienna')
 
             currentMap.once('moveend', () => {
-                currentMap.setMinZoom(8.65)
+                //currentMap.setMinZoom(8.65)
 
             })
 
