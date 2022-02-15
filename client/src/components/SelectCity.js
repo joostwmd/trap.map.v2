@@ -17,21 +17,10 @@ function SelectCity({ currentCity, currentMap, toggleSetSelectCityMenuOpen, jump
                 mr='5vw'
                 pb='10vh'
                 w='90vw'
-                h='auto'
+                h='100vh'
                 flexDir='column'
                 alignItems='center'
             >
-
-                <Heading
-                    fontSize='12.5vw'
-                    color='#fff'
-                    mb='10vh'
-                    letterSpacing='wider'
-                    textDecorationLine='underline'
-                    textDecorationColor='brand.200'
-                >
-                    select the city
-                </Heading>
                 {citys.map(city => {
                     if (city === currentCity) {
                         return (

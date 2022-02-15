@@ -152,7 +152,6 @@ function ArtistProfile() {
 
             <div>
                 {topTracks.map(track => {
-
                     //makes sure that every track is playable
                     if (track.preview_url !== null) {
                         count++
