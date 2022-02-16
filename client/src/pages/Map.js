@@ -15,28 +15,28 @@ function Map() {
     const [selectCityMenuOpen, setSelectCityMenuOpen] = useState(false)
 
     const toggleSetSelectCityMenuOpen = (action) => {
-        if (action === 'open'){
+        if (action === 'open') {
             setSelectCityMenuOpen(true)
-        } else if (action === 'close'){
+        } else if (action === 'close') {
             setSelectCityMenuOpen(false)
         }
     }
-    
+
     const renderNav = () => {
-        if (selectCityMenuOpen === false){
+        if (selectCityMenuOpen === false) {
             return (
-                <Nav currentCity={currentCity} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} redirectToHomepage={redirectToHomepage}/>
+                <Nav currentCity={currentCity} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} redirectToHomepage={redirectToHomepage} />
             )
         }
     }
 
     const renderSelectCity = () => {
-        if (selectCityMenuOpen === true){
+        if (selectCityMenuOpen === true) {
             return (
-                <SelectCity currentCity={currentCity} currentMap={currentMap} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} jumpToCity={jumpToCity}/>
+                <SelectCity currentCity={currentCity} currentMap={currentMap} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} jumpToCity={jumpToCity} />
             )
         }
-    } 
+    }
 
     //map props
     mapboxgl.accessToken = MAPBOX_TOKEN
@@ -96,7 +96,7 @@ function Map() {
 
         }
 
-        if (city === 'frankfurt'){
+        if (city === 'frankfurt') {
             currentMap.setMinZoom(undefined)
             currentMap.flyTo({
                 center: frankfurtCenter,
@@ -110,7 +110,7 @@ function Map() {
             })
         }
 
-        if (city === 'stuttgart'){
+        if (city === 'stuttgart') {
             currentMap.setMinZoom(undefined)
             currentMap.flyTo({
                 center: stuttgartCenter,
@@ -128,12 +128,12 @@ function Map() {
     const getCity = async () => {
         const city = await sessionStorage.getItem('city')
 
-        if (city === null){
+        if (city === null) {
             return 'berlin'
         } else {
             return city
         }
-        
+
     }
 
     //change the db artist data into mapboxgl format
@@ -189,7 +189,7 @@ function Map() {
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: coords,
             zoom: zoom,
-            minZoom: 8.65,
+            //minZoom: 8.65,
 
             attributionControl: false,
         })
@@ -204,27 +204,36 @@ function Map() {
     const resizeArtistMarkers = (marker, markerProps, initialZoom) => {
         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22
         let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
-        marker.style.height = `${markerSize}px`
-        marker.style.width = `${markerSize}px`
-        marker.innerHTML = `<p style='font-size:${nameSize}px'>${markerProps.properties.artistName}</p>`
+        
+        if (Number((map.current.getZoom() > 7.5))) {
+            marker.style.visibility = 'visible'
+            marker.style.height = `${markerSize}px`
+            marker.style.width = `${markerSize}px`
+            marker.innerHTML = `<p style='font-size:${nameSize}px'>${markerProps.properties.artistName}</p>`
+        }
+
+        if (Number((map.current.getZoom() <= 7.5))) {
+            marker.style.visibility = 'hidden'
+            marker.innerHTML = ''
+        }
     }
 
-    const createHomeButton = (currentMap) => {
-        const homeButton = document.createElement('div')
-        homeButton.className = 'homeButton'
-        homeButton.innerHTML = '<p>home</p>'
-        homeButton.addEventListener('click', () => {
-            redirectToHomepage()
-        })
-        return new mapboxgl.Marker(homeButton).setLngLat(getTopMiddleCoordinates(currentMap)).addTo(currentMap)
-    }
+    // const createHomeButton = (currentMap) => {
+    //     const homeButton = document.createElement('div')
+    //     homeButton.className = 'homeButton'
+    //     homeButton.innerHTML = '<p>home</p>'
+    //     homeButton.addEventListener('click', () => {
+    //         redirectToHomepage()
+    //     })
+    //     return new mapboxgl.Marker(homeButton).setLngLat(getTopMiddleCoordinates(currentMap)).addTo(currentMap)
+    // }
 
-    const getTopMiddleCoordinates = (currentMap) => {
-        let lng = currentMap.getCenter().lng
-        let lat = currentMap.getBounds()._ne.lat
+    // const getTopMiddleCoordinates = (currentMap) => {
+    //     let lng = currentMap.getCenter().lng
+    //     let lat = currentMap.getBounds()._ne.lat
 
-        return [lng, lat]
-    }
+    //     return [lng, lat]
+    // }
 
     useEffect(() => {
         axios.get(`${SERVER_URL}/dataBase/map`)
@@ -286,6 +295,7 @@ function Map() {
                             //resize markers in zoom
                             map.current.on('zoom', () => {
                                 resizeArtistMarkers(markers[i], features[i], 8.75)
+                                //hideArtistMarkers(map.current)
                             })
 
                             resizeArtistMarkers(markers[i], features[i], 8.75)
