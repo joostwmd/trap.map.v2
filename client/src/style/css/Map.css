@@ -1,4 +1,4 @@
-.marker{
+.artistMarker {
     width: 22px;
     height: 22px;
     border-radius: 50%; 
@@ -10,8 +10,30 @@
     align-items: center;
 }
   
-.marker > p {
+.artistMarker > p {
     font-size: 5px;
+    color:#fff;
+    font-family: PhillySans;
+    display: inline-block;
+    position: absolute;
+    text-overflow: ellipsis; 
+    white-space: nowrap;   
+}
+
+.cityMarker { 
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; 
+    background-color:rgba(147, 129, 255, 0.85);
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cityMarker > p {
+    font-size: 20px;
     color:#fff;
     font-family: PhillySans;
     display: inline-block;

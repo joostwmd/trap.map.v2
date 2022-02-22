@@ -2,7 +2,7 @@ import '../src/style/css/ArtistProfile.css';
 import '../src/style/css/Home.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react'
+
 
 
 //pages

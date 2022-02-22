@@ -8,6 +8,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { SERVER_URL, CLIENT_URL, MAPBOX_TOKEN } from '../clientVariables'
+import { CITYS } from '../mapboxCityVariables'
 
 
 function Map() {
@@ -52,77 +53,31 @@ function Map() {
     const stuttgartCenter = [9.190939013758715, 48.79088672173038]
 
 
+
+    const handleJumpWithNav = (cityCenter) => {
+
+        if (typeof (cityCenter) === 'string') {
+            for (let city of CITYS) {
+                if (city[0] === cityCenter) {
+                    return city[1]
+                }
+            }
+        } else {
+            return cityCenter
+        }
+    }
+
     //handel city change with mapbox fly to animation
-    const jumpToCity = (currentMap, city) => {
-        if (city === 'berlin') {
-            currentMap.setMinZoom(undefined)
-            currentMap.flyTo({
-                center: berlinCenter,
-                speed: 1.25
-            })
+    const jumpToCity = async (currentMap, cityCenter, cityName) => {
 
-            setCurrentCity('berlin')
-            currentMap.once('moveend', () => {
-                //currentMap.setMinZoom(8.65)
+        let center = await handleJumpWithNav(cityCenter)
 
-            })
-        }
-
-        if (city === 'hamburg') {
-            currentMap.setMinZoom(undefined)
-            currentMap.flyTo({
-                center: hamburgCenter,
-                speed: 1.25
-            })
-            setCurrentCity('hamburg')
-            currentMap.once('moveend', () => {
-                //currentMap.setMinZoom(8.65)
-
-            })
-        }
-
-        if (city === 'vienna') {
-            currentMap.setMinZoom(undefined)
-            currentMap.flyTo({
-                center: viennaCenter,
-                speed: 1.25
-            })
-            setCurrentCity('vienna')
-
-            currentMap.once('moveend', () => {
-                //currentMap.setMinZoom(8.65)
-
-            })
-
-        }
-
-        if (city === 'frankfurt') {
-            currentMap.setMinZoom(undefined)
-            currentMap.flyTo({
-                center: frankfurtCenter,
-                speed: 1.25
-            })
-            setCurrentCity('frankfurt')
-
-            currentMap.once('moveend', () => {
-                //currentMap.setMinZoom(8.65)
-
-            })
-        }
-
-        if (city === 'stuttgart') {
-            currentMap.setMinZoom(undefined)
-            currentMap.flyTo({
-                center: stuttgartCenter,
-                speed: 1.25
-            })
-            setCurrentCity('stuttgart')
-
-            currentMap.once('moveend', () => {
-                //currentMap.setMinZoom(8.65)
-
-            })
-        }
+        currentMap.flyTo({
+            center: center,
+            speed: 1.25,
+            zoom: 9
+        })
+        setCurrentCity(cityName)
     }
 
     const getCity = async () => {
@@ -137,7 +92,7 @@ function Map() {
     }
 
     //change the db artist data into mapboxgl format
-    const features = []
+    const artitsFeatures = []
     const artistToFeatures = (artists) => {
         for (let artist of artists) {
             const feature = {
@@ -156,9 +111,32 @@ function Map() {
                     'coordinates': artist.coordinates
                 }
             }
-            features.push(feature)
+            artitsFeatures.push(feature)
         }
     }
+
+    const cityFeatures = []
+    const citysToFeatures = (citys) => {
+        for (let city of citys) {
+            const feature = {
+                'type': 'feature',
+
+                'properties': {
+                    'cityName': city[0],
+                    'cityCenter': city[1],
+                    'cityMarkerSize': city[2]
+                },
+
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': city[1],
+                }
+            }
+            cityFeatures.push(feature)
+        }
+    }
+
+
 
     //build redirect url
     const redirectToArtistProfilePage = (artistDatabaseId, artistSpotifyId, zoom) => {
@@ -201,10 +179,11 @@ function Map() {
         window.location.href = `${CLIENT_URL}`
     }
 
-    const resizeArtistMarkers = (marker, markerProps, initialZoom) => {
+  
+    const handleZoomArtistMarkers = (marker, markerProps, initialZoom) => {
         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22
         let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
-        
+
         if (Number((map.current.getZoom() > 7.5))) {
             marker.style.visibility = 'visible'
             marker.style.height = `${markerSize}px`
@@ -218,22 +197,21 @@ function Map() {
         }
     }
 
-    // const createHomeButton = (currentMap) => {
-    //     const homeButton = document.createElement('div')
-    //     homeButton.className = 'homeButton'
-    //     homeButton.innerHTML = '<p>home</p>'
-    //     homeButton.addEventListener('click', () => {
-    //         redirectToHomepage()
-    //     })
-    //     return new mapboxgl.Marker(homeButton).setLngLat(getTopMiddleCoordinates(currentMap)).addTo(currentMap)
-    // }
+    const handleZoomCityMarkers = (marker, markerProps, initialZoom) => {
+        let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + (markerProps.properties.cityMarkerSize / 100)
+        let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + (markerProps.properties.cityMarkerSize / 1000)
 
-    // const getTopMiddleCoordinates = (currentMap) => {
-    //     let lng = currentMap.getCenter().lng
-    //     let lat = currentMap.getBounds()._ne.lat
+        if (Number((map.current.getZoom() > 7.5))) { 
+            marker.style.visibility = 'hidden'
+        }
 
-    //     return [lng, lat]
-    // }
+        if (Number((map.current.getZoom() <= 7.5))) {
+            marker.style.visibility = 'visible'
+            marker.style.height = `${markerSize}px`
+            marker.style.width = `${markerSize}px`
+            marker.innerHTML = `<p style='font-size:${nameSize}px'>${markerProps.properties.cityName}</p>`
+        }
+    }
 
     useEffect(() => {
         axios.get(`${SERVER_URL}/dataBase/map`)
@@ -241,6 +219,8 @@ function Map() {
                 //change data into mapboxgl format with function
                 artistToFeatures(res.data)
             })
+
+        citysToFeatures(CITYS)
 
         getCity()
             .then(city => {
@@ -258,47 +238,83 @@ function Map() {
                 map.current.touchZoomRotate.disableRotation()
 
                 map.current.on('load', () => {
+
                     map.current.addSource('artists', {
                         'type': 'geojson',
                         'data': {
                             'type': 'FeatureCollection',
-                            'features': features
+                            'features': artitsFeatures
                         }
                     })
 
                     //create a marker(img) for each artists (feature) object
-                    for (let i = 0; i < features.length; i++) {
+                    for (let i = 0; i < artitsFeatures.length; i++) {
 
                         //create divs
                         const marker = document.createElement('div')
-                        marker.className = 'marker'
+                        marker.className = 'artistMarker'
                         //marker.id = `marker${features.properties.artistName}`
 
                         //add the divs to mapboxgl marker 
-                        new mapboxgl.Marker(marker).setLngLat(features[i].geometry.coordinates).addTo(map.current)
+                        new mapboxgl.Marker(marker).setLngLat(artitsFeatures[i].geometry.coordinates).addTo(map.current)
 
                         //create array for all markers
-                        const markers = document.getElementsByClassName('marker')
+                        const artistMarkers = document.getElementsByClassName('artistMarker')
 
                         //add functionality and design (src for marker img and scaleControl)  
-                        for (let i = 0; i < markers.length; i++) {
-                            markers[i].addEventListener('click', () => {
-                                redirectToArtistProfilePage(features[i].properties.artistDatabaseId, features[i].properties.artistSpotifyId, map.current.getZoom())
+                        for (let i = 0; i < artistMarkers.length; i++) {
+                            artistMarkers[i].addEventListener('click', () => {
+                                redirectToArtistProfilePage(artitsFeatures[i].properties.artistDatabaseId, artitsFeatures[i].properties.artistSpotifyId, map.current.getZoom())
                             })
 
                             //add url to background img
-                            markers[i].style.backgroundImage = `url(${features[i].properties.artistPicture})`
+                            artistMarkers[i].style.backgroundImage = `url(${artitsFeatures[i].properties.artistPicture})`
 
                             //artistName
-                            markers[i].innerHTML = `<p>${features[i].properties.artistName}</p>`
+                            artistMarkers[i].innerHTML = `<p>${artitsFeatures[i].properties.artistName}</p>`
 
                             //resize markers in zoom
                             map.current.on('zoom', () => {
-                                resizeArtistMarkers(markers[i], features[i], 8.75)
-                                //hideArtistMarkers(map.current)
+                                handleZoomArtistMarkers(artistMarkers[i], artitsFeatures[i], 8.75)
                             })
 
-                            resizeArtistMarkers(markers[i], features[i], 8.75)
+                            handleZoomArtistMarkers(artistMarkers[i], artitsFeatures[i], 8.75)
+                        }
+                    }
+
+
+                    map.current.addSource('citys', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'FeatureCollection',
+                            'features': cityFeatures
+                        }
+                    })
+
+                    //create a marrker for each city (feature) object
+                    for (let i = 0; i < cityFeatures.length; i++) {
+                        const marker = document.createElement('div')
+                        marker.className = 'cityMarker'
+
+                        new mapboxgl.Marker(marker).setLngLat(cityFeatures[i].geometry.coordinates).addTo(map.current)
+
+                        //create array for all markers
+                        const cityMarkers = document.getElementsByClassName('cityMarker')
+
+                        for (let j = 0; j < cityMarkers.length; j++) {
+                            cityMarkers[i].innerHTML = `<p>${cityFeatures[i].properties.cityName}</p>`
+
+                            cityMarkers[i].addEventListener('click', () => {
+                                jumpToCity(map.current, cityFeatures[i].properties.cityCenter, cityFeatures[i].properties.cityName)
+                            })
+
+
+                            map.current.on('zoom', () => {
+                                handleZoomCityMarkers(cityMarkers[i], cityFeatures[i], 8.75)
+                            })
+
+                            handleZoomCityMarkers(cityMarkers[i], cityFeatures[i], 8.75)
+
                         }
                     }
                 })
@@ -317,6 +333,6 @@ function Map() {
             <div ref={mapContainer} className="map-container" />
         </div>
     )
-}
 
+}
 export default Map
