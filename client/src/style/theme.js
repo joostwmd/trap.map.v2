@@ -1,8 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
 
-
-
-
 const theme = extendTheme({
     fonts: {
         heading: 'PhillySans',
@@ -34,6 +31,10 @@ const theme = extendTheme({
 
         }
     },
+
+    shadows : {
+        outline : '0 0 0 3px var(--chakra-ui-focus-ring-color)'
+    }
 })
 
 export default theme

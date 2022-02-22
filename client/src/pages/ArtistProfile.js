@@ -17,40 +17,8 @@ function ArtistProfile() {
     const [links, setLinks] = useState([])
     const [topTracks, setTopTracks] = useState([])
 
-
-    //music related functions
-
-    //for tracks
     let count = 0
 
-    // const countTracks = (albums) => {
-    //     let trackCount = 0
-    //     let singlesCount = 0
-    //     let albumCount = 0
-
-    //     for (let album of albums) {
-    //         if (album.album_type === "single") {
-    //             trackCount++
-    //             singlesCount++
-    //         } else if (album.album_type === "album") {
-    //             trackCount += album.total_tracks
-    //             albumCount++
-    //         }
-    //     }
-
-
-    //     return `tracks : ${trackCount}, singles : ${singlesCount}, albums : ${albumCount}`
-    // }
-
-    // const createFeaturesString = (artists) => {
-    //     let featuresString = "feat: "
-    //     for (let artist of artists) {
-    //         if (artistName !== artist.name) {
-    //             featuresString += `${artist.name}, `
-    //         }
-    //     }
-    //     return featuresString.slice(0, -2)
-    // }
 
     //fetch data function
     const getArtistsIds = async () => {
@@ -112,7 +80,7 @@ function ArtistProfile() {
                         //header
                         setArtistName(spotifyData.data[0].name)
                         setArtistPicture(spotifyData.data[0].images[0].url)
-                        // setReleasedMusic(countTracks(spotifyData.data[2]))
+                        //setReleasedMusic(countTracks(spotifyData.data[2]))
 
                         //tracks
                         setTopTracks(spotifyData.data[1])

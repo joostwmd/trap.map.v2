@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import Nav from '../components/Nav';
-import SelectCity from '../components/SelectCity';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -13,71 +12,27 @@ import { CITYS } from '../mapboxCityVariables'
 
 function Map() {
 
-    const [selectCityMenuOpen, setSelectCityMenuOpen] = useState(false)
-
-    const toggleSetSelectCityMenuOpen = (action) => {
-        if (action === 'open') {
-            setSelectCityMenuOpen(true)
-        } else if (action === 'close') {
-            setSelectCityMenuOpen(false)
-        }
-    }
-
-    const renderNav = () => {
-        if (selectCityMenuOpen === false) {
-            return (
-                <Nav currentCity={currentCity} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} redirectToHomepage={redirectToHomepage} />
-            )
-        }
-    }
-
-    const renderSelectCity = () => {
-        if (selectCityMenuOpen === true) {
-            return (
-                <SelectCity currentCity={currentCity} currentMap={currentMap} toggleSetSelectCityMenuOpen={toggleSetSelectCityMenuOpen} jumpToCity={jumpToCity} />
-            )
-        }
-    }
-
     //map props
     mapboxgl.accessToken = MAPBOX_TOKEN
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [currentMap, setCurrentMap] = useState()
     const [currentCity, setCurrentCity] = useState('')
-
     const berlinCenter = [13.404954, 52.520008]
-    const viennaCenter = [16.399278140182776, 48.216024738236314]
-    const hamburgCenter = [10.020145509856745, 53.57073340285103]
-    const frankfurtCenter = [8.676046683139553, 50.119403081008265]
-    const stuttgartCenter = [9.190939013758715, 48.79088672173038]
 
 
-
-    const handleJumpWithNav = (cityCenter) => {
-
-        if (typeof (cityCenter) === 'string') {
-            for (let city of CITYS) {
-                if (city[0] === cityCenter) {
-                    return city[1]
-                }
-            }
-        } else {
-            return cityCenter
-        }
-    }
+    //nav
+    const [endOfNav, setEndOfNav] = useState(Number)
 
     //handel city change with mapbox fly to animation
-    const jumpToCity = async (currentMap, cityCenter, cityName) => {
-
-        let center = await handleJumpWithNav(cityCenter)
+    const jumpToCity = async (currentMap, city) => {
 
         currentMap.flyTo({
-            center: center,
+            center: city[1],
             speed: 1.25,
             zoom: 9
         })
-        setCurrentCity(cityName)
+        setCurrentCity(city[0])
     }
 
     const getCity = async () => {
@@ -175,11 +130,7 @@ function Map() {
         return map.current
     }
 
-    const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}`
-    }
 
-  
     const handleZoomArtistMarkers = (marker, markerProps, initialZoom) => {
         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22
         let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
@@ -198,10 +149,11 @@ function Map() {
     }
 
     const handleZoomCityMarkers = (marker, markerProps, initialZoom) => {
-        let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + (markerProps.properties.cityMarkerSize / 100)
-        let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + (markerProps.properties.cityMarkerSize / 1000)
 
-        if (Number((map.current.getZoom() > 7.5))) { 
+        let markerSize = (markerProps.properties.cityMarkerSize / 10000) + 100 + (Number(map.current.getZoom() - initialZoom) * 12.5)
+        let nameSize = 40 + (Number(map.current.getZoom() - initialZoom) * 5)
+
+        if (Number((map.current.getZoom() > 7.5))) {
             marker.style.visibility = 'hidden'
         }
 
@@ -213,7 +165,28 @@ function Map() {
         }
     }
 
+    const getHeightOfNav = (el) => {
+        setEndOfNav(el.getBoundingClientRect().height)
+    }
+
+    const preventScrollDown = () => {
+        if (window.scrollY > 25){
+            console.log(window.scrollY - 25, endOfNav)
+            // if (window.scrollY >= endOfNav){
+            //     window.scrollTo({ top: 0, behavior : 'smooth' })
+            // }
+        }
+    }
+
+    document.addEventListener('scroll', () => {
+        preventScrollDown()
+    })
+
     useEffect(() => {
+
+        const nav = document.getElementById('mapNav')
+        new ResizeObserver(() => getHeightOfNav(nav)).observe(nav);
+
         axios.get(`${SERVER_URL}/dataBase/map`)
             .then(res => {
                 //change data into mapboxgl format with function
@@ -305,7 +278,7 @@ function Map() {
                             cityMarkers[i].innerHTML = `<p>${cityFeatures[i].properties.cityName}</p>`
 
                             cityMarkers[i].addEventListener('click', () => {
-                                jumpToCity(map.current, cityFeatures[i].properties.cityCenter, cityFeatures[i].properties.cityName)
+                                jumpToCity(map.current, [cityFeatures[i].properties.cityName, cityFeatures[i].properties.cityCenter])
                             })
 
 
@@ -321,15 +294,12 @@ function Map() {
             })
     }, [])
 
-
-
-
-
     return (
         <div>
-            {/* <Nav currentMap={currentMap} currentCity={currentCity} jumpToCity={jumpToCity} /> */}
-            {renderNav()}
-            {renderSelectCity()}
+            <div id='mapNav'>
+                <Nav currentMap={currentMap} currentCity={currentCity} jumpToCity={jumpToCity} />
+            </div>
+
             <div ref={mapContainer} className="map-container" />
         </div>
     )

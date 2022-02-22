@@ -1,47 +1,141 @@
-import { Heading, Flex } from '@chakra-ui/react'
+import { Heading, Flex, Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react'
+import { CITYS } from '../mapboxCityVariables'
+import { CLIENT_URL } from '../clientVariables'
+import { useState } from 'react'
+
+function Nav({ currentMap, currentCity, currentCountry, jumpToCity }) {
+
+    const countrys = ['germany', 'austria', 'switzerland', 'luxembourg']
+
+    const [isOpen, setIsOpen] = useState(false)
 
 
-function Nav({ currentCity, toggleSetSelectCityMenuOpen, redirectToHomepage }) {
+    const handleClick = (action, city) => {
+        window.scrollTo({ top: 0 });
+        setIsOpen(action)
+        jumpToCity(currentMap, city)
+    }
 
-    return (
-        <div className='mapNav'>
-            <Flex
-                bg='brand.100'
-                w='100vw'
-                h='10vw'
-                alignItems='center'
-                justifyContent='space-around'
-            >
-                <Heading
-                    onClick={() => {redirectToHomepage()}}
-                    color='#fff'
-                    fontSize='7.5vw'
-                    textDecorationLine='underline'
-                    textDecorationColor='brand.200'
+    const redirectToHomepage = () => {
+        window.location.href = `${CLIENT_URL}`
+    }
+
+    if (isOpen === false) {
+        return (
+            <div>
+                <Flex
+                    bg='brand.100'
+                    w='100vw'
+                    h='10vw'
+                    alignItems='center'
+                    justifyContent='space-around'
                 >
-                    home
-                </Heading>
+                    <Heading
+                        onClick={() => { redirectToHomepage() }}
+                        color='#fff'
+                        fontSize='7.5vw'
+                        textDecorationLine='underline'
+                        textDecorationColor='brand.200'
+                    >
+                        home
+                    </Heading>
 
-                <Heading
-                    color='brand.200'
-                    fontSize='7.5vw'
+                    <Heading
+                        color='brand.200'
+                        fontSize='7.5vw'
+                    >
+                        {currentCity}
+                    </Heading>
+
+                    <Heading
+                        onClick={() => { setIsOpen(true) }}
+                        color='#fff'
+                        fontSize='7.5vw'
+                        textDecorationLine='underline'
+                        textDecorationColor='brand.200'
+                    >
+                        areas
+                    </Heading>
+
+                </Flex>
+            </div>
+        )
+    } else if (isOpen === true) {
+        return (
+            <div>
+                <Accordion
+                    allowToggle
+                    bg='brand.100'
+                    ml='5vw'
+                    mr='5vw'
+                    pb='10vh'
+                    w='90vw'
+                    minH='100vh'
+                    flexDir='column'
+                    alignItems='center'
                 >
-                    {currentCity}
-                </Heading>
 
-                <Heading
-                    onClick={() => {toggleSetSelectCityMenuOpen('open')}}
-                    color='#fff'
-                    fontSize='7.5vw'
-                    textDecorationLine='underline'
-                    textDecorationColor='brand.200'
-                >
-                    areas
-                </Heading>
+                    {countrys.map(country => {
 
-            </Flex>
-        </div>
-    )
+                        return (
+                            <AccordionItem
+                                flexDir='column'
+                                alignItems='center'
+                            >
+                                <AccordionButton>
+                                    <Heading
+                                        key={country}
+                                        color='#fff'
+                                        fontSize='15vw'
+                                    >
+                                        {country}
+                                    </Heading>
+                                </AccordionButton>
+
+                                <AccordionPanel
+                                    flexDir='column'
+                                    alignItems='center'
+                                >
+                                    {CITYS.map(city => {
+                                        if (country === city[3]) {
+                                            if (city[0] === currentCity) {
+                                                return (
+                                                    <Heading
+                                                        key={city}
+                                                        color='brand.200'
+                                                        fontSize='10vw'
+                                                        onClick={() => { handleClick(false, city) }}
+                                                    >
+                                                        {city[0]}
+                                                    </Heading>
+                                                )
+                                            } else {
+                                                return (
+                                                    <Heading
+                                                        key={city}
+                                                        color='#fff'
+                                                        fontSize='10vw'
+                                                        onClick={() => { handleClick(false, city) }}
+                                                    >
+                                                        {city[0]}
+                                                    </Heading>
+                                                )
+                                            }
+
+                                        }
+                                    })}
+
+                                </AccordionPanel>
+                            </AccordionItem>
+                        )
+                    })}
+                </Accordion>
+            </div>
+        )
+    }
+
+
+
 }
 
 export default Nav

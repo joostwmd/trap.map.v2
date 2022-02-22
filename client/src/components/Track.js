@@ -109,7 +109,7 @@ function Track({ artistDatabaseId, track, count }) {
                     >
                         <Text
                             id={`trackCount${track.name}`}
-                            marginRight="5vw"
+                            mr="5vw"
                             fontSize='5vw'
                         >
                             {count}
@@ -125,6 +125,7 @@ function Track({ artistDatabaseId, track, count }) {
                 <Flex
                     flexDir='column'
                     alignItems='left'
+                    maxW='60vw'
                 >
                     <Text
                         id={`trackTitle${track.name}`}

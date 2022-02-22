@@ -10,7 +10,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { ChakraProvider } from '@chakra-ui/react'
 
 import Fonts from '../src/style/fonts/Fonts'
-import theme from '../src/style/theme'
+import theme from './style/theme'
 
 
 ReactDOM.render(
