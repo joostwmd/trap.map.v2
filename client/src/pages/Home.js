@@ -16,6 +16,7 @@ function Home() {
 
     }
 
+
     const [email, setEmail] = useState("")
     const singUpForBetaKey = () => {
         if (document.getElementById('singUpButton').firstElementChild.innerHTML === 'submit') {
@@ -140,7 +141,7 @@ function Home() {
 
                             size='md'
                             width='90vw'
-                            mb='2.5vh'
+                            mb='2vh'
                         />
 
                         <Button onClick={() => singUpForBetaKey()}
