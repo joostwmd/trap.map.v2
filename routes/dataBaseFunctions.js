@@ -21,5 +21,15 @@ router.post("/artistProfile", (req, res, next) => {
         })
 })
 
+router.post('/accessBeta', (req, res, next) => {
+    const key = req.body.key
+
+    if (key === process.env.KEY){
+        res.status(200).json({'res' : 'accessGranted'})
+    } else {
+        res.status(200).json({'res' : 'accessDenied'})
+    }
+})
+
 
 module.exports = router;

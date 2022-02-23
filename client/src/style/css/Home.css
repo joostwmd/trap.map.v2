@@ -7,5 +7,14 @@
    font-family: Montserrat;
 }
 
+#keyInput, textarea{
+   color : #fff;
+   font-family: Montserrat;
+}
+
+#keyInput::placeholder{
+   font-family: Montserrat;
+}
+
 
 

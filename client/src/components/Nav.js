@@ -1,7 +1,7 @@
 import { Heading, Flex, Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react'
 import { CITYS } from '../mapboxCityVariables'
 import { CLIENT_URL } from '../clientVariables'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Nav({ currentMap, currentCity, currentCountry, jumpToCity }) {
 
@@ -9,6 +9,14 @@ function Nav({ currentMap, currentCity, currentCountry, jumpToCity }) {
 
     const [isOpen, setIsOpen] = useState(false)
 
+    //BERLIN IS KING
+    let citys = []
+    for (let city of CITYS){
+        if (city[0] !== 'berlin'){
+            citys.push(city)
+        }
+    }
+    citys.unshift(['berlin', [13.404954, 52.520008], 230000, 'germany'])
 
     const handleClick = (action, city) => {
         window.scrollTo({ top: 0 });
@@ -96,7 +104,7 @@ function Nav({ currentMap, currentCity, currentCountry, jumpToCity }) {
                                     flexDir='column'
                                     alignItems='center'
                                 >
-                                    {CITYS.map(city => {
+                                    {citys.map(city => {
                                         if (country === city[3]) {
                                             if (city[0] === currentCity) {
                                                 return (

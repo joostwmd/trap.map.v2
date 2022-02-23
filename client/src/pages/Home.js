@@ -12,7 +12,7 @@ import {SERVER_URL, CLIENT_URL} from '../clientVariables'
 function Home() {
 
     const redirectToMap = () => {
-        window.location.href = `${CLIENT_URL}/map`
+        window.location.href = `${CLIENT_URL}/key`
 
     }
 

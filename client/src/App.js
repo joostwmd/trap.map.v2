@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ArtistProfile from './pages/ArtistProfile';
 import Map from './pages/Map';
+import Welcome from './pages/Welcome';
 
 
 //components
@@ -24,17 +25,22 @@ function App() {
         <Routes>
 
           <Route
+            exact path='/key'
+            element={<Welcome />}
+          />
+
+          <Route
             exact path="/"
             element={<Home />}
           />
 
           <Route 
-            exact path="/map"
+            exact path="/VPcpfJADsmwQqmurzmhr"
             element={<Map />}
           />
 
           <Route 
-            exact path="/map/:artistName"
+            exact path="/VPcpfJADsmwQqmurzmhr/:artistName"
             element={<ArtistProfile />}
           />
 
