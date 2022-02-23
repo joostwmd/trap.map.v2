@@ -96,7 +96,7 @@ function Map() {
     //build redirect url
     const redirectToArtistProfilePage = (artistDatabaseId, artistSpotifyId, zoom) => {
         sessionStorage.setItem('zoom', zoom)
-        window.location.href = `${CLIENT_URL}/map/:${artistDatabaseId}:${artistSpotifyId}`
+        window.location.href = `${CLIENT_URL}/VPcpfJADsmwQqmurzmhr/:${artistDatabaseId}:${artistSpotifyId}`
 
     }
 
