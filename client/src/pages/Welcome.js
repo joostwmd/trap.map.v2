@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Heading, Button, Input, Flex } from '@chakra-ui/react'
 import { SERVER_URL, CLIENT_URL } from '../clientVariables'
 
+
 function Welcome() {
 
     const [key, setKey] = useState('')

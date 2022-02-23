@@ -140,7 +140,7 @@ function Home() {
 
                             size='md'
                             width='90vw'
-                            mb='2vh'
+                            mb='2.5vh'
                         />
 
                         <Button onClick={() => singUpForBetaKey()}
