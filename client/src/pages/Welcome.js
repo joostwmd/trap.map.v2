@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
-import { Center, Heading, Button, Input, Flex } from '@chakra-ui/react'
+import { Heading, Button, Input, Flex } from '@chakra-ui/react'
 import { SERVER_URL, CLIENT_URL } from '../clientVariables'
 
 function Welcome() {
