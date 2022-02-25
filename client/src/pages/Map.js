@@ -1,7 +1,7 @@
 import React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import axios from 'axios'
-import Nav from '../components/Nav';
+//import Nav from '../components/Nav';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -16,13 +16,12 @@ function Map() {
     mapboxgl.accessToken = MAPBOX_TOKEN
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [currentMap, setCurrentMap] = useState()
-    const [currentCity, setCurrentCity] = useState('')
-    const berlinCenter = [13.404954, 52.520008]
 
-
-    //nav
-    const [endOfNav, setEndOfNav] = useState(Number)
+    const center = [10.172946185256103, 50.70767729701806]
+    const bounds = [
+        [1.5959956864622256, 44.599918543774685], 
+        [19.10264276075604, 57.051410713269455]
+    ]
 
     //handel city change with mapbox fly to animation
     const jumpToCity = async (currentMap, city) => {
@@ -32,18 +31,6 @@ function Map() {
             speed: 1.25,
             zoom: 9
         })
-        setCurrentCity(city[0])
-    }
-
-    const getCity = async () => {
-        const city = await sessionStorage.getItem('city')
-
-        if (city === null) {
-            return 'berlin'
-        } else {
-            return city
-        }
-
     }
 
     //change the db artist data into mapboxgl format
@@ -109,7 +96,7 @@ function Map() {
         } else if (coords !== null && zoom === null) {
             return [[Number(coords.split(',')[0]), Number(coords.split(',')[1])], 12]
         } else if (coords === null && zoom === null) {
-            return [berlinCenter, 8.75]
+            return [center, 4.2]
         }
 
     }
@@ -122,8 +109,8 @@ function Map() {
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
             center: coords,
             zoom: zoom,
-            //minZoom: 8.65,
-
+            minZoom: 4,
+            maxBounds : bounds,
             attributionControl: false,
         })
 
@@ -135,29 +122,28 @@ function Map() {
         let markerSize = (Number((map.current.getZoom()) - initialZoom) * 8) + 22
         let nameSize = (Number((map.current.getZoom()) - initialZoom) * 4) + 5
 
-        if (Number((map.current.getZoom() > 7.5))) {
+        if (Number((map.current.getZoom() > 7))) {
             marker.style.visibility = 'visible'
             marker.style.height = `${markerSize}px`
             marker.style.width = `${markerSize}px`
             marker.innerHTML = `<p style='font-size:${nameSize}px'>${markerProps.properties.artistName}</p>`
         }
 
-        if (Number((map.current.getZoom() <= 7.5))) {
+        if (Number((map.current.getZoom() <= 7))) {
             marker.style.visibility = 'hidden'
             marker.innerHTML = ''
         }
     }
 
     const handleZoomCityMarkers = (marker, markerProps, initialZoom) => {
-
         let markerSize = (markerProps.properties.cityMarkerSize / 10000) + 100 + (Number(map.current.getZoom() - initialZoom) * 12.5)
         let nameSize = 40 + (Number(map.current.getZoom() - initialZoom) * 5)
 
-        if (Number((map.current.getZoom() > 7.5))) {
+        if (Number((map.current.getZoom() > 7))) {
             marker.style.visibility = 'hidden'
         }
 
-        if (Number((map.current.getZoom() <= 7.5))) {
+        if (Number((map.current.getZoom() <= 7))) {
             marker.style.visibility = 'visible'
             marker.style.height = `${markerSize}px`
             marker.style.width = `${markerSize}px`
@@ -165,27 +151,29 @@ function Map() {
         }
     }
 
-    const getHeightOfNav = (el) => {
-        setEndOfNav(el.getBoundingClientRect().height)
+    const redirectToHomepage = () => {
+        window.location.href = `${CLIENT_URL}/` 
     }
 
-    const preventScrollDown = () => {
-        if (window.scrollY > 25){
-            console.log(window.scrollY - 25, endOfNav)
-            // if (window.scrollY >= endOfNav){
-            //     window.scrollTo({ top: 0, behavior : 'smooth' })
-            // }
-        }
+    const createHomeButton = (currentMap) => {
+        const homeButton = document.createElement('div')
+        homeButton.className = 'homeButton'
+        homeButton.innerHTML = '<p className="textInHomeButton">home</p>'
+        homeButton.addEventListener('click', () => {
+            redirectToHomepage()
+        })
+        return new mapboxgl.Marker(homeButton).setLngLat(getTopLeftCoordinates(currentMap)).addTo(currentMap)
     }
 
-    document.addEventListener('scroll', () => {
-        preventScrollDown()
-    })
+    const getTopLeftCoordinates = (currentMap) => {
+        let lng = currentMap.getBounds()._sw.lng
+        let lat = currentMap.getBounds()._ne.lat
 
+        return [lng, lat]
+    }
+
+    
     useEffect(() => {
-
-        const nav = document.getElementById('mapNav')
-        new ResizeObserver(() => getHeightOfNav(nav)).observe(nav);
 
         axios.get(`${SERVER_URL}/dataBase/map`)
             .then(res => {
@@ -195,17 +183,9 @@ function Map() {
 
         citysToFeatures(CITYS)
 
-        getCity()
-            .then(city => {
-                setCurrentCity(city)
-            })
-
-
-
         getMapProps()
             .then(props => {
                 map.current = createMap(props[0], props[1])
-                setCurrentMap(map.current)
 
                 map.current.dragRotate.disable()
                 map.current.touchZoomRotate.disableRotation()
@@ -291,14 +271,26 @@ function Map() {
                         }
                     }
                 })
+
+                const homeButtonMarker = createHomeButton(map.current)
+
+                map.current.on('zoom', () => {
+                    homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+                })
+        
+        
+               
+                map.current.on('move', () => {
+                    homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+                })
             })
     }, [])
 
     return (
         <div>
-            <div id='mapNav'>
+            {/* <div id='mapNav'>
                 <Nav currentMap={currentMap} currentCity={currentCity} jumpToCity={jumpToCity} />
-            </div>
+            </div> */}
 
             <div ref={mapContainer} className="map-container" />
         </div>

@@ -72,7 +72,6 @@ function ArtistProfile() {
 
                         //set current coords / city ad session storage item
                         sessionStorage.setItem('coords', dataBaseData.data.coordinates)
-                        sessionStorage.setItem('city', dataBaseData.data.city)
                     })
 
                 getSpotifyData(ids[1])
