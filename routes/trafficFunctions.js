@@ -14,8 +14,8 @@ router.post("/addTrapMapProfileVisit", (req, res, next) => {
     TrapMapVisit.create({
         artist: req.body.artistDatabaseId
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
@@ -25,8 +25,8 @@ router.post("/addSpotifyProfileVisit", (req, res, next) => {
     SpotifyVisit.create({
         artist: req.body.artistDatabaseId
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
@@ -35,8 +35,8 @@ router.post("/addAppleMusicProfileVisit", (req, res, next) => {
     AppleMusicVisit.create({
         artist: req.body.artistDatabaseId
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
@@ -46,8 +46,8 @@ router.post("/addInstagramProfileVisit", (req, res, next) => {
     InstagramVisit.create({
         artist: req.body.artistDatabaseId
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
@@ -57,8 +57,8 @@ router.post("/addYoutubeProfileVisit", (req, res, next) => {
     YoutubeVisit.create({
         artist: req.body.artistDatabaseId
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
@@ -67,8 +67,8 @@ router.post("/addSnippetPlayed", (req, res, next) => {
     SnippetPlayed.create({
         artist: req.body.artistDatabaseId
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
@@ -78,8 +78,8 @@ router.post("/addSignUpForBetaKey", (req, res, next) => {
     SignUpForBetaKey.create({
         email: req.body.email
     })
-        .then(() => {
-            res.status(200)
+        .then(createdDoc => {
+            res.status(200).json(createdDoc)
         })
         .catch(err => console.log(err))
 })
