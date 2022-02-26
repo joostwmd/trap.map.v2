@@ -30,7 +30,7 @@ function SignUp() {
                     id="nameInput"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="name"
                     focusBorderColor='brand.200'
 
                     size='md'
@@ -43,7 +43,7 @@ function SignUp() {
                     id="loactionInput"
                     value={location}
                     onChange={e => setLocation(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="location"
                     focusBorderColor='brand.200'
 
                     size='md'
@@ -56,7 +56,7 @@ function SignUp() {
                     id="spotifyLinkInput"
                     value={spotifyLink}
                     onChange={e => setSpotifyLink(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="spotify link"
                     focusBorderColor='brand.200'
 
                     size='md'
@@ -68,7 +68,7 @@ function SignUp() {
                     id="appleMusicLinkInput"
                     value={appleMusicLink}
                     onChange={e => setAppleMusicLink(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="apple music link"
                     focusBorderColor='brand.200'
 
                     size='md'
@@ -80,7 +80,7 @@ function SignUp() {
                     id="youtubeLinkInput"
                     value={youtubeLink}
                     onChange={e => setYoutubeLink(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="youtube link"
                     focusBorderColor='brand.200'
 
                     size='md'
@@ -92,7 +92,7 @@ function SignUp() {
                     id="instaLinkInput"
                     value={instaLink}
                     onChange={e => setInstaLink(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="insta link"
                     focusBorderColor='brand.200'
 
                     size='md'
@@ -107,7 +107,7 @@ function SignUp() {
                     id="favSong"
                     value={favSong}
                     onChange={e => setFavSong(e.target.value)}
-                    placeholder="email adress"
+                    placeholder="fav song"
                     focusBorderColor='brand.200'
 
                     size='md'

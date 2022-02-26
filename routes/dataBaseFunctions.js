@@ -23,13 +23,14 @@ router.post("/artistProfile", (req, res, next) => {
 })
 
 router.post('/signUpArtist', (req, res, next) => {
+    console.log(req.body)
     ArtistSignUp.create({
         name : req.body.name,
-        location : req.body.name,
+        location : req.body.location,
         spotifyLink : req.body.spotifyLink,
         appleMusicLink : req.body.appleMusicLink,
         youtubeLink : req.body.youtubeLink,
-        instagramLink : req.body.instagramLink,
+        instagramLink : req.body.instaLink,
         favSong : req.body.favSong
     })
 })

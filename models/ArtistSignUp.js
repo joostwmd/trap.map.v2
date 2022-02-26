@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const artistSignUpSchema = new Schema({
-    coordinates : String,
+    location : String,
     name : String,
     spotifyLink : String,
     appleMusicLink : String,
