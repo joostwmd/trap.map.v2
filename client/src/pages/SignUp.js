@@ -120,7 +120,7 @@ function SignUp() {
                 >
                     <Heading
                     >
-                        singUp
+                        sign up
                     </Heading>
                 </Button>
 
