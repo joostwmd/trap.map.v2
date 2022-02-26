@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import ArtistProfile from './pages/ArtistProfile';
 import Map from './pages/Map';
 import Welcome from './pages/Welcome';
+import SignUp from './pages/SignUp';
 
 
 //components
@@ -42,6 +43,11 @@ function App() {
           <Route 
             exact path="/VPcpfJADsmwQqmurzmhr/:artistName"
             element={<ArtistProfile />}
+          />
+
+          <Route  
+            exact path='/signUp'
+            element={<SignUp />}
           />
 
         </Routes>

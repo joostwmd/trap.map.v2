@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Artist = require("../models/Artist");
+const ArtistSignUp = require('../models/ArtistSignUp')
 //const mapboxgl =  require('!mapbox-gl');
 const mapboxgl = require('mapbox-gl')
 
@@ -19,6 +20,18 @@ router.post("/artistProfile", (req, res, next) => {
         .then(artist => {
             res.status(200).json(artist)
         })
+})
+
+router.post('/signUpArtist', (req, res, next) => {
+    ArtistSignUp.create({
+        name : req.body.name,
+        location : req.body.name,
+        spotifyLink : req.body.spotifyLink,
+        appleMusicLink : req.body.appleMusicLink,
+        youtubeLink : req.body.youtubeLink,
+        instagramLink : req.body.instagramLink,
+        favSong : req.body.favSong
+    })
 })
 
 router.post('/accessBeta', (req, res, next) => {
