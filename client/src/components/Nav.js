@@ -25,7 +25,7 @@ function Nav({ currentMap, currentCity, currentCountry, jumpToCity }) {
     }
 
     const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}/home`
+        window.location.href = `${CLIENT_URL}/`
     }
 
     if (isOpen === false) {

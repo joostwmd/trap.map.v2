@@ -143,13 +143,13 @@ function Map() {
     }
 
     const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}/home`
+        window.location.href = `${CLIENT_URL}/`
     }
 
     //build redirect url
     const redirectToArtistProfilePage = (artistDatabaseId, artistSpotifyId, zoom) => {
         sessionStorage.setItem('zoom', zoom)
-        window.location.href = `${CLIENT_URL}/:${artistDatabaseId}:${artistSpotifyId}`
+        window.location.href = `${CLIENT_URL}/map/:${artistDatabaseId}:${artistSpotifyId}`
 
     }
 

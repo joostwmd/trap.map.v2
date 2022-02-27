@@ -1,11 +1,11 @@
 //for development
-const CLIENT_URL = 'http://localhost:3000'
-const SERVER_URL = 'http://localhost:5005'
+// const CLIENT_URL = 'http://localhost:3000'
+// const SERVER_URL = 'http://localhost:5005'
 
 
 //for deployment
-// const CLIENT_URL = 'https://trapmap.herokuapp.com'
-// const SERVER_URL = 'https://trapmap.herokuapp.com'
+const CLIENT_URL = 'https://trapmap.herokuapp.com'
+const SERVER_URL = 'https://trapmap.herokuapp.com'
 
 //for production
 // const CLIENT_URL = 'https://trapmap.eu'
