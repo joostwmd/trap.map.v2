@@ -1,0 +1,79 @@
+#signUpInputName, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputName::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#signUpInputLocation, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputLocation::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#signUpInputSpotify, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputSpotify::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputAppleMusic, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputAppleMusic::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputInsta, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputInsta::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputYoutube, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputYoutube::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputFavSong, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputFavSong::placeholder{
+    font-family: Montserrat;
+}
+

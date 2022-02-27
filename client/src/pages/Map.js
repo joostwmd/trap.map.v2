@@ -19,7 +19,7 @@ function Map() {
 
     const center = [10.172946185256103, 50.70767729701806]
     const bounds = [
-        [1.5959956864622256, 44.599918543774685], 
+        [1.5959956864622256, 44.599918543774685],
         [19.10264276075604, 57.051410713269455]
     ]
 
@@ -78,15 +78,6 @@ function Map() {
         }
     }
 
-
-
-    //build redirect url
-    const redirectToArtistProfilePage = (artistDatabaseId, artistSpotifyId, zoom) => {
-        sessionStorage.setItem('zoom', zoom)
-        window.location.href = `${CLIENT_URL}/VPcpfJADsmwQqmurzmhr/:${artistDatabaseId}:${artistSpotifyId}`
-
-    }
-
     const getMapProps = async () => {
         const coords = await sessionStorage.getItem('coords')
         const zoom = await sessionStorage.getItem('zoom')
@@ -110,7 +101,7 @@ function Map() {
             center: coords,
             zoom: zoom,
             minZoom: 4,
-            maxBounds : bounds,
+            maxBounds: bounds,
             attributionControl: false,
         })
 
@@ -152,8 +143,16 @@ function Map() {
     }
 
     const redirectToHomepage = () => {
-        window.location.href = `${CLIENT_URL}/` 
+        window.location.href = `${CLIENT_URL}/home`
     }
+
+    //build redirect url
+    const redirectToArtistProfilePage = (artistDatabaseId, artistSpotifyId, zoom) => {
+        sessionStorage.setItem('zoom', zoom)
+        window.location.href = `${CLIENT_URL}/:${artistDatabaseId}:${artistSpotifyId}`
+
+    }
+
 
     const createHomeButton = (currentMap) => {
         const homeButton = document.createElement('div')
@@ -172,7 +171,7 @@ function Map() {
         return [lng, lat]
     }
 
-    
+
     useEffect(() => {
 
         axios.get(`${SERVER_URL}/dataBase/map`)
@@ -277,9 +276,9 @@ function Map() {
                 map.current.on('zoom', () => {
                     homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
                 })
-        
-        
-               
+
+
+
                 map.current.on('move', () => {
                     homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
                 })

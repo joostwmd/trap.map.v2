@@ -6,13 +6,14 @@ import chromeGrillzTop from '../style/chromeGrillzTop.png'
 import trapmapLettering from '../style/trapmapLetteringRectangle.png'
 
 import { Input, Center, Heading, Text, Flex, Button, Image } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
-import {SERVER_URL, CLIENT_URL} from '../clientVariables'
+import { SERVER_URL, CLIENT_URL } from '../clientVariables'
 
 function Home() {
 
     const redirectToMap = () => {
-        window.location.href = `${CLIENT_URL}/key`
+        window.location.href = `${CLIENT_URL}`
 
     }
 
@@ -66,18 +67,11 @@ function Home() {
 
                 <Text
                     align='center'
-                    mb='2vh'
+                    mb='5vh'
                     fontSize='4vw'
                 >
-                    we have mapped the world of trapmusic and thus created a way for you to discover new artists without playlists or algorithms.
-                </Text>
-
-                <Text
-                    align='center'
-                    mb='2vh'
-                    fontSize='4vw'
-                >
-                    every trapper is linked on our map in the hood he represents with his music. no marker is bigger or smaller, lighter or darker, all artists are displayed equally. all you need to do is to browse the map
+                    we have mapped the world of trapmusic and thus created a way for you
+                    to discover new artists without playlists or algorithms.
                 </Text>
 
                 <Button
@@ -98,10 +92,33 @@ function Home() {
                 </Button>
             </Center>
 
+
+            <Center>
+                <Link to='/signUp'>
+                    <Button
+                        color='#fff'
+                        rounded='md'
+                        w='90vw'
+                        h='12.5vw'
+                        mb='5vh'
+                    >
+                        <Heading
+                            fontSize='10vw'
+                            color='brand.200'
+                            letterSpacing='wider'
+                        >
+                            sign up for artist
+                        </Heading>
+
+                    </Button>
+                </Link>
+            </Center>
+
             <Center
                 mr='5vw'
                 ml='5vw'
                 mb='15vh'
+                mt='15vh'
             >
                 <Flex
                     flexDir='column'
@@ -138,7 +155,6 @@ function Home() {
                             onChange={e => setEmail(e.target.value)}
                             placeholder="email adress"
                             focusBorderColor='brand.200'
-
                             size='md'
                             width='90vw'
                             mb='2vh'
@@ -167,14 +183,12 @@ function Home() {
                 </Flex>
             </Center>
 
-
             <Center
                 flexDir='column'
                 ml='5vw'
                 mr='5vw'
                 mb='5vh'
             >
-
                 <Heading
                     aling='center'
                     fontSize='12vw'
@@ -190,8 +204,48 @@ function Home() {
                     color='#fff'
                 >
                     if you have ideas or suggestions for improvements or if you miss an artist on our map,
-                    DM on us on <a href='https://www.instagram.com/trapmap.berlin/' style={{ textDecoration: 'underline', textDecorationColor: '#9381FF' }}>insta</a>
+                    DM on us on
                 </Text>
+
+
+                <a href='https://www.instagram.com/trapmap.eu/'>
+                    <Heading
+                        aling='center'
+                        fontSize='7.5vw'
+                        color='brand.200'
+                    >
+                        insta
+                    </Heading>
+                </a>
+
+
+                <Flex
+                    mt='15vh'
+                >
+                    <Link to='/impressum'>
+                        <Heading
+                            fontSize='5vw'
+                            color='#fff'
+                            mr='12.5vw'
+                            textDecorationLine='underline'
+                            textDecorationColor='brand.200'
+                        >
+                            impressum
+                        </Heading>
+                    </Link>
+
+                    <Link to='/datenschutz'>
+                        <Heading
+                            fontSize='5vw'
+                            color='#fff'
+                            ml='12.5vw'
+                            textDecorationLine='underline'
+                            textDecorationColor='brand.200'
+                        >
+                            datenschutz
+                        </Heading>
+                    </Link>
+                </Flex>
             </Center>
 
         </div>
