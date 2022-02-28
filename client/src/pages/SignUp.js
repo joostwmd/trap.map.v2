@@ -72,7 +72,7 @@ function SignUp() {
                         mb='5vh'
                         align='center'
                     >
-                        your aka. this name will be used for your marker on the trapmap
+                        your artistname. this name will be used for your marker on the trapmap
                     </Text>
 
 
@@ -95,7 +95,7 @@ function SignUp() {
                         mb='5vh'
                         align='center'
                     >
-                        your position on the trapmap. discribe the position (postal-code, adress, place, park)
+                        your position on the trapmap. describe the position (postal-code, adress, place, park)
                     </Text>
 
 
