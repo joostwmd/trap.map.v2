@@ -30,6 +30,14 @@ function Track({ artistDatabaseId, track, count }) {
     // }
 
 
+    
+    //traffic
+    const addSnippetPlayed = (artistDatabaseId) => {
+        let requestBody = { artistDatabaseId }
+        axios.post(`${SERVER_URL}/traffic/addSnippetPlayed`, requestBody)
+    }
+
+
     //functions to handle track behavior
     const playTrack = (trackName) => {
         const track = document.getElementById(`audioPlayer${trackName}`)
@@ -47,7 +55,7 @@ function Track({ artistDatabaseId, track, count }) {
     const pauseTrack = (trackName) => {
         const track = document.getElementById(`audioPlayer${trackName}`)
         track.pause()
-        
+
         //remove visual feedback
         const trackTitle = document.getElementById(`trackTitle${trackName}`)
         trackTitle.style.color = '#fff'
@@ -58,7 +66,7 @@ function Track({ artistDatabaseId, track, count }) {
     }
 
     //handle click on play/pause button => All the track functions are used here
-    const playOrPauseTrack = (trackName) => {
+    const playOrPauseTrack = (trackName, artistDatabaseId) => {
         const audios = document.getElementsByClassName('audioPlayer')
         const clickedAudio = document.getElementById(`audioPlayer${trackName}`)
 
@@ -82,13 +90,6 @@ function Track({ artistDatabaseId, track, count }) {
                 pauseTrack(trackName)
             }
         }
-    }
-
-
-    //traffic
-    const addSnippetPlayed = (artistDatabaseId) => {
-        let requestBody = { artistDatabaseId }
-        axios.post(`${SERVER_URL}/traffic/addSnippetPlayed`, requestBody)
     }
 
 

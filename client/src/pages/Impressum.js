@@ -68,13 +68,13 @@ function Impressum() {
                 <Text
                     mt='2.5vh'
                 >
-                    - Joost Windmöller, Hüninger Straße 12, 14195 Berlin
+                    - Joost Windmöller
                 </Text>
 
                 <Text
                     mt='2.5vh'
                 >
-                    - Maximilian Pohl, Schwedter Straße 16, 10119 Berlin
+                    - Maximilian Pohl
                 </Text>
 
             </Flex>
