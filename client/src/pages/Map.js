@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 //import Nav from '../components/Nav';
 
@@ -7,7 +7,8 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { SERVER_URL, CLIENT_URL, MAPBOX_TOKEN } from '../clientVariables'
-import { CITYS } from '../mapboxCityVariables'
+//import { CITYS } from '../mapboxApi/mapboxCityVariables'
+import { CITYS } from '../mapboxApi/mapboxCityVariables'
 
 
 function Map() {
@@ -16,6 +17,10 @@ function Map() {
     mapboxgl.accessToken = MAPBOX_TOKEN
     const mapContainer = useRef(null);
     const map = useRef(null);
+
+
+
+    
 
     const center = [10.172946185256103, 50.70767729701806]
     const bounds = [
@@ -32,6 +37,33 @@ function Map() {
             zoom: 9
         })
     }
+
+    // const jumpToArtist = (currentMap, artistCoors) => {
+
+    //     currentMap.flyTo({
+    //         center: artistCoors,
+    //         speed: 2.25,
+    //         zoom: 12
+    //     })
+    // }
+
+    // const shuffelArtistsHandler = async (currentMap) => {
+    //     axios.get(`${SERVER_URL}/dataBase/map`)
+    //         .then(res => {
+    //             getRandomArtists(res.data)
+    //                 .then(artist => {
+    //                     jumpToArtist(currentMap, artist[0].coordinates)
+    //                 })
+
+    //         })
+
+    // }
+
+    // const getRandomArtists = async (artists) => {
+    //     let shuffel = Math.floor(Math.random() * artists.length + 1)
+    //     let res = await [artists[shuffel]]
+    //     return res
+    // }
 
     //change the db artist data into mapboxgl format
     const artitsFeatures = []
@@ -93,7 +125,7 @@ function Map() {
     }
 
 
-    const createMap = (coords, zoom) => {
+    const createMap = (mapContainer, coords, zoom) => {
         if (map.current) return;
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
@@ -142,6 +174,17 @@ function Map() {
         }
     }
 
+    // const handleZoomRandomArtistMarker = (currentMap) => {
+    //     const marker = document.getElementById('randomArtistButton')
+    //     if (Number((currentMap.getZoom() > 5.25))) {
+    //         marker.style.visibility = 'hidden'
+    //     }
+
+    //     if (Number((currentMap.getZoom() <= 5.25))) {
+    //         marker.style.visibility = 'visible'
+    //     }
+    // }
+
     const redirectToHomepage = () => {
         window.location.href = `${CLIENT_URL}/`
     }
@@ -172,19 +215,39 @@ function Map() {
     }
 
 
+    // const createRandomArtistButton = (currentMap, artists) => {
+    //     const randomArtistButton = document.createElement('div')
+    //     randomArtistButton.id = 'randomArtistButton'
+    //     randomArtistButton.innerHTML = '<p className="textInRandomArtistButton">shuffle</p>'
+    //     randomArtistButton.addEventListener('click', () => {
+    //         shuffelArtistsHandler(currentMap, artists)
+    //     })
+    //     return new mapboxgl.Marker(randomArtistButton).setLngLat(getTopLeftCoordinates(currentMap)).addTo(currentMap)
+    // }
+
+    // const getBottomMiddleCoordinates = (currentMap) => {
+    //     let lng = currentMap.getCenter().lng
+    //     let lat = currentMap.getCenter().lat - (currentMap.getBounds()._ne.lat - currentMap.getBounds()._sw.lat) / 4 
+
+    //     return [lng, lat]
+    // }
+
+
     useEffect(() => {
 
         axios.get(`${SERVER_URL}/dataBase/map`)
             .then(res => {
                 //change data into mapboxgl format with function
                 artistToFeatures(res.data)
+                
+
             })
 
         citysToFeatures(CITYS)
 
         getMapProps()
             .then(props => {
-                map.current = createMap(props[0], props[1])
+                map.current = createMap(mapContainer ,props[0], props[1])
 
                 map.current.dragRotate.disable()
                 map.current.touchZoomRotate.disableRotation()
@@ -227,10 +290,10 @@ function Map() {
 
                             //resize markers in zoom
                             map.current.on('zoom', () => {
-                                handleZoomArtistMarkers(artistMarkers[i], artitsFeatures[i], 8.75)
+                                handleZoomArtistMarkers(map.current, artistMarkers[i], artitsFeatures[i], 8.75)
                             })
 
-                            handleZoomArtistMarkers(artistMarkers[i], artitsFeatures[i], 8.75)
+                            handleZoomArtistMarkers(map.current, artistMarkers[i], artitsFeatures[i], 8.75)
                         }
                     }
 
@@ -272,15 +335,20 @@ function Map() {
                 })
 
                 const homeButtonMarker = createHomeButton(map.current)
+                //const randomArtistMarker = createRandomArtistButton(map.current)
 
                 map.current.on('zoom', () => {
                     homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+
+                    // randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
+                    // handleZoomRandomArtistMarker(map.current, randomArtistMarker)
                 })
 
 
 
                 map.current.on('move', () => {
                     homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+                    //randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
                 })
             })
     }, [])

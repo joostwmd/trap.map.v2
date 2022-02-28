@@ -58,6 +58,22 @@
     text-decoration-color: #fff;
 }
 
+/* #randomArtistButton {
+    margin-left: 12vw;
+    margin-top: 4.2vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#randomArtistButton > p {
+    font-size: 10vw;
+    color:#9381FF;
+    font-family: PhillySans;
+    text-decoration-line: underline;
+    text-decoration-color: #fff;
+} */
+
  
 .map-container {
     height: 100vh;
