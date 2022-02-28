@@ -19,7 +19,7 @@ import Datenschutz from './pages/Datenschutz';
 function App() {
 
   useEffect(() => {
-    console.log('test')
+    // console.log('test')
   }, [])
   
   //imported create map

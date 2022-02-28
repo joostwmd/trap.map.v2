@@ -290,10 +290,10 @@ function Map() {
 
                             //resize markers in zoom
                             map.current.on('zoom', () => {
-                                handleZoomArtistMarkers(map.current, artistMarkers[i], artitsFeatures[i], 8.75)
+                                handleZoomArtistMarkers(artistMarkers[i], artitsFeatures[i], 8.75)
                             })
 
-                            handleZoomArtistMarkers(map.current, artistMarkers[i], artitsFeatures[i], 8.75)
+                            handleZoomArtistMarkers(artistMarkers[i], artitsFeatures[i], 8.75)
                         }
                     }
 
