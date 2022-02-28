@@ -30,7 +30,7 @@ function Track({ artistDatabaseId, track, count }) {
     // }
 
 
-    
+
     //traffic
     const addSnippetPlayed = (artistDatabaseId) => {
         let requestBody = { artistDatabaseId }
@@ -78,6 +78,7 @@ function Track({ artistDatabaseId, track, count }) {
             }
             //play clicked track
             playTrack(trackName)
+            addSnippetPlayed(artistDatabaseId)
 
         } else {
             //pause the track 
