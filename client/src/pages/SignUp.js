@@ -11,7 +11,6 @@ function SignUp() {
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')
     const [spotifyLink, setSpotifyLink] = useState('')
-    const [favSong, setFavSong] = useState('')
     const [instaLink, setInstaLink] = useState('')
     const [youtubeLink, setYoutubeLink] = useState('')
     const [appleMusicLink, setAppleMusicLink] = useState('')
@@ -28,9 +27,9 @@ function SignUp() {
     }
 
     const signUp = () => {
-        if (name !== '' && spotifyLink !== '' && spotifyLink !== '' && instaLink !== '' && favSong !== '') {
+        if (name !== '' && spotifyLink !== '' && spotifyLink !== '' && instaLink !== '') {
             setStatus('signedUp')
-            const requestBody = { name, location, spotifyLink, youtubeLink, instaLink, appleMusicLink, favSong }
+            const requestBody = { name, location, spotifyLink, youtubeLink, instaLink, appleMusicLink }
             axios.post(`${SERVER_URL}/dataBase/signUpArtist`, requestBody)
         }
     }
@@ -201,50 +200,6 @@ function SignUp() {
                         mb='10vh'
                     />
 
-
-                    <Heading
-                        color='#fff'
-                        fontSize='10vw'
-                        textDecorationLine='underline'
-                        textDecorationColor='brand.200'
-                    >
-                        authentification
-                    </Heading>
-
-                    <Text
-                        fontSize='4.2vw'
-                        mt='5vh'
-                        ml='5vw'
-                        mr='5vw'
-                        align='center'
-                    >
-                        we don't want anyone to sign you up without your permission.
-                        therefore we have a security question for you
-                    </Text>
-
-                    <Text
-                        fontSize='5vw'
-                        color='brand.200'
-                        mt='5vh'
-                        ml='5vw'
-                        mr='5vw'
-                        align='center'
-                    >
-                        whats your favorite track?
-                    </Text>
-
-                    <Input
-                        id='signUpInputFavSong'
-                        value={favSong}
-                        onChange={e => setFavSong(e.target.value)}
-                        focusBorderColor='brand.200'
-                        placeholder='required'
-                        size='md'
-                        width='90vw'
-                        mt='5vh'
-                        mb='10vh'
-                    />
-
                     <Button
                         onClick={() => { signUp() }}
                         bg='brand.200'
@@ -261,10 +216,6 @@ function SignUp() {
                             sign up
                         </Heading>
                     </Button>
-
-
-
-
                 </Center>
             </div>
         )
@@ -287,13 +238,35 @@ function SignUp() {
                         thank you
                     </Heading>
 
-                    <Text
-                        fontSize='5vw'
-                        align='center'
-                        mb='15vh'
+                    <Heading
+                        color='#fff'
+                        fontSize='10vw'
+                        textDecorationLine='underline'
+                        textDecorationColor='brand.200'
                     >
-                        we will message you on instagram to verify your sign up
+                        authentification
+                    </Heading>
+
+                    <Text
+                        fontSize='4.2vw'
+                        mt='5vh'
+                        ml='5vw'
+                        mr='5vw'
+                        align='center'
+                    >
+                        we don't want anyone to sign you up without your permission.
+                        so please dm us on insta, we'll take care of the rest
                     </Text>
+
+                    <a href='https://www.instagram.com/trapmap.eu/'>
+                        <Heading
+                            aling='center'
+                            fontSize='7.5vw'
+                            color='brand.200'
+                        >
+                            insta
+                        </Heading>
+                    </a>
                 </Flex>
 
                 <Flex

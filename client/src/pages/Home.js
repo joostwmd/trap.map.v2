@@ -204,7 +204,7 @@ function Home() {
                     color='#fff'
                 >
                     if you have ideas or suggestions for improvements or if you miss an artist on our map,
-                    DM on us on
+                    dm on us on
                 </Text>
 
 

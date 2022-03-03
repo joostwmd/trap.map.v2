@@ -3,7 +3,7 @@ import { Center, Text, Flex, Image } from '@chakra-ui/react'
 import { SERVER_URL } from '../clientVariables'
 
 
-function Track({ artistDatabaseId, track, count }) {
+function Track({ dataBaseId, track, count }) {
 
     //create strings for additional trackrelated info 
     // const createFeaturesInfo = (artists) => {
@@ -32,8 +32,8 @@ function Track({ artistDatabaseId, track, count }) {
 
 
     //traffic
-    const addSnippetPlayed = (artistDatabaseId) => {
-        let requestBody = { artistDatabaseId }
+    const addSnippetPlayed = (dataBaseId) => {
+        let requestBody = { dataBaseId }
         axios.post(`${SERVER_URL}/traffic/addSnippetPlayed`, requestBody)
     }
 
@@ -66,7 +66,7 @@ function Track({ artistDatabaseId, track, count }) {
     }
 
     //handle click on play/pause button => All the track functions are used here
-    const playOrPauseTrack = (trackName, artistDatabaseId) => {
+    const playOrPauseTrack = (trackName, dataBaseId) => {
         const audios = document.getElementsByClassName('audioPlayer')
         const clickedAudio = document.getElementById(`audioPlayer${trackName}`)
 
@@ -78,7 +78,7 @@ function Track({ artistDatabaseId, track, count }) {
             }
             //play clicked track
             playTrack(trackName)
-            addSnippetPlayed(artistDatabaseId)
+            addSnippetPlayed(dataBaseId)
 
         } else {
             //pause the track 
@@ -139,7 +139,7 @@ function Track({ artistDatabaseId, track, count }) {
             </Flex>
 
 
-            <audio id={`audioPlayer${track.name}`} className='audioPlayer' onPlay={() => { addSnippetPlayed(artistDatabaseId) }}>
+            <audio id={`audioPlayer${track.name}`} className='audioPlayer' onPlay={() => { addSnippetPlayed(dataBaseId) }}>
                 <source src={track.preview_url} type="audio/mp3" />
             </audio>
         </div>

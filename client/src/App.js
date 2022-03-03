@@ -18,9 +18,9 @@ import Datenschutz from './pages/Datenschutz';
 
 function App() {
 
-  useEffect(() => {
-    // console.log('test')
-  }, [])
+  // useEffect(() => {
+  //   console.log('test root')
+  // }, [])
   
   //imported create map
 

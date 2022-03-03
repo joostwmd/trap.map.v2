@@ -49,9 +49,7 @@ const loadArtistProfile = async (token, artistId) => {
 
     const info = await getArtistInfo(artistId)
     const topTracks = await getArtistTopTracks(artistId)
-    //const artistAlbum = await getArtistAlbums(artistId)
-
-    //return [info, topTracks, artistAlbum]
+    
     return [info, topTracks]
 }
 

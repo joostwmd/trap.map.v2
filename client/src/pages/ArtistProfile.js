@@ -8,22 +8,22 @@ import ArtistProfileHeader from '../components/ArtistProfileHeader'
 
 import { SERVER_URL } from '../clientVariables'
 
-function ArtistProfile() {
+// import { createConnectionLayer, jumpToCenter, createCloseConnectionsButton } from '../mapboxApi/artistConnectionsLayer'
+// import { closeArtistProfilePopup } from '../mapboxApi/artistPopupLayer'
+
+function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
     //artist info
-    const [artistName, setArtistName] = useState("")
-    const [artistDatabaseId, setArtistDatabaseId] = useState("")
-    const [artistPicture, setArtistPicture] = useState("")
-    const [links, setLinks] = useState([])
+    const [name, setName] = useState("")
+    const [picture, setPicture] = useState("")
     const [topTracks, setTopTracks] = useState([])
+    const [links, setLinks] = useState([])
+    const [coords, setCoords] = useState([])
+
+    const [dataBaseDataFetched, setDataBaseDataFetched] = useState(false)
+    const [spotifyDataFetched, setSpotifyDataFetched] = useState(false)
 
     let count = 0
-
-
-    //fetch data function
-    const getArtistsIds = async () => {
-        return [window.location.pathname.split(":")[1], window.location.pathname.split(":")[2]]
-    }
 
     const getSpotifyData = async (spotifyId) => {
         const requestBody = { spotifyId }
@@ -51,85 +51,93 @@ function ArtistProfile() {
     }
 
 
+    // const handleShowConnections = (currentMap, dataBaseId, artistCoords) => {
+    //     createConnectionLayer(currentMap, dataBaseId)
+    //     closeArtistProfilePopup(currentMap, popup)
+    //     jumpToCenter(currentMap, artistCoords)
+    //     createCloseConnectionsButton(currentMap)
+    // }
+
+
+
+
 
     useEffect(() => {
+        getDataBaseData(dataBaseId)
+            .then(dataBaseData => {
+                setDataBaseDataFetched(true)
+                setLinks([
+                    ["spotify", dataBaseData.data.spotifyLink],
+                    ["appleMusic", dataBaseData.data.appleMusicLink],
+                    ["youtube", dataBaseData.data.youtubeLink],
+                    ["instagram", dataBaseData.data.instagramLink]
+                ])
+                addTrapMapProfileVisit(dataBaseData.data._id)
+                setCoords(dataBaseData.data.coordinates)
+            })
 
-        getArtistsIds()
-            .then(ids => {
-                getDataBaseData(ids[0])
-                    .then(dataBaseData => {
-                        setArtistDatabaseId(dataBaseData.data._id)
-                        //header
-                        setLinks([
-                            ["spotify", dataBaseData.data.spotifyLink],
-                            ["appleMusic", dataBaseData.data.appleMusicLink],
-                            ["youtube", dataBaseData.data.youtubeLink],
-                            ["instagram", dataBaseData.data.instagramLink]
-                        ])
-
-                        //add trapMap visits
-                        addTrapMapProfileVisit(dataBaseData.data._id)
-
-                        //set current coords / city ad session storage item
-                        sessionStorage.setItem('coords', dataBaseData.data.coordinates)
-                    })
-
-                getSpotifyData(ids[1])
-                    .then(spotifyData => {
-                        //header
-                        setArtistName(spotifyData.data[0].name)
-                        setArtistPicture(spotifyData.data[0].images[0].url)
-                        //setReleasedMusic(countTracks(spotifyData.data[2]))
-
-                        //tracks
-                        setTopTracks(spotifyData.data[1])
-                    })
+        getSpotifyData(spotifyId)
+            .then(spotifyData => {
+                setSpotifyDataFetched(true)
+                setName(spotifyData.data[0].name)
+                setPicture(spotifyData.data[0].images[0].url)
+                setTopTracks(spotifyData.data[1])
             })
     }, [])
 
-    return (
-        <div className="artistProfile">
-            <ArtistProfileHeader artistName={artistName} artistPicture={artistPicture} />
+    if (dataBaseDataFetched === true && spotifyDataFetched === true){
+        return (
+            <div className='mapBlur'>
+                <div className="artistProfile">
+                    <ArtistProfileHeader currentMap={currentMap} artistPicture={picture} popup={popup} />
+    
+                    <Flex
+                        justifyContent='center'
+                        h='20vw'
+                        mb='2vh'
+                    >
+                        {links.map(link => {
+                            //makes sure that every app logo is a working link
+                            if (link[1] !== '') {
+                                return (
+                                    <AppLogoWithLink key={link[1]} app={link[0]} link={link[1]} dataBaseId={dataBaseId} />
+                                )
+                            }
+                        })}
+                    </Flex>
+    
+                    <div className='artistNameWrapper'>
+                        <h2>{name.replaceAll('$', 'S')}</h2>
+                    </div>
 
-            <Flex
-                justifyContent='center'
-                h='20vw'
-                mb='2vh'
-            >
-                {links.map(link => {
-                    //makes sure that every app logo is a working link
-                    if (link[1] !== ''){
-                        return (
-                            <AppLogoWithLink key={link[1]} app={link[0]} link={link[1]} artistDatabaseId={artistDatabaseId} />
-                        )
-                    } 
-                })}
-            </Flex>
-
-            <Center>
-                <Heading
-                    color='#fff'
-                    mb='5vh'
-                    letterSpacing='wider'
-                    fontSize='17.5vw'
-                >
-                   {artistName.replaceAll('$', 'S')}
-                </Heading>
-            </Center>
-
-            <div>
-                {topTracks.map(track => {
-                    //makes sure that every track is playable
-                    if (track.preview_url !== null) {
-                        count++
-                        return (
-                            <Track key={track.name} track={track} artistName={artistName} artistDatabaseId={artistDatabaseId} count={count} />
-                        )
-                    }
-                })}
+                    {/* <button
+                        onClick={() => {handleShowConnections(currentMap, dataBaseId, coords)}}
+                    >
+                        show connection
+                    </button> */}
+    
+    
+                    <div>
+                        {topTracks.map(track => {
+                            //makes sure that every track is playable
+                            if (track.preview_url !== null) {
+                                count++
+                                return (
+                                    <Track key={track.name} track={track} dataBaseId={dataBaseId} count={count} />
+                                )
+                            }
+                        })}
+                    </div>
+                </div>
             </div>
-        </div>
-    )
+        )
+    } 
+    //block nothing is retuned error
+    else {
+        return (
+            <div/>
+        )
+    }
 }
 
 export default ArtistProfile

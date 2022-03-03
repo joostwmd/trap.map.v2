@@ -9,26 +9,26 @@ import { Image } from '@chakra-ui/react'
 
 import { SERVER_URL } from '../clientVariables'
 
-function AppLogoWithLink({ app, link, artistDatabaseId }) {
+function AppLogoWithLink({ app, link, dataBaseId }) {
 
 
     const addSpotifyProfileVisit = () => {
-        let requestBody = { artistDatabaseId }
+        let requestBody = { dataBaseId }
         axios.post(`${SERVER_URL}/traffic/addSpotifyProfileVisit`, requestBody)
     }
 
     const addAppleMusicProfileVisit = () => {
-        let requestBody = { artistDatabaseId }
+        let requestBody = { dataBaseId }
         axios.post(`${SERVER_URL}/traffic/addAppleMusicProfileVisit`, requestBody)
     }
 
     const addYoutubeProfileVisit = () => {
-        let requestBody = { artistDatabaseId }
+        let requestBody = { dataBaseId }
         axios.post(`${SERVER_URL}/traffic/addYoutubeProfileVisit`, requestBody)
     }
 
     const addInstagramProfileVisit = () => {
-        let requestBody = { artistDatabaseId }
+        let requestBody = { dataBaseId }
         axios.post(`${SERVER_URL}/traffic/addInstagramProfileVisit`, requestBody)
     }
 

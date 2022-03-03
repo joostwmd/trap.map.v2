@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.d01e31f7.chunk.css",
-    "main.js": "/static/js/main.8d6d1326.chunk.js",
-    "main.js.map": "/static/js/main.8d6d1326.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.e535106d.js",
-    "runtime-main.js.map": "/static/js/runtime-main.e535106d.js.map",
+    "main.css": "/static/css/main.45b744df.chunk.css",
+    "main.js": "/static/js/main.fd6b2e60.chunk.js",
+    "main.js.map": "/static/js/main.fd6b2e60.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ffa92fc7.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ffa92fc7.js.map",
     "static/css/2.c2cad7ad.chunk.css": "/static/css/2.c2cad7ad.chunk.css",
-    "static/js/2.2d837964.chunk.js": "/static/js/2.2d837964.chunk.js",
-    "static/js/2.2d837964.chunk.js.map": "/static/js/2.2d837964.chunk.js.map",
-    "static/js/3.978401a2.chunk.js": "/static/js/3.978401a2.chunk.js",
-    "static/js/3.978401a2.chunk.js.map": "/static/js/3.978401a2.chunk.js.map",
+    "static/js/2.2936f3ca.chunk.js": "/static/js/2.2936f3ca.chunk.js",
+    "static/js/2.2936f3ca.chunk.js.map": "/static/js/2.2936f3ca.chunk.js.map",
+    "static/js/3.5530dc73.chunk.js": "/static/js/3.5530dc73.chunk.js",
+    "static/js/3.5530dc73.chunk.js.map": "/static/js/3.5530dc73.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.c2cad7ad.chunk.css.map": "/static/css/2.c2cad7ad.chunk.css.map",
-    "static/css/main.d01e31f7.chunk.css.map": "/static/css/main.d01e31f7.chunk.css.map",
-    "static/js/2.2d837964.chunk.js.LICENSE.txt": "/static/js/2.2d837964.chunk.js.LICENSE.txt",
+    "static/css/main.45b744df.chunk.css.map": "/static/css/main.45b744df.chunk.css.map",
+    "static/js/2.2936f3ca.chunk.js.LICENSE.txt": "/static/js/2.2936f3ca.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/PhillySans.44179f8b.woff",
     "static/media/chromeGrillzBottom.77043c98.png": "/static/media/chromeGrillzBottom.77043c98.png",
     "static/media/chromeGrillzTop.2f6fd0de.png": "/static/media/chromeGrillzTop.2f6fd0de.png",
@@ -23,10 +23,10 @@
     "static/media/youtubeLogo.6615ff3f.png": "/static/media/youtubeLogo.6615ff3f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.e535106d.js",
+    "static/js/runtime-main.ffa92fc7.js",
     "static/css/2.c2cad7ad.chunk.css",
-    "static/js/2.2d837964.chunk.js",
-    "static/css/main.d01e31f7.chunk.css",
-    "static/js/main.8d6d1326.chunk.js"
+    "static/js/2.2936f3ca.chunk.js",
+    "static/css/main.45b744df.chunk.css",
+    "static/js/main.fd6b2e60.chunk.js"
   ]
 }
