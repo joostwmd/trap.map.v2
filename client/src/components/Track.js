@@ -5,32 +5,7 @@ import { SERVER_URL } from '../clientVariables'
 
 function Track({ dataBaseId, track, count }) {
 
-    //create strings for additional trackrelated info 
-    // const createFeaturesInfo = (artists) => {
-    //     if (artists.length === 1) {
-    //         return ''
-    //     }
-    //     let featuresString = `feat: `
-    //     for (let artist of artists) {
-    //         if (artistName !== artist.name) {
-    //             featuresString += `${artist.name}, `
-    //         }
-    //     }
-    //     return featuresString.slice(0, -2)
-    // }
-
-    // const createReleaseInfo = (album) => {
-    //     if (album.album_type === "single") {
-    //         return `single`
-    //     }
-
-    //     if (album.album_type === "album") {
-    //         return `on album: ${album.name}`
-    //     }
-    // }
-
-
-
+    
     //traffic
     const addSnippetPlayed = (dataBaseId) => {
         let requestBody = { dataBaseId }
@@ -113,6 +88,7 @@ function Track({ dataBaseId, track, count }) {
                             id={`trackCount${track.name}`}
                             mr="5vw"
                             fontSize='5vw'
+                            lineHeight='175%'
                         >
                             {count}
                         </Text>
