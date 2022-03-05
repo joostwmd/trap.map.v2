@@ -18,8 +18,8 @@ const getDataBaseData = async (dataBaseId) => {
 const jumpUp = (currentMap, artistCoords) => {
     currentMap.flyTo({
         center: artistCoords,
-        speed: 1.25,
-        zoom: 9.1
+        speed: 0.5,
+        zoom: 11
     })
 }
 
