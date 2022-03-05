@@ -25,6 +25,7 @@ export const artistToFeatures = (artists, artistsArr) => {
         }
         artistsArr.push(feature)
     }
+    console.log('artists', artistsArr)
 }
 
 

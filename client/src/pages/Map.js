@@ -12,7 +12,7 @@ import { citysToFeatures, loadCityMarker } from '../mapboxApi/cityMarkerLayer'
 import { artistToFeatures, loadArtistMarkers } from '../mapboxApi/artistMarkerLayer'
 import { createHomeButton, getTopLeftCoordinates } from '../mapboxApi/homeButton'
 // import { createRandomArtistButton, getBottomMiddleCoordinates, handleZoomRandomArtistMarker } from '../mapboxApi/shuffelArtistsButton';
-// import { getBottomRightCoordinates } from '../mapboxApi/artistConnectionsLayer'
+import { createCloseConnectionsButton, getBottomRightCoordinates } from '../mapboxApi/artistConnectionsLayer'
 
 
 function Map() {
@@ -24,8 +24,8 @@ function Map() {
 
     const center = [10.172946185256103, 50.70767729701806]
     const bounds = [
-        [1.5959956864622256, 44.599918543774685],
-        [19.10264276075604, 57.051410713269455]
+        [-2.6751938897195346, 41.314258227976836], 
+        [33.44692831623758, 60.83696282472915]
     ]
 
     const artitsFeatures = []
@@ -44,6 +44,12 @@ function Map() {
         })
 
         return map.current
+    }
+
+    const testArtist = {
+        'name': 'test',
+        'coordinates': [13.589783011720522, 52.444243934389924],
+        'connections': ['62190272f637e68233425549', '621cf3c4efebccc1638af8e8', '62165502e3cf05875f41287a', '621653c8e3cf05875f412876']
     }
 
 
@@ -73,6 +79,8 @@ function Map() {
 
         const homeButtonMarker = createHomeButton(map.current)
         //const randomArtistMarker = createRandomArtistButton(map.current)
+        const closeConnectionsButton = createCloseConnectionsButton(map.current)
+
 
         //set correct visiblity on map load
         //handleZoomRandomArtistMarker(map.current, randomArtistMarker)
@@ -83,12 +91,14 @@ function Map() {
             // randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
             // handleZoomRandomArtistMarker(map.current, randomArtistMarker)
 
+            closeConnectionsButton.setLngLat(getBottomRightCoordinates(map.current))
         })
 
         map.current.on('move', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
             //randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
 
+            closeConnectionsButton.setLngLat(getBottomRightCoordinates(map.current))
         })
     }, [])
 

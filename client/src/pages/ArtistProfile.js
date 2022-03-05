@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Center, Heading, Flex } from '@chakra-ui/react'
+import { Center, Heading, Flex, Button } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
 import ArtistProfileHeader from '../components/ArtistProfileHeader'
+import ConnectionsButton from '../components/ConnectionsButton'
 
 import { SERVER_URL } from '../clientVariables'
 
-// import { createConnectionLayer, jumpToCenter, createCloseConnectionsButton } from '../mapboxApi/artistConnectionsLayer'
-// import { closeArtistProfilePopup } from '../mapboxApi/artistPopupLayer'
+import { handleShowConnectionsClick } from '../mapboxApi/artistConnectionsLayer'
+import { closeArtistProfilePopup } from '../mapboxApi/artistPopupLayer'
 
 function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
@@ -22,6 +23,7 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
     const [dataBaseDataFetched, setDataBaseDataFetched] = useState(false)
     const [spotifyDataFetched, setSpotifyDataFetched] = useState(false)
+    const [hasConnections, setHasConnections] = useState(false)
 
     let count = 0
 
@@ -51,21 +53,21 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
     }
 
 
-    // const handleShowConnections = (currentMap, dataBaseId, artistCoords) => {
-    //     createConnectionLayer(currentMap, dataBaseId)
-    //     closeArtistProfilePopup(currentMap, popup)
-    //     jumpToCenter(currentMap, artistCoords)
-    //     createCloseConnectionsButton(currentMap)
-    // }
+    const handleShowConnectionsClickWrapper = (currentMap, dataBaseId, coords, popup) => {
+        closeArtistProfilePopup(currentMap, popup)
+        handleShowConnectionsClick(currentMap, dataBaseId, coords)
 
-
-
+    }
 
 
     useEffect(() => {
         getDataBaseData(dataBaseId)
             .then(dataBaseData => {
                 setDataBaseDataFetched(true)
+                if (dataBaseData.data.connections.length !== 0) {
+                    setHasConnections(true)
+                }
+
                 setLinks([
                     ["spotify", dataBaseData.data.spotifyLink],
                     ["appleMusic", dataBaseData.data.appleMusicLink],
@@ -85,12 +87,12 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
             })
     }, [])
 
-    if (dataBaseDataFetched === true && spotifyDataFetched === true){
+    if (dataBaseDataFetched === true && spotifyDataFetched === true) {
         return (
             <div className='mapBlur'>
                 <div className="artistProfile">
                     <ArtistProfileHeader currentMap={currentMap} artistPicture={picture} popup={popup} />
-    
+
                     <Flex
                         justifyContent='center'
                         h='20vw'
@@ -105,18 +107,11 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                             }
                         })}
                     </Flex>
-    
+
                     <div className='artistNameWrapper'>
                         <h2>{name.replaceAll('$', 'S')}</h2>
                     </div>
 
-                    {/* <button
-                        onClick={() => {handleShowConnections(currentMap, dataBaseId, coords)}}
-                    >
-                        show connection
-                    </button> */}
-    
-    
                     <div>
                         {topTracks.map(track => {
                             //makes sure that every track is playable
@@ -128,14 +123,22 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                             }
                         })}
                     </div>
+
+
+
+                    <div
+                        onClick={() => { handleShowConnectionsClickWrapper(currentMap, dataBaseId, coords, popup) }}
+                    >
+                        <ConnectionsButton hasConnections={hasConnections} />
+                    </div>
                 </div>
             </div>
         )
-    } 
+    }
     //block nothing is retuned error
     else {
         return (
-            <div/>
+            <div />
         )
     }
 }

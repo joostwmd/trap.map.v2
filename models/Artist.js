@@ -9,7 +9,12 @@ const artistSchema = new Schema({
     spotifyLink : String,
     appleMusicLink : String,
     youtubeLink : String,
-    instagramLink : String   
+    instagramLink : String,
+    
+    connections : [{
+        type : Schema.Types.ObjectId,
+        ref : 'Artist'
+    }],
 })
 
 

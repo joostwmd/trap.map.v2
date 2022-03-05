@@ -12,11 +12,11 @@ const jumpToCity = async (currentMap, cityCenter) => {
 const handleZoomCityMarkers = (currentMap, marker, markerProps, initialZoom) => {
     let size = 0
     if (markerProps.properties.cityMarkerSize === 'sm'){
-        size += 25
+        size += 15
     } else if (markerProps.properties.cityMarkerSize === 'md'){
-        size += 50
+        size += 35
     } else if (markerProps.properties.cityMarkerSize === 'lg'){
-        size += 75
+        size += 60
     }
 
     let markerSize = size + (Number(currentMap.getZoom()) - initialZoom)
@@ -33,7 +33,17 @@ const handleZoomCityMarkers = (currentMap, marker, markerProps, initialZoom) => 
 }
 
 export const citysToFeatures = (citys, cityArr) => {
-    for (let city of citys) {
+
+    const citysSorted = []
+    for (let city of citys){
+        if (city.size === 'lg'){
+            citysSorted.unshift(city)
+        } else {
+            citysSorted.push(city)
+        }
+    }
+
+    for (let city of citysSorted) {
         const feature = {
             'type': 'feature',
 
@@ -50,6 +60,7 @@ export const citysToFeatures = (citys, cityArr) => {
         }
         cityArr.push(feature)
     }
+    console.log('city', cityArr)
 }
 
 
@@ -65,6 +76,10 @@ export const loadCityMarker = (currentMap, cityArr) => {
     for (let i = 0; i < cityArr.length; i++) {
         const marker = document.createElement('div')
         marker.className = 'cityMarker'
+
+        if (cityArr[i].properties.cityMarkerSize === 'lg'){
+            marker.innerHTML = `<p>${cityArr[i].properties.cityName}`
+        }
 
         new mapboxgl.Marker(marker).setLngLat(cityArr[i].geometry.coordinates).addTo(currentMap)
 
