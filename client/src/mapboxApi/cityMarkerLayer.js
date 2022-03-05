@@ -4,8 +4,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 const jumpToCity = async (currentMap, cityCenter) => {
     currentMap.flyTo({
         center: cityCenter,
-        speed: 1.25,
-        zoom: 9.5
+        speed: 0.5,
+        zoom: 10.5
     })
 }
 
@@ -60,7 +60,6 @@ export const citysToFeatures = (citys, cityArr) => {
         }
         cityArr.push(feature)
     }
-    console.log('city', cityArr)
 }
 
 
