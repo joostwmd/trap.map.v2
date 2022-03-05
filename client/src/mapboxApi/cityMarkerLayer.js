@@ -5,7 +5,7 @@ const jumpToCity = async (currentMap, cityCenter) => {
     currentMap.flyTo({
         center: cityCenter,
         speed: 1.25,
-        zoom: 9
+        zoom: 9.1
     })
 }
 
