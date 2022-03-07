@@ -52,11 +52,45 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
         axios.post(`${SERVER_URL}/traffic/addTrapMapProfileVisit`, requestBody)
     }
 
+    const addSnippetPlayed = (dataBaseId) => {
+        let requestBody = { dataBaseId }
+        axios.post(`${SERVER_URL}/traffic/addSnippetPlayed`, requestBody)
+    }
+
 
     const handleShowConnectionsClickWrapper = (currentMap, dataBaseId, coords, popup) => {
         closeArtistProfilePopup(currentMap, popup)
         handleShowConnectionsClick(currentMap, dataBaseId, coords)
 
+    }
+
+    const getRandomTrack = async (tracks) => {
+        let shuffel = Math.floor(Math.random() * tracks.length)
+        const randomTrack = await tracks[shuffel]
+        return randomTrack
+    }
+
+    const playRandomTrack = async (tracks) => {
+        getRandomTrack(tracks)
+            .then(track => {
+                const randomAudio = document.getElementById(`audioPlayer${track.name}`)
+                randomAudio.play()
+
+                //add visual feedback
+                const randomTrackTitle = document.getElementById(`trackTitle${track.name}`)
+                randomTrackTitle.style.color = '#9381FF'
+
+                //reset track
+                randomAudio.ontimeupdate = () => {
+                    if (randomAudio.currentTime >= 30) {
+                        randomAudio.pause()
+
+                        //remove visual feedback
+                        const trackTitle = document.getElementById(`trackTitle${track.name}`)
+                        trackTitle.style.color = '#fff'
+                    }
+                }
+            })
     }
 
 
@@ -84,6 +118,8 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                 setName(spotifyData.data[0].name)
                 setPicture(spotifyData.data[0].images[0].url)
                 setTopTracks(spotifyData.data[1])
+                playRandomTrack(spotifyData.data[1])
+                addSnippetPlayed(dataBaseId)
             })
     }, [])
 
@@ -112,6 +148,12 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                         <h2>{name.replaceAll('$', 'S')}</h2>
                     </div>
 
+                    <div
+                        onClick={() => { handleShowConnectionsClickWrapper(currentMap, dataBaseId, coords, popup) }}
+                    >
+                        <ConnectionsButton hasConnections={hasConnections} />
+                    </div>
+
                     <div>
                         {topTracks.map(track => {
                             //makes sure that every track is playable
@@ -122,14 +164,6 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                                 )
                             }
                         })}
-                    </div>
-
-
-
-                    <div
-                        onClick={() => { handleShowConnectionsClickWrapper(currentMap, dataBaseId, coords, popup) }}
-                    >
-                        <ConnectionsButton hasConnections={hasConnections} />
                     </div>
                 </div>
             </div>

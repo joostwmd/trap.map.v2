@@ -3,6 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import axios from 'axios'
 import { SERVER_URL } from '../clientVariables'
+import { getBottomRightCoordinates } from './general';
 
 
 const getDataBaseData = async (dataBaseId) => {
@@ -75,16 +76,6 @@ export const handleShowConnectionsClick = (currentMap, artistDatabaseId, artistC
     jumpUp(currentMap, artistCoords)
     sessionStorage.setItem('artistID', artistDatabaseId)
 }
-
-
-
-export const getBottomRightCoordinates = (currentMap) => {
-    let lng = currentMap.getBounds()._ne.lng
-    let lat = currentMap.getBounds()._sw.lat
-
-    return [lng, lat]
-}
-
 
 export const createCloseConnectionsButton = (currentMap) => {
     const button = document.createElement('div')

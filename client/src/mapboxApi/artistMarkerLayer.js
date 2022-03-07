@@ -48,6 +48,7 @@ const handleZoomArtistMarkers = (currrentMap, marker, markerProps, initialZoom) 
 
 
 export const loadArtistMarkers = (currentMap, artistArr, popup) => {
+    
     currentMap.addSource('artists', {
         'type': 'geojson',
         'data': {

@@ -1,6 +1,7 @@
 function connectionsButton({ hasConnections }) {
     if (hasConnections === false) {
         return (
+            //<div />
             <div
                 className='noConnectionsButton'
             >

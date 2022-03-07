@@ -2,6 +2,7 @@ import axios from 'axios'
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { SERVER_URL } from '../clientVariables'
+import { getBottomMiddleCoordinates } from './general';
 
 
 
@@ -15,13 +16,6 @@ export const handleZoomRandomArtistMarker = (currentMap) => {
     if (Number((currentMap.getZoom() <= 5.25))) {
         marker.style.visibility = 'visible'
     }
-}
-
-export const getBottomMiddleCoordinates = (currentMap) => {
-    let lng = currentMap.getCenter().lng
-    let lat = currentMap.getCenter().lat - (currentMap.getBounds()._ne.lat - currentMap.getBounds()._sw.lat) / 4
-
-    return [lng, lat]
 }
 
 

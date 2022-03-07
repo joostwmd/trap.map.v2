@@ -39,6 +39,7 @@
 .noConnectionsButton{
   width: 75vw;
   height: 5vh;
+  margin-bottom: 10vh;
   background-color: #fff;
 
   display: flex;
@@ -58,6 +59,7 @@
 .connectionsButton {
   width: 75vw;
   height: 5vh;
+  margin-bottom: 10vh;
   background-color: #9381FF;
 
   display: flex;

@@ -10,9 +10,10 @@ import { SERVER_URL, MAPBOX_TOKEN } from '../clientVariables'
 
 import { citysToFeatures, loadCityMarker } from '../mapboxApi/cityMarkerLayer'
 import { artistToFeatures, loadArtistMarkers } from '../mapboxApi/artistMarkerLayer'
-import { createHomeButton, getTopLeftCoordinates } from '../mapboxApi/homeButton'
-// import { createRandomArtistButton, getBottomMiddleCoordinates, handleZoomRandomArtistMarker } from '../mapboxApi/shuffelArtistsButton';
-import { createCloseConnectionsButton, getBottomRightCoordinates } from '../mapboxApi/artistConnectionsLayer'
+import { createHomeButton } from '../mapboxApi/homeButton'
+// import { createRandomArtistButton, handleZoomRandomArtistMarker } from '../mapboxApi/shuffelArtistsButton';
+import { createCloseConnectionsButton } from '../mapboxApi/artistConnectionsLayer'
+import { getTopLeftCoordinates, getBottomRightCoordinates } from '../mapboxApi/general'
 
 
 function Map() {
@@ -45,13 +46,6 @@ function Map() {
 
         return map.current
     }
-
-    const testArtist = {
-        'name': 'test',
-        'coordinates': [13.589783011720522, 52.444243934389924],
-        'connections': ['62190272f637e68233425549', '621cf3c4efebccc1638af8e8', '62165502e3cf05875f41287a', '621653c8e3cf05875f412876']
-    }
-
 
     useEffect(() => {
 
