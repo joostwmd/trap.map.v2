@@ -59,7 +59,7 @@ function SignUp() {
                         fontSize='15vw'
                         color='brand.200'
                     >
-                        sing up
+                        sign up
                     </Heading>
 
 

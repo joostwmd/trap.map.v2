@@ -92,7 +92,6 @@ function Home() {
                 </Button>
             </Center>
 
-
             <Center>
                 <Link to='/signUp'>
                     <Button
