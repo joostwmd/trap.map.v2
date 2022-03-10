@@ -31,9 +31,9 @@ export const artistToFeatures = (artists, artistsArr) => {
 
 const hideMarkersNotInViewport = (currentMap, mapboxMarker, htmlMarker, artistProps) => {
 
-    if (currentMap.getBounds().contains(mapboxMarker.getLngLat()) && htmlMarker.style.visibility === 'hidden' && Number((currentMap.getZoom() > 9)) && artistProps.properties.state === 'active'){
+    if (currentMap.getBounds().contains(mapboxMarker.getLngLat())) {
         htmlMarker.style.visibility = 'visible'
-    } else if (!currentMap.getBounds().contains(mapboxMarker.getLngLat()) && htmlMarker.style.visibility === 'visible' && Number((currentMap.getZoom() > 9)) && artistProps.properties.state === 'active'){
+    } else if (!currentMap.getBounds().contains(mapboxMarker.getLngLat()) && htmlMarker.style.visibility === 'visible') {
         htmlMarker.style.visibility = 'hidden'
     }
 }
@@ -46,9 +46,9 @@ export const handleZoomArtistMarker = (currrentMap, marker, markerProps, initial
     if (markerProps.properties.state === 'active') {
         if (Number((currrentMap.getZoom() > 9))) {
             marker.style.visibility = 'visible'
-            marker.style.height = `${markerSize}px`
-            marker.style.width = `${markerSize}px`
-            marker.innerHTML = `<p style='font-size:${nameSize}px'>${markerProps.properties.artistName}</p>`
+            // marker.style.height = `${markerSize}px`
+            // marker.style.width = `${markerSize}px`
+            marker.innerHTML = `<p>${markerProps.properties.artistName}</p>`
         }
 
         if (Number((currrentMap.getZoom() <= 9))) {
@@ -71,7 +71,7 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
     })
 
     const mapboxMarkerArray = []
-    for (let i = 0; i < artistArr.length; i++) { 
+    for (let i = 0; i < artistArr.length; i++) {
 
         const marker = document.createElement('div')
         marker.className = 'artistMarker'
@@ -87,17 +87,17 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
             artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
             artistMarkers[i].innerHTML = `<p>${artistArr[i].properties.artistName}</p>`
 
-            currentMap.on('zoom', () => {
-                handleZoomArtistMarker(currentMap, artistMarkers[i], artistArr[i], 8.75)
-                hideMarkersNotInViewport(currentMap, mapboxMarkerArray[i], artistMarkers[i], artistArr[i])
-            })
+            // currentMap.on('zoom', () => {
+            //     handleZoomArtistMarker(currentMap, artistMarkers[i], artistArr[i], 8.75)
+            //     //hideMarkersNotInViewport(currentMap, mapboxMarkerArray[i], artistMarkers[i], artistArr[i])
+            // })
 
 
             currentMap.on('move', () => {
                 hideMarkersNotInViewport(currentMap, mapboxMarkerArray[i], artistMarkers[i], artistArr[i])
             })
 
-            handleZoomArtistMarker(currentMap, artistMarkers[i], artistArr[i], 8.75)
+            //handleZoomArtistMarker(currentMap, artistMarkers[i], artistArr[i], 8.75)
         }
     }
 }

@@ -54,10 +54,10 @@ function Map() {
                 artistToFeatures(res.data, artitsFeatures)
             })
 
-        axios.get(`${SERVER_URL}/dataBase/getCities`)
-            .then(res => {
-                citysToFeatures(res.data, cityFeatures)
-            })
+        // axios.get(`${SERVER_URL}/dataBase/getCities`)
+        //     .then(res => {
+        //         citysToFeatures(res.data, cityFeatures)
+        //     })
 
 
         map.current = createMap(mapContainer)
@@ -67,7 +67,7 @@ function Map() {
         //console.log(loadArtistMarkers(map.current, artitsFeatures))
 
         map.current.on('load', () => {
-            loadCityMarker(map.current, cityFeatures)
+            //loadCityMarker(map.current, cityFeatures)
             loadArtistMarkers(map.current, artitsFeatures)
 
 

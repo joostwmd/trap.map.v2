@@ -64,7 +64,7 @@ export const filterArtists = (currentMap, artists, popup, selectedGenres) => {
 
         if (artists[i].properties.city === 'berlin'){
             artists[i].properties.state = 'active'
-            handleZoomArtistMarker(currentMap, artistMarkers[i], artists[i], 8.75)
+            //handleZoomArtistMarker(currentMap, artistMarkers[i], artists[i], 8.75)
 
         }
     }
