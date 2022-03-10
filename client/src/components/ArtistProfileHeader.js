@@ -1,5 +1,5 @@
 import { Image, Center } from '@chakra-ui/react'
-import {closeArtistProfilePopup} from '../mapboxApi/artistPopupLayer'
+import {closeArtistProfilePopup} from '../mapboxApi/artistProfilePopup'
 
 
 

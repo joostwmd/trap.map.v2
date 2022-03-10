@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect, useRef } from 'react'
 import axios from 'axios'
 //import Nav from '../components/Nav';
@@ -8,16 +8,16 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { SERVER_URL, MAPBOX_TOKEN } from '../clientVariables'
 
-import { citysToFeatures, loadCityMarker } from '../mapboxApi/cityMarkerLayer'
+import { citysToFeatures, loadCityMarker, handleZoomCityMarkers } from '../mapboxApi/cityMarkerLayer'
 import { artistToFeatures, loadArtistMarkers } from '../mapboxApi/artistMarkerLayer'
 import { createHomeButton } from '../mapboxApi/homeButton'
 // import { createRandomArtistButton, handleZoomRandomArtistMarker } from '../mapboxApi/shuffelArtistsButton';
 import { createCloseConnectionsButton } from '../mapboxApi/artistConnectionsLayer'
-import { getTopLeftCoordinates, getBottomRightCoordinates } from '../mapboxApi/general'
+import { getTopLeftCoordinates, getBottomRightCoordinates, getBottomMiddleCoordinates } from '../mapboxApi/general'
+import { createFilterMenuButton } from '../mapboxApi/filterMenuPopup'
 
 
 function Map() {
-
     //map props
     mapboxgl.accessToken = MAPBOX_TOKEN
     const mapContainer = useRef(null);
@@ -25,7 +25,7 @@ function Map() {
 
     const center = [10.172946185256103, 50.70767729701806]
     const bounds = [
-        [-2.6751938897195346, 41.314258227976836], 
+        [-2.6751938897195346, 41.314258227976836],
         [33.44692831623758, 60.83696282472915]
     ]
 
@@ -33,7 +33,7 @@ function Map() {
     const cityFeatures = []
 
     const createMap = (mapContainer) => {
-        if (map.current) return;
+        //if (map.current) return;
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
@@ -64,6 +64,8 @@ function Map() {
         map.current.dragRotate.disable()
         map.current.touchZoomRotate.disableRotation()
 
+        //console.log(loadArtistMarkers(map.current, artitsFeatures))
+
         map.current.on('load', () => {
             loadCityMarker(map.current, cityFeatures)
             loadArtistMarkers(map.current, artitsFeatures)
@@ -74,6 +76,7 @@ function Map() {
         const homeButtonMarker = createHomeButton(map.current)
         //const randomArtistMarker = createRandomArtistButton(map.current)
         const closeConnectionsButton = createCloseConnectionsButton(map.current)
+        //const openFilterMenuBotton = createFilterMenuButton(map.current, artitsFeatures)
 
 
         //set correct visiblity on map load
@@ -82,9 +85,9 @@ function Map() {
         map.current.on('zoom', () => {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
 
-            // randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
-            // handleZoomRandomArtistMarker(map.current, randomArtistMarker)
-
+            //randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
+            //handleZoomRandomArtistMarker(map.current, randomArtistMarker)
+            //openFilterMenuBotton.setLngLat(getBottomMiddleCoordinates(map.current))
             closeConnectionsButton.setLngLat(getBottomRightCoordinates(map.current))
         })
 
@@ -92,6 +95,7 @@ function Map() {
             homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
             //randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
 
+            //openFilterMenuBotton.setLngLat(getBottomMiddleCoordinates(map.current))
             closeConnectionsButton.setLngLat(getBottomRightCoordinates(map.current))
         })
     }, [])

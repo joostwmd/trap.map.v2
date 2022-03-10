@@ -7,8 +7,6 @@ const artistSignUpSchema = new Schema({
     appleMusicLink : String,
     youtubeLink : String,
     instagramLink : String,
-    
-    favSong : String
 })
 
 

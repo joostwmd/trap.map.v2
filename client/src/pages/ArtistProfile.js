@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Center, Heading, Flex, Button } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
@@ -10,7 +10,7 @@ import ConnectionsButton from '../components/ConnectionsButton'
 import { SERVER_URL } from '../clientVariables'
 
 import { handleShowConnectionsClick } from '../mapboxApi/artistConnectionsLayer'
-import { closeArtistProfilePopup } from '../mapboxApi/artistPopupLayer'
+import { closeArtistProfilePopup } from '../mapboxApi/artistProfilePopup'
 
 function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
@@ -178,5 +178,8 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 }
 
 export default ArtistProfile
+
+
+
 
 

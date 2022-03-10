@@ -1,8 +1,9 @@
 import '../src/style/css/ArtistProfile.css';
 import '../src/style/css/Home.css'
 import '../src/style/css/SignUp.css'
+import '../src/style/css/FilerMenu.css'
 
-import {useEffect} from 'react'
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -17,14 +18,6 @@ import Datenschutz from './pages/Datenschutz';
 
 
 function App() {
-
-  // useEffect(() => {
-  //   console.log('test root')
-  // }, [])
-  
-  //imported create map
-
-  //createMap(map, mapContainer,)
 
   return (
     <div className="App">
