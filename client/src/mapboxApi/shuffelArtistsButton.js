@@ -42,7 +42,7 @@ const shuffelArtistsHandler = async (currentMap) => {
         .then(res => {
             getRandomArtists(res.data)
                 .then(artist => {
-                    createArtistProfilePopup(currentMap, artist[0].coordinates, artist[0]._id, artist[0].spotifyID)
+                    createArtistProfilePopup(currentMap, artist[0]._id, artist[0].spotifyID)
                 })
 
         })
