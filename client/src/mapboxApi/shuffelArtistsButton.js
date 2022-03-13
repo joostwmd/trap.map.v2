@@ -2,31 +2,32 @@ import axios from 'axios'
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { SERVER_URL } from '../clientVariables'
-import { getBottomMiddleCoordinates } from './general';
-
+import { getShuffleArtistsButtonCoordinates } from './general';
+import { ICONS } from '../clientVariables';
+import { createArtistProfilePopup } from './artistProfilePopup';
 
 
 
 export const handleZoomRandomArtistMarker = (currentMap) => {
-    const marker = document.getElementById('randomArtistButton')
-    if (Number((currentMap.getZoom() > 5.25))) {
+    const marker = document.getElementsByClassName('shuffleArtistButton')[0]
+    if (Number((currentMap.getZoom() > 5.25)) && marker.style.visibility !== 'hidden') {
         marker.style.visibility = 'hidden'
     }
 
-    if (Number((currentMap.getZoom() <= 5.25))) {
+    if (Number((currentMap.getZoom() <= 5.25)) && marker.style.visibility !== 'visible') {
         marker.style.visibility = 'visible'
     }
 }
 
 
-export const createRandomArtistButton = (currentMap) => {
+export const createShuffleArtistButton = (currentMap) => {
     const randomArtistButton = document.createElement('div')
-    randomArtistButton.id = 'randomArtistButton'
-    randomArtistButton.innerHTML = '<p className="textInRandomArtistButton">shuffle</p>'
+    randomArtistButton.className = 'shuffleArtistButton'
+    randomArtistButton.innerHTML = `${ICONS.shuffleWhite}`
     randomArtistButton.addEventListener('click', () => {
         shuffelArtistsHandler(currentMap)
     })
-    return new mapboxgl.Marker(randomArtistButton).setLngLat(getBottomMiddleCoordinates(currentMap)).addTo(currentMap)
+    return new mapboxgl.Marker(randomArtistButton).setLngLat(getShuffleArtistsButtonCoordinates(currentMap)).addTo(currentMap)
 }
 
 
@@ -36,11 +37,15 @@ const getRandomArtists = async (artists) => {
     return res
 }
 
-const jumpToArtist = (currentMap, artistCoors) => {
+const jumpToArtist = (currentMap, artistCoors, artistDatabaseId, artistSpotifyId) => {
     currentMap.flyTo({
         center: artistCoors,
         speed: 2.25,
         zoom: 12
+    })
+
+    currentMap.once('moveend', () => {
+        createArtistProfilePopup(currentMap, artistDatabaseId, artistSpotifyId)
     })
 }
 
@@ -49,7 +54,7 @@ const shuffelArtistsHandler = async (currentMap) => {
         .then(res => {
             getRandomArtists(res.data)
                 .then(artist => {
-                    jumpToArtist(currentMap, artist[0].coordinates)
+                    jumpToArtist(currentMap, artist[0].coordinates, artist[0]._id, artist[0].spotifyID)
                 })
 
         })

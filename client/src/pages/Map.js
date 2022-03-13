@@ -8,12 +8,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { SERVER_URL, MAPBOX_TOKEN } from '../clientVariables'
 
-import { citysToFeatures, loadCityMarker, handleZoomCityMarkers } from '../mapboxApi/cityMarkerLayer'
+// import { citysToFeatures, loadCityMarker, handleZoomCityMarkers } from '../mapboxApi/cityMarkerLayer'
 import { artistToFeatures, loadArtistMarkers } from '../mapboxApi/artistMarkerLayer'
 import { createHomeButton } from '../mapboxApi/homeButton'
-// import { createRandomArtistButton, handleZoomRandomArtistMarker } from '../mapboxApi/shuffelArtistsButton';
+import { createShuffleArtistButton } from '../mapboxApi/shuffelArtistsButton';
 import { createCloseConnectionsButton } from '../mapboxApi/artistConnectionsLayer'
-import { getTopLeftCoordinates, getBottomRightCoordinates, getBottomMiddleCoordinates } from '../mapboxApi/general'
+import { getHomeButtonCoordinates, getShuffleArtistsButtonCoordinates, getOpenFilterMenuButtonCoordinares, getCloseConnectionsButtonCoordinates } from '../mapboxApi/general'
 import { createFilterMenuButton } from '../mapboxApi/filterMenuPopup'
 
 
@@ -30,7 +30,7 @@ function Map() {
     ]
 
     const artitsFeatures = []
-    const cityFeatures = []
+    //const cityFeatures = []
 
     const createMap = (mapContainer) => {
         //if (map.current) return;
@@ -74,29 +74,25 @@ function Map() {
         })
 
         const homeButtonMarker = createHomeButton(map.current)
-        //const randomArtistMarker = createRandomArtistButton(map.current)
+        const shuffleArtistMarker = createShuffleArtistButton(map.current)
         const closeConnectionsButton = createCloseConnectionsButton(map.current)
-        //const openFilterMenuBotton = createFilterMenuButton(map.current, artitsFeatures)
-
-
-        //set correct visiblity on map load
-        //handleZoomRandomArtistMarker(map.current, randomArtistMarker)
+        const openFilterMenuBotton = createFilterMenuButton(map.current, artitsFeatures)
 
         map.current.on('zoom', () => {
-            homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
+            homeButtonMarker.setLngLat(getHomeButtonCoordinates(map.current))
 
-            //randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
-            //handleZoomRandomArtistMarker(map.current, randomArtistMarker)
-            //openFilterMenuBotton.setLngLat(getBottomMiddleCoordinates(map.current))
-            closeConnectionsButton.setLngLat(getBottomRightCoordinates(map.current))
+            shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))
+            
+            openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
+            closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
         })
 
         map.current.on('move', () => {
-            homeButtonMarker.setLngLat(getTopLeftCoordinates(map.current))
-            //randomArtistMarker.setLngLat(getBottomMiddleCoordinates(map.current))
+            homeButtonMarker.setLngLat(getHomeButtonCoordinates(map.current))
+            shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))
 
-            //openFilterMenuBotton.setLngLat(getBottomMiddleCoordinates(map.current))
-            closeConnectionsButton.setLngLat(getBottomRightCoordinates(map.current))
+            openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
+            closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
         })
     }, [])
 

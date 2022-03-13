@@ -2,7 +2,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactDOM from 'react-dom';
 import ArtistProfile from '../pages/ArtistProfile'
-import { getCenterCoordinates, disableMapInteractions, enableMapInteractions } from './general'
+import { getCenterCoordinates, disableMapInteractions, enableMapInteractions, hideAllButtons, showAllButtons} from './general'
 
 const popup = []
 export const createArtistProfilePopup = (currentMap, dataBaseId, spotifyId) => {
@@ -19,6 +19,7 @@ export const createArtistProfilePopup = (currentMap, dataBaseId, spotifyId) => {
         , document.getElementById('artistProfile')
     )
 
+    hideAllButtons()
 }
 
 
@@ -31,4 +32,6 @@ export const closeArtistProfilePopup = (currentMap, popup) => {
             popup[i].remove();
         }
     }
+
+    showAllButtons()
 }

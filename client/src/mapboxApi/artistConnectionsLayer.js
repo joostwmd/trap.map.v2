@@ -2,8 +2,9 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import axios from 'axios'
+import { ICONS } from '../clientVariables';
 import { SERVER_URL } from '../clientVariables'
-import { getBottomRightCoordinates } from './general';
+import { getCloseConnectionsButtonCoordinates } from './general';
 
 
 const getDataBaseData = async (dataBaseId) => {
@@ -65,7 +66,7 @@ const createConnectionLayer = (currentMap, artistDatabaseId) => {
 }
 
 const showRemoveConnectionsButton = () => {
-    const button = document.getElementById('closeConnectionsButton')
+    const button = document.getElementsByClassName('closeConnectionsButton')[0]
     button.style.visibility = 'visible'
 }
 
@@ -79,14 +80,14 @@ export const handleShowConnectionsClick = (currentMap, artistDatabaseId, artistC
 
 export const createCloseConnectionsButton = (currentMap) => {
     const button = document.createElement('div')
-    button.id = 'closeConnectionsButton'
-    button.innerHTML = '<p>close</p>'
+    button.className = 'closeConnectionsButton'
+    button.innerHTML = `${ICONS.closeWhite}`
     button.style.visibility = 'hidden'
     button.addEventListener('click', () => {
         handleRemoveConnectionsClick(currentMap)
 
     })
-    return new mapboxgl.Marker(button).setLngLat(getBottomRightCoordinates(currentMap)).addTo(currentMap)
+    return new mapboxgl.Marker(button).setLngLat(getCloseConnectionsButtonCoordinates(currentMap)).addTo(currentMap)
     
 }
 
@@ -105,7 +106,7 @@ const removeConnectionsLayers = (currentMap, artistDatabaseId) => {
 }
 
 const hideCloseConnectionsButton = () => {
-    const button = document.getElementById('closeConnectionsButton')
+    const button = document.getElementsByClassName('closeConnectionsButton')[0]
     button.style.visibility = 'hidden'
 }
 
