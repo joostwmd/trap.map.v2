@@ -37,24 +37,12 @@ const getRandomArtists = async (artists) => {
     return res
 }
 
-const jumpToArtist = (currentMap, artistCoors, artistDatabaseId, artistSpotifyId) => {
-    currentMap.flyTo({
-        center: artistCoors,
-        speed: 2.25,
-        zoom: 12
-    })
-
-    currentMap.once('moveend', () => {
-        createArtistProfilePopup(currentMap, artistDatabaseId, artistSpotifyId)
-    })
-}
-
 const shuffelArtistsHandler = async (currentMap) => {
     axios.get(`${SERVER_URL}/dataBase/getArtists`)
         .then(res => {
             getRandomArtists(res.data)
                 .then(artist => {
-                    jumpToArtist(currentMap, artist[0].coordinates, artist[0]._id, artist[0].spotifyID)
+                    createArtistProfilePopup(currentMap, artist[0].coordinates, artist[0]._id, artist[0].spotifyID)
                 })
 
         })
