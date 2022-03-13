@@ -2,7 +2,7 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactDOM from 'react-dom';
 import FilterMenu from '../components/FilterMenu';
-import { getOpenFilterMenuButtonCoordinares,  getCenterCoordinates, disableMapInteractions, enableMapInteractions, hideAllButtons, showAllButtons } from './general'
+import { getOpenFilterMenuButtonCoordinares, getCenterCoordinates, disableMapInteractions, enableMapInteractions, hideAllButtons, showAllButtons } from './general'
 import { handleZoomArtistMarker } from '../mapboxApi/artistMarkerLayer'
 import { ChakraProvider } from '@chakra-ui/react'
 import Fonts from '../style/fonts/Fonts'
@@ -41,7 +41,7 @@ export const closeFilterMenuPopup = (currentMap, popup) => {
             popup[i].remove();
         }
     }
-    
+
     showAllButtons()
 }
 
@@ -60,18 +60,29 @@ export const createFilterMenuButton = (currentMap, artistsArr) => {
 export const filterArtists = (currentMap, artists, popup, selectedGenres) => {
     const artistMarkers = document.getElementsByClassName('artistMarker')
 
-    // for (let i = 0; i <  artists.length; i++){
-    //     if (artists[i].properties.city !== 'berlin'){
-    //         artists[i].properties.state = 'inactive'
-    //         artistMarkers[i].style.visibility = 'hidden'
-    //     }
+    if (selectedGenres.length === 0){
+        for (let i = 0; i < artists.length; i++) {
+            artists[i].properties.state = 'active'
+            artistMarkers[i].style.visibility = 'visible'
+        }
 
-    //     if (artists[i].properties.city === 'berlin'){
-    //         artists[i].properties.state = 'active'
-    //         //handleZoomArtistMarker(currentMap, artistMarkers[i], artists[i], 8.75)
-
-    //     }
-    // }
+        
+    } else if (selectedGenres.length !== 0){
+        for (let i = 0; i < artists.length; i++) {
+            artists[i].properties.state = 'inactive'
+            artistMarkers[i].style.visibility = 'hidden'
+    
+            if (artists[i].properties.genres.length !== 0) {
+                for (let genre of artists[i].properties.genres) {
+                    if (selectedGenres.includes(genre) === true) {
+                        artists[i].properties.state = 'active'
+                        artistMarkers[i].style.visibility = 'visible'
+                        break
+                    } 
+                }
+            }
+        }
+    }
 
     closeFilterMenuPopup(currentMap, popup)
 }

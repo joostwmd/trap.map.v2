@@ -16,6 +16,7 @@ export const artistToFeatures = (artists, artistsArr) => {
                 'artistDatabaseId': artist._id,
                 'artistSpotifyId': artist.spotifyID,
                 'city': artist.city,
+                'genres' : artist.genres,
                 'state': 'active'
             },
 
@@ -30,11 +31,12 @@ export const artistToFeatures = (artists, artistsArr) => {
 
 
 const hideMarkersNotInViewport = (currentMap, mapboxMarker, htmlMarker, artistProps) => {
-
-    if (currentMap.getBounds().contains(mapboxMarker.getLngLat())) {
-        htmlMarker.style.visibility = 'visible'
-    } else if (!currentMap.getBounds().contains(mapboxMarker.getLngLat()) && htmlMarker.style.visibility === 'visible') {
-        htmlMarker.style.visibility = 'hidden'
+    if (artistProps.properties.state === 'active'){
+        if (currentMap.getBounds().contains(mapboxMarker.getLngLat())) {
+            htmlMarker.style.visibility = 'visible'
+        } else if (!currentMap.getBounds().contains(mapboxMarker.getLngLat()) && htmlMarker.style.visibility === 'visible') {
+            htmlMarker.style.visibility = 'hidden'
+        }
     }
 }
 

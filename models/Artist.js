@@ -10,6 +10,7 @@ const artistSchema = new Schema({
     appleMusicLink : String,
     youtubeLink : String,
     instagramLink : String,
+    genres : Array,
     
     connections : [{
         type : Schema.Types.ObjectId,
