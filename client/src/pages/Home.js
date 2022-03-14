@@ -55,7 +55,7 @@ function Home() {
                     fontSize='7.5vw'
                     color='#fff'
                     letterSpacing='wider'
-                    mb='5vh'
+                    mb='2vh'
                 >
                     <span style={{ color: '#9381FF' }}>don't </span>
                     let the
@@ -102,7 +102,7 @@ function Home() {
                         mb='5vh'
                     >
                         <Heading
-                            fontSize='10vw'
+                            fontSize='7.5vw'
                             color='brand.200'
                             letterSpacing='wider'
                         >

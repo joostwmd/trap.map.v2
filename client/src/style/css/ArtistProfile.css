@@ -8,7 +8,8 @@
 }
 
 .artistProfile > div > h2 {
-  font-family: PhillySans;
+  font-family: Montserrat;
+  color: #9381ff;
 }
 
 .artistProfile {
@@ -50,8 +51,8 @@
 
 
 .noConnectionsButtonText {
-  font-family: PhillySans;
-  font-size: 10vw;
+  font-family: Montserrat;
+  font-size: 7.5vw;
   color : #9381FF
 }
 
@@ -69,7 +70,7 @@
 }
 
 .connectionsButtonText {
-  font-family: PhillySans;
+  font-family: Montserrat;
   font-size: 10vw;
   color : #fff
 }

@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { SERVER_URL } from '../clientVariables'
 import { getShuffleArtistsButtonCoordinates } from './general';
 import { ICONS } from '../clientVariables';
-import { createArtistProfilePopup } from './artistProfilePopup';
+import { createArtistProfilePopup, closeArtistProfilePopup, popup } from './artistProfilePopup';
 
 
 
@@ -23,7 +23,7 @@ export const handleZoomRandomArtistMarker = (currentMap) => {
 export const createShuffleArtistButton = (currentMap) => {
     const randomArtistButton = document.createElement('div')
     randomArtistButton.className = 'shuffleArtistButton'
-    randomArtistButton.innerHTML = `${ICONS.shuffleWhite}`
+    randomArtistButton.innerHTML = `<div>${ICONS.shuffleWhite}</div>`
     randomArtistButton.addEventListener('click', () => {
         shuffelArtistsHandler(currentMap)
     })
@@ -31,13 +31,14 @@ export const createShuffleArtistButton = (currentMap) => {
 }
 
 
-const getRandomArtists = async (artists) => {
+ export const getRandomArtists = async (artists) => {
     let shuffel = Math.floor(Math.random() * artists.length + 1)
     let res = await [artists[shuffel]]
     return res
 }
 
-const shuffelArtistsHandler = async (currentMap) => {
+export const shuffelArtistsHandler = async (currentMap) => {
+    console.log('x')
     axios.get(`${SERVER_URL}/dataBase/getArtists`)
         .then(res => {
             getRandomArtists(res.data)
@@ -45,6 +46,17 @@ const shuffelArtistsHandler = async (currentMap) => {
                     createArtistProfilePopup(currentMap, artist[0]._id, artist[0].spotifyID)
                 })
 
+        })
+}
+
+
+export const shuffelNextArtistsHandler = async () => {
+    axios.get(`${SERVER_URL}/dataBase/getArtists`)
+        .then(res => {
+            getRandomArtists(res.data)
+                .then(artist => {
+                    return artist
+                })
         })
 }
 

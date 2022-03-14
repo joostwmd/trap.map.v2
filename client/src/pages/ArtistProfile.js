@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Flex } from '@chakra-ui/react'
+import { Button, Flex } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
@@ -11,6 +11,7 @@ import { SERVER_URL } from '../clientVariables'
 
 import { handleShowConnectionsClick } from '../mapboxApi/artistConnectionsLayer'
 import { closeArtistProfilePopup } from '../mapboxApi/artistProfilePopup'
+import { shuffelNextArtistsHandler, getRandomArtists } from '../mapboxApi/shuffelArtistsButton'
 
 function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
@@ -24,7 +25,6 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
     const [dataBaseDataFetched, setDataBaseDataFetched] = useState(false)
     const [spotifyDataFetched, setSpotifyDataFetched] = useState(false)
     const [hasConnections, setHasConnections] = useState(false)
-
     let count = 0
 
     const getSpotifyData = async (spotifyId) => {
@@ -44,7 +44,6 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
         return data
     }
-
 
     //traffic functions
     const addTrapMapProfileVisit = (artistDatabaseId) => {
@@ -93,8 +92,45 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
             })
     }
 
+    const reloadArtistProfile = async () => {
+
+        axios.get(`${SERVER_URL}/dataBase/getArtists`)
+            .then(res => {
+                getRandomArtists(res.data)
+                    .then(artist => {
+                        getDataBaseData(artist[0]._id)
+                            .then(dataBaseData => {
+                                setDataBaseDataFetched(true)
+                                if (dataBaseData.data.connections.length !== 0) {
+                                    setHasConnections(true)
+                                }
+
+                                setLinks([
+                                    ["spotify", dataBaseData.data.spotifyLink],
+                                    ["appleMusic", dataBaseData.data.appleMusicLink],
+                                    ["youtube", dataBaseData.data.youtubeLink],
+                                    ["instagram", dataBaseData.data.instagramLink]
+                                ])
+                                addTrapMapProfileVisit(dataBaseData.data._id)
+                                setCoords(dataBaseData.data.coordinates)
+                            })
+
+                        getSpotifyData(artist[0].spotifyID)
+                            .then(spotifyData => {
+                                setSpotifyDataFetched(true)
+                                setName(spotifyData.data[0].name)
+                                setPicture(spotifyData.data[0].images[0].url)
+                                setTopTracks(spotifyData.data[1])
+                                playRandomTrack(spotifyData.data[1])
+                                addSnippetPlayed(dataBaseId)
+                            })
+                    })
+            })
+    }
+
 
     useEffect(() => {
+
         getDataBaseData(dataBaseId)
             .then(dataBaseData => {
                 setDataBaseDataFetched(true)
@@ -143,6 +179,12 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                             }
                         })}
                     </Flex>
+
+                    {/* <Button
+                        onClick={() => reloadArtistProfile(currentMap)}
+                    >
+                        SHUFFLE
+                    </Button> */}
 
                     <div className='artistNameWrapper'>
                         <h2>{name.replaceAll('$', 'S')}</h2>

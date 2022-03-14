@@ -3,7 +3,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import ReactDOM from 'react-dom';
 import FilterMenu from '../components/FilterMenu';
 import { getOpenFilterMenuButtonCoordinares, getCenterCoordinates, disableMapInteractions, enableMapInteractions, hideAllButtons, showAllButtons } from './general'
-import { handleZoomArtistMarker } from '../mapboxApi/artistMarkerLayer'
 import { ChakraProvider } from '@chakra-ui/react'
 import Fonts from '../style/fonts/Fonts'
 import theme from '../style/theme'
@@ -49,7 +48,7 @@ export const closeFilterMenuPopup = (currentMap, popup) => {
 export const createFilterMenuButton = (currentMap, artistsArr) => {
     const homeButton = document.createElement('div')
     homeButton.className = 'openFilterMenuButton'
-    homeButton.innerHTML = `${ICONS.filterWhite}`
+    homeButton.innerHTML = `<div>${ICONS.filterWhite}</div>`
     homeButton.addEventListener('click', () => {
         createFilterMenuPopup(currentMap, artistsArr)
 
@@ -66,7 +65,7 @@ export const filterArtists = (currentMap, artists, popup, selectedGenres) => {
             artistMarkers[i].style.visibility = 'visible'
         }
 
-        
+
     } else if (selectedGenres.length !== 0){
         for (let i = 0; i < artists.length; i++) {
             artists[i].properties.state = 'inactive'

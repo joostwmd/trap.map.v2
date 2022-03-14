@@ -87,7 +87,7 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
             })
 
             artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
-            artistMarkers[i].innerHTML = `<p>${artistArr[i].properties.artistName}</p>`
+            //artistMarkers[i].innerHTML = `<p>${artistArr[i].properties.artistName}</p>`
 
             // currentMap.on('zoom', () => {
             //     handleZoomArtistMarker(currentMap, artistMarkers[i], artistArr[i], 8.75)

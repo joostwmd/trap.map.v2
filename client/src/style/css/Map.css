@@ -4,14 +4,13 @@
     border-radius: 50%; 
     background-size: cover;
     position: absolute;
-  
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 0;
 }
   
-.artistMarker > p {
+/* .artistMarker > p {
     font-size: 5px;
     color:#fff;
     font-family: PhillySans;
@@ -19,7 +18,7 @@
     position: absolute;
     text-overflow: ellipsis; 
     white-space: nowrap;   
-}
+} */
 
 /* .cityMarker { 
     width: 100px;
@@ -57,12 +56,14 @@
     z-index: 1;
 }
 
-.homeButton > svg {
+.homeButton > div > svg {
     width: 10vw;
     height: 10vw;
 }
 
-.shuffleArtistButton {
+.shuffleArtistButton > div {
+    margin-bottom: 45vh;
+    margin-right: 25vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -74,16 +75,14 @@
     z-index: 1;
 }
 
-.shuffleArtistButton > svg {
+.shuffleArtistButton > div > svg {
     width: 12vw;
     height: 12vw;
 }
 
-
-
-
-.closeConnectionsButton {
-    
+.closeConnectionsButton > div {  
+    margin-bottom: 85vh;
+    margin-right: 25vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -92,16 +91,17 @@
     border-radius: 50%;
     width: 15vw;
     height: 15vw;
-    margin-right: 60vw;
     z-index: 1;
 }
 
-.closeConnectionsButton > svg {
+.closeConnectionsButton > div > svg {
     width: 12vw;
     height: 12vw;
 }
 
-.openFilterMenuButton{
+.openFilterMenuButton > div {
+    margin-bottom: 65vh;
+    margin-right: 25vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -113,7 +113,7 @@
     z-index: 1;
 }
 
-.openFilterMenuButton > svg {
+.openFilterMenuButton > div > svg {
     width: 12vw;
     height: 12vw;
 }

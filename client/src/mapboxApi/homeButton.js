@@ -12,7 +12,7 @@ const redirectToHomepage = () => {
 export const createHomeButton = (currentMap) => {
     const homeButton = document.createElement('div')
     homeButton.className = 'homeButton'
-    homeButton.innerHTML = `${ICONS.home}`
+    homeButton.innerHTML = `<div>${ICONS.home}</div>`
     homeButton.addEventListener('click', () => {
         redirectToHomepage()
 

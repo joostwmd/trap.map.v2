@@ -81,7 +81,7 @@ export const handleShowConnectionsClick = (currentMap, artistDatabaseId, artistC
 export const createCloseConnectionsButton = (currentMap) => {
     const button = document.createElement('div')
     button.className = 'closeConnectionsButton'
-    button.innerHTML = `${ICONS.closeWhite}`
+    button.innerHTML = `<div>${ICONS.closeWhite}</div>`
     button.style.visibility = 'hidden'
     button.addEventListener('click', () => {
         handleRemoveConnectionsClick(currentMap)

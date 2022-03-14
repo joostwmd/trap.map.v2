@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 const theme = extendTheme({
     fonts: {
-        heading: 'PhillySans',
+        heading: 'Montserrat',
         body : 'Montserrat',
     },
 
@@ -13,7 +13,7 @@ const theme = extendTheme({
             },
 
             h1: {
-                fontFamily : 'PhillySans',
+                fontFamily : 'Montserrat',
                 color: '#fff'
             },
     

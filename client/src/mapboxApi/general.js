@@ -37,32 +37,21 @@ export const getHomeButtonCoordinates = (currentMap) => {
 
 export const getOpenFilterMenuButtonCoordinares = (currentMap) => {
     let lng = currentMap.getBounds()._ne.lng
-    let lngShift = (currentMap.getBounds()._sw.lng - currentMap.getBounds()._ne.lng) / 10
-
     let lat = currentMap.getBounds()._sw.lat
-    let latShift = (currentMap.getBounds()._ne.lat - currentMap.getBounds()._sw.lat) / 12.5
-    return [lng + lngShift, lat + latShift]
+    return [lng, lat]
 }
 
 export const getShuffleArtistsButtonCoordinates = (currentMap) => {
     let lng = currentMap.getBounds()._ne.lng
-    let lngShift = (currentMap.getBounds()._sw.lng - currentMap.getBounds()._ne.lng) / 10
-
     let lat = currentMap.getBounds()._sw.lat
-    let latShift = (currentMap.getBounds()._ne.lat - currentMap.getBounds()._sw.lat) / 5
-    return [lng + lngShift, lat + latShift]
+    return [lng ,lat]
 }
-
 
 export const getCloseConnectionsButtonCoordinates = (currentMap) => {
     let lng = currentMap.getBounds()._ne.lng
-    let lngShift = (currentMap.getBounds()._sw.lng - currentMap.getBounds()._ne.lng) / 10
-
     let lat = currentMap.getBounds()._sw.lat
-    let latShift = (currentMap.getBounds()._ne.lat - currentMap.getBounds()._sw.lat) / 3.25
-    return [lng + lngShift, lat + latShift]
+    return [lng, lat]
 }
-
 
 export const hideAllButtons = () => {
     const buttons = [
