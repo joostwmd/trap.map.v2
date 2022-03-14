@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Button, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
@@ -11,7 +11,7 @@ import { SERVER_URL } from '../clientVariables'
 
 import { handleShowConnectionsClick } from '../mapboxApi/artistConnectionsLayer'
 import { closeArtistProfilePopup } from '../mapboxApi/artistProfilePopup'
-import { shuffelNextArtistsHandler, getRandomArtists } from '../mapboxApi/shuffelArtistsButton'
+import { getRandomArtists } from '../mapboxApi/shuffelArtistsButton'
 
 function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 

@@ -24,7 +24,8 @@ export const createShuffleArtistButton = (currentMap) => {
     const randomArtistButton = document.createElement('div')
     randomArtistButton.className = 'shuffleArtistButton'
     randomArtistButton.innerHTML = `<div>${ICONS.shuffleWhite}</div>`
-    randomArtistButton.addEventListener('click', () => {
+    //console.log(randomArtistButton.children[0].children)
+    randomArtistButton.children[0].addEventListener('click', () => {
         shuffelArtistsHandler(currentMap)
     })
     return new mapboxgl.Marker(randomArtistButton).setLngLat(getShuffleArtistsButtonCoordinates(currentMap)).addTo(currentMap)
@@ -37,7 +38,7 @@ export const createShuffleArtistButton = (currentMap) => {
     return res
 }
 
-export const shuffelArtistsHandler = async (currentMap) => {
+const shuffelArtistsHandler = async (currentMap) => {
     console.log('x')
     axios.get(`${SERVER_URL}/dataBase/getArtists`)
         .then(res => {
@@ -50,13 +51,5 @@ export const shuffelArtistsHandler = async (currentMap) => {
 }
 
 
-export const shuffelNextArtistsHandler = async () => {
-    axios.get(`${SERVER_URL}/dataBase/getArtists`)
-        .then(res => {
-            getRandomArtists(res.data)
-                .then(artist => {
-                    return artist
-                })
-        })
-}
+
 

@@ -80,9 +80,7 @@ function Map() {
 
         map.current.on('zoom', () => {
             homeButtonMarker.setLngLat(getHomeButtonCoordinates(map.current))
-
-            shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))
-            
+            shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))   
             openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
             closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
         })
@@ -90,7 +88,6 @@ function Map() {
         map.current.on('move', () => {
             homeButtonMarker.setLngLat(getHomeButtonCoordinates(map.current))
             shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))
-
             openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
             closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
         })

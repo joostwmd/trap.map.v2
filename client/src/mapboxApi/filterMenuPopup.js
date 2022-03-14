@@ -10,7 +10,6 @@ import { ICONS } from '../clientVariables'
 
 const popup = []
 export const createFilterMenuPopup = (currentMap, artistsArr) => {
-
     disableMapInteractions(currentMap)
 
     const marker = document.createElement('div')
@@ -46,14 +45,14 @@ export const closeFilterMenuPopup = (currentMap, popup) => {
 
 
 export const createFilterMenuButton = (currentMap, artistsArr) => {
-    const homeButton = document.createElement('div')
-    homeButton.className = 'openFilterMenuButton'
-    homeButton.innerHTML = `<div>${ICONS.filterWhite}</div>`
-    homeButton.addEventListener('click', () => {
+    const filterMenuButton = document.createElement('div')
+    filterMenuButton.className = 'openFilterMenuButton'
+    filterMenuButton.innerHTML = `<div>${ICONS.filterWhite}</div>`
+    filterMenuButton.children[0].addEventListener('click', () => {
         createFilterMenuPopup(currentMap, artistsArr)
 
     })
-    return new mapboxgl.Marker(homeButton).setLngLat(getOpenFilterMenuButtonCoordinares(currentMap)).addTo(currentMap)
+    return new mapboxgl.Marker(filterMenuButton).setLngLat(getOpenFilterMenuButtonCoordinares(currentMap)).addTo(currentMap)
 }
 
 export const filterArtists = (currentMap, artists, popup, selectedGenres) => {
