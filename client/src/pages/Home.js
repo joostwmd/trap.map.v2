@@ -93,7 +93,7 @@ function Home() {
             </Center>
 
             <Center>
-                <Link to='/signUp'>
+                <Link to='/signUpArtists'>
                     <Button
                         color='#fff'
                         rounded='md'
@@ -107,6 +107,27 @@ function Home() {
                             letterSpacing='wider'
                         >
                             sign up for artist
+                        </Heading>
+
+                    </Button>
+                </Link>
+            </Center>
+
+            <Center>
+                <Link to='/signUpCreatives'>
+                    <Button
+                        color='#fff'
+                        rounded='md'
+                        w='90vw'
+                        h='12.5vw'
+                        mb='5vh'
+                    >
+                        <Heading
+                            fontSize='7.5vw'
+                            color='brand.200'
+                            letterSpacing='wider'
+                        >
+                            sign up for creatives
                         </Heading>
 
                     </Button>

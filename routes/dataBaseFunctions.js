@@ -2,8 +2,8 @@ const router = require("express").Router();
 const Artist = require("../models/Artist");
 const ArtistSignUp = require('../models/ArtistSignUp')
 const City = require('../models/City')
-//const mapboxgl =  require('!mapbox-gl');
-const mapboxgl = require('mapbox-gl')
+const Creative = require('../models/Creative')
+const CreativeSignUp = require('../models/CreativeSignUp')
 
 
 
@@ -22,6 +22,17 @@ router.get("/getCities", (req, res, next) => {
         })
         .catch(err => next(err))
 })
+
+
+router.get("/getCreatives", (req, res, next) => {
+    Creative.find({})
+        .then(creatives => {
+            res.status(200).json(creatives)
+        })
+        .catch(err => next(err))
+})
+
+
 
 
 router.post("/artistProfile", (req, res, next) => {
@@ -48,6 +59,21 @@ router.post('/signUpArtist', (req, res, next) => {
         instagramLink: req.body.instaLink,
     })
 })
+
+
+router.post('/signUpCreative', (req, res, next) => {
+    CreativeSignUp.create({
+        location : req.body.location,
+        name : req.body.name,
+        type : req.body.type,
+        discription : req.body.discription,
+        links : req.body.links,
+        contactInfo : req.body.contactInfo
+    })
+})
+
+
+
 
 
 

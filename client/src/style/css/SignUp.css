@@ -77,3 +77,46 @@
     font-family: Montserrat;
 }
 
+
+
+#nameOfWebsiteInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#nameOfWebsiteInput::placeholder{
+    font-family: Montserrat;
+}
+
+
+#linkToWebsiteInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#linkToWebsiteInput::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#channelOfContactInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#channelOfContactInput::placeholder{
+    font-family: Montserrat;
+}
+
+
+#contactInfoInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#contactInfoInput::placeholder{
+    font-family: Montserrat;
+}
+
+

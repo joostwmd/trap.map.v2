@@ -40,10 +40,10 @@ function AppLogoWithLink({ app, link, dataBaseId }) {
                 <Image
                     src={spotifyLogo}
                     alt="spotify logo"
-                    w='12vw'
-                    h='12vw'
-                    ml='6vw'
-                    mr='6vw'
+                    w='15vw'
+                    h='15vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
                 />
             </a>
         )
@@ -52,14 +52,14 @@ function AppLogoWithLink({ app, link, dataBaseId }) {
     if (app === "appleMusic") {
         return (
             <a href={link} onClick={() => { addAppleMusicProfileVisit() }}>
-                    <Image
-                        src={appleMusicLogo}
-                        alt="apple music logo"
-                        w='12vw'
-                        h='12vw'
-                        ml='6vw'
-                        mr='6vw'
-                    />
+                <Image
+                    src={appleMusicLogo}
+                    alt="apple music logo"
+                    w='15vw'
+                    h='15vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
+                />
             </a>
         )
     }
@@ -70,10 +70,10 @@ function AppLogoWithLink({ app, link, dataBaseId }) {
                 <Image
                     src={youtubeLogo}
                     alt="youtube logo"
-                    w='12vw'
-                    h='12vw'
-                    ml='6vw'
-                    mr='6vw'
+                    w='15vw'
+                    h='15vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
                 />
             </a>
         )
@@ -85,10 +85,10 @@ function AppLogoWithLink({ app, link, dataBaseId }) {
                 <Image
                     src={instagramLogo}
                     alt="instagram logo"
-                    w='12vw'
-                    h='12vw'
-                    ml='6vw'
-                    mr='6vw'
+                    w='15vw'
+                    h='15vw'
+                    ml='7.5vw'
+                    mr='7.5vw'
                 />
             </a>
         )

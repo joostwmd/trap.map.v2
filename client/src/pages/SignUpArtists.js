@@ -225,8 +225,10 @@ function SignUp() {
                 <Flex
                     mt='2vh'
                     flexDir='column'
+                    alignItems='center'
                     ml='5vw'
                     mr='5vw'
+                    mb='7.5vh'
                 >
                     <Heading
                         color='brand.200'
@@ -261,10 +263,13 @@ function SignUp() {
                     <a href='https://www.instagram.com/trapmap.eu/'>
                         <Heading
                             aling='center'
-                            fontSize='7.5vw'
+                            fontSize='12.5vw'
                             color='brand.200'
+                            textDecorationLine='underline'
+                            textDecorationColor='#fff'
+
                         >
-                            insta
+                            INSTA
                         </Heading>
                     </a>
                 </Flex>

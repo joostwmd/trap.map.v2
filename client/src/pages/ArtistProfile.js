@@ -1,47 +1,36 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Center, Heading } from '@chakra-ui/react'
 
 import Track from '../components/Track'
 import AppLogoWithLink from '../components/AppLogoWithLink'
 import ArtistProfileHeader from '../components/ArtistProfileHeader'
 import ConnectionsButton from '../components/ConnectionsButton'
 
-import { SERVER_URL } from '../clientVariables'
+import { SERVER_URL, ICONS } from '../clientVariables'
 
 import { handleShowConnectionsClick } from '../mapboxApi/artistConnectionsLayer'
 import { closeArtistProfilePopup } from '../mapboxApi/artistProfilePopup'
-import { getRandomArtists } from '../mapboxApi/shuffelArtistsButton'
+import TypeBadge from '../components/TypeBadge'
 
 function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
 
     //artist info
     const [name, setName] = useState("")
-    const [picture, setPicture] = useState("")
-    const [topTracks, setTopTracks] = useState([])
+    const [types, setTypes] = useState([])
     const [links, setLinks] = useState([])
     const [coords, setCoords] = useState([])
+    const arrowLeftIcon = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="90%" height="90%"><path fill="none" d="M0 0h24v24H0z" /><path d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z" fill="rgba(147,129,255,1)" /></svg>
 
     const [dataBaseDataFetched, setDataBaseDataFetched] = useState(false)
-    const [spotifyDataFetched, setSpotifyDataFetched] = useState(false)
+
     const [hasConnections, setHasConnections] = useState(false)
-    let count = 0
 
-    const getSpotifyData = async (spotifyId) => {
-        const requestBody = { spotifyId }
-
-        const response = await axios.post(`${SERVER_URL}/spotify/artistProfile`, requestBody)
-        const data = await response
-
-        return data
-    }
 
     const getDataBaseData = async (dataBaseId) => {
         const requestBody = { dataBaseId }
-
         const response = await axios.post(`${SERVER_URL}/dataBase/artistProfile`, requestBody)
         const data = await response
-
         return data
     }
 
@@ -51,86 +40,14 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
         axios.post(`${SERVER_URL}/traffic/addTrapMapProfileVisit`, requestBody)
     }
 
-    const addSnippetPlayed = (dataBaseId) => {
-        let requestBody = { dataBaseId }
-        axios.post(`${SERVER_URL}/traffic/addSnippetPlayed`, requestBody)
-    }
-
 
     const handleShowConnectionsClickWrapper = (currentMap, dataBaseId, coords, popup) => {
         closeArtistProfilePopup(currentMap, popup)
         handleShowConnectionsClick(currentMap, dataBaseId, coords)
-
-    }
-
-    const getRandomTrack = async (tracks) => {
-        let shuffel = Math.floor(Math.random() * tracks.length)
-        const randomTrack = await tracks[shuffel]
-        return randomTrack
-    }
-
-    const playRandomTrack = async (tracks) => {
-        getRandomTrack(tracks)
-            .then(track => {
-                const randomAudio = document.getElementById(`audioPlayer${track.name}`)
-                randomAudio.play()
-
-                //add visual feedback
-                const randomTrackTitle = document.getElementById(`trackTitle${track.name}`)
-                randomTrackTitle.style.color = '#9381FF'
-
-                //reset track
-                randomAudio.ontimeupdate = () => {
-                    if (randomAudio.currentTime >= 30) {
-                        randomAudio.pause()
-
-                        //remove visual feedback
-                        const trackTitle = document.getElementById(`trackTitle${track.name}`)
-                        trackTitle.style.color = '#fff'
-                    }
-                }
-            })
-    }
-
-    const reloadArtistProfile = async () => {
-
-        axios.get(`${SERVER_URL}/dataBase/getArtists`)
-            .then(res => {
-                getRandomArtists(res.data)
-                    .then(artist => {
-                        getDataBaseData(artist[0]._id)
-                            .then(dataBaseData => {
-                                setDataBaseDataFetched(true)
-                                if (dataBaseData.data.connections.length !== 0) {
-                                    setHasConnections(true)
-                                }
-
-                                setLinks([
-                                    ["spotify", dataBaseData.data.spotifyLink],
-                                    ["appleMusic", dataBaseData.data.appleMusicLink],
-                                    ["youtube", dataBaseData.data.youtubeLink],
-                                    ["instagram", dataBaseData.data.instagramLink]
-                                ])
-                                addTrapMapProfileVisit(dataBaseData.data._id)
-                                setCoords(dataBaseData.data.coordinates)
-                            })
-
-                        getSpotifyData(artist[0].spotifyID)
-                            .then(spotifyData => {
-                                setSpotifyDataFetched(true)
-                                setName(spotifyData.data[0].name)
-                                setPicture(spotifyData.data[0].images[0].url)
-                                setTopTracks(spotifyData.data[1])
-                                playRandomTrack(spotifyData.data[1])
-                                addSnippetPlayed(dataBaseId)
-                            })
-                    })
-            })
     }
 
 
     useEffect(() => {
-
         getDataBaseData(dataBaseId)
             .then(dataBaseData => {
                 setDataBaseDataFetched(true)
@@ -138,6 +55,8 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                     setHasConnections(true)
                 }
 
+                setName(dataBaseData.data.name)
+                setTypes(dataBaseData.data.type)
                 setLinks([
                     ["spotify", dataBaseData.data.spotifyLink],
                     ["appleMusic", dataBaseData.data.appleMusicLink],
@@ -147,23 +66,56 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                 addTrapMapProfileVisit(dataBaseData.data._id)
                 setCoords(dataBaseData.data.coordinates)
             })
-
-        getSpotifyData(spotifyId)
-            .then(spotifyData => {
-                setSpotifyDataFetched(true)
-                setName(spotifyData.data[0].name)
-                setPicture(spotifyData.data[0].images[0].url)
-                setTopTracks(spotifyData.data[1])
-                playRandomTrack(spotifyData.data[1])
-                addSnippetPlayed(dataBaseId)
-            })
     }, [])
 
-    if (dataBaseDataFetched === true && spotifyDataFetched === true) {
+    if (dataBaseDataFetched === true) {
         return (
             <div className='mapBlur'>
                 <div className="artistProfile">
-                    <ArtistProfileHeader currentMap={currentMap} artistPicture={picture} popup={popup} />
+
+                    <Flex
+                        alignItems='flex-start'
+                        w='98vw'
+                    >
+                        <Center
+                            onClick={() => closeArtistProfilePopup(currentMap, popup)}
+                            w='7.5vw'
+                            h='7.5vw'
+                            mt='0.5vh'
+                            ml='1vw'
+                            pos='absolute'
+                            backgroundColor='#fff'
+                            borderRadius='50%'
+
+                        >
+                            {arrowLeftIcon}
+                        </Center>
+                    </Flex>
+
+
+                    <Flex
+                        justifyContent='center'
+                        h='20vw'
+                        
+                        mt='5vh'
+                    >
+                        {types.map(type => {
+                            return (
+                                <TypeBadge type={type} />
+                            )
+                        })}
+                    </Flex>
+
+
+                    <Heading
+                        fontSize='12.5vw'
+                        color='brand.200'
+                        mt='2.5vh'
+                        mb='5vh'
+                    >
+                        {name}
+                    </Heading>
+
 
                     <Flex
                         justifyContent='center'
@@ -180,32 +132,10 @@ function ArtistProfile({ dataBaseId, spotifyId, currentMap, popup }) {
                         })}
                     </Flex>
 
-                    {/* <Button
-                        onClick={() => reloadArtistProfile(currentMap)}
-                    >
-                        SHUFFLE
-                    </Button> */}
-
-                    <div className='artistNameWrapper'>
-                        <h2>{name.replaceAll('$', 'S')}</h2>
-                    </div>
-
                     <div
                         onClick={() => { handleShowConnectionsClickWrapper(currentMap, dataBaseId, coords, popup) }}
                     >
                         <ConnectionsButton hasConnections={hasConnections} />
-                    </div>
-
-                    <div>
-                        {topTracks.map(track => {
-                            //makes sure that every track is playable
-                            if (track.preview_url !== null) {
-                                count++
-                                return (
-                                    <Track key={track.name} track={track} dataBaseId={dataBaseId} count={count} />
-                                )
-                            }
-                        })}
                     </div>
                 </div>
             </div>

@@ -12,7 +12,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ArtistProfile from './pages/ArtistProfile';
 import Map from './pages/Map';
-import SignUp from './pages/SignUp';
+import SignUpArtists from './pages/SignUpArtists';
+import SignUpCreatives from './pages/SignUpCreatives';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
 
@@ -51,8 +52,13 @@ function App() {
           />
 
           <Route  
-            exact path='/signUp'
-            element={<SignUp />}
+            exact path='/signUpArtists'
+            element={<SignUpArtists />}
+          />
+
+          <Route
+            exact path='/signUpCreatives'
+            element={<SignUpCreatives />}
           />
 
         </Routes>

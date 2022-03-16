@@ -42,20 +42,6 @@ function FilterMenu({ artistsArr, popup, currentMap }) {
                     flexDir='row'
                     alignItems='center'
                 >
-                    {/* <Center
-                        //onClick={() => closeArtistProfilePopup(currentMap, popup)}
-                        w='7.5vw'
-                        h='7.5vw'
-                        // pos='absolute'
-                        // top='7.5vh'
-                        mr='5vw'
-
-                        backgroundColor='#fff'
-                        borderRadius='50%'
-                    >
-                        {arrowLeftIcon}
-                    </Center> */}
-
                     <Heading
                         pt='2.5vh'
                         fontSize='12.5vw'

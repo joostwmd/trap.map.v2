@@ -1,5 +1,6 @@
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
+import artistIcon from '../style/icons/artist.png'
 
 import { createArtistProfilePopup } from './artistProfilePopup'
 
@@ -17,7 +18,8 @@ export const artistToFeatures = (artists, artistsArr) => {
                 'artistSpotifyId': artist.spotifyID,
                 'city': artist.city,
                 'genres' : artist.genres,
-                'state': 'active'
+                'state': 'active',
+                'spotifyLink' : artist.spotifyLink
             },
 
             'geometry': {
@@ -60,7 +62,9 @@ export const handleZoomArtistMarker = (currrentMap, marker, markerProps, initial
     }
 }
 
-
+const redirectToSpotifyArtistAcc = (link) => {
+    window.location.href = link
+}
 
 export const loadArtistMarkers = (currentMap, artistArr) => {
 
@@ -77,6 +81,7 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
 
         const marker = document.createElement('div')
         marker.className = 'artistMarker'
+        marker.innerHTML = `<img src=${artistIcon} />`
         new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap)
         mapboxMarkerArray.push(new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap))
 
@@ -84,9 +89,12 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
         for (let i = 0; i < artistMarkers.length; i++) {
             artistMarkers[i].addEventListener('click', () => {
                 createArtistProfilePopup(currentMap, artistArr[i].properties.artistDatabaseId, artistArr[i].properties.artistSpotifyId)
+                //edirectToSpotifyArtistAcc(artistArr[i].properties.spotifyLink)
             })
 
-            artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
+            //artistMarkers[i].style.backgroundImage = `url(${artistIcon})`
+           
+            //artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
             //artistMarkers[i].innerHTML = `<p>${artistArr[i].properties.artistName}</p>`
 
             // currentMap.on('zoom', () => {

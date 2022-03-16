@@ -8,6 +8,7 @@ import Fonts from '../style/fonts/Fonts'
 import theme from '../style/theme'
 import { ICONS } from '../clientVariables'
 
+
 const popup = []
 export const createFilterMenuPopup = (currentMap, artistsArr) => {
     disableMapInteractions(currentMap)
@@ -24,9 +25,7 @@ export const createFilterMenuPopup = (currentMap, artistsArr) => {
         </ChakraProvider>
         , document.getElementById('filterMenu')
     )
-
     hideAllButtons()
-
 }
 
 
@@ -50,14 +49,12 @@ export const createFilterMenuButton = (currentMap, artistsArr) => {
     filterMenuButton.innerHTML = `<div>${ICONS.filterWhite}</div>`
     filterMenuButton.children[0].addEventListener('click', () => {
         createFilterMenuPopup(currentMap, artistsArr)
-
     })
     return new mapboxgl.Marker(filterMenuButton).setLngLat(getOpenFilterMenuButtonCoordinares(currentMap)).addTo(currentMap)
 }
 
 export const filterArtists = (currentMap, artists, popup, selectedGenres) => {
     const artistMarkers = document.getElementsByClassName('artistMarker')
-
     if (selectedGenres.length === 0){
         for (let i = 0; i < artists.length; i++) {
             artists[i].properties.state = 'active'

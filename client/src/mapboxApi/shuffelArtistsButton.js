@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { SERVER_URL } from '../clientVariables'
 import { getShuffleArtistsButtonCoordinates } from './general';
 import { ICONS } from '../clientVariables';
-import { createArtistProfilePopup, closeArtistProfilePopup, popup } from './artistProfilePopup';
+import { createArtistProfilePopup } from './artistProfilePopup';
 
 
 
@@ -38,13 +38,17 @@ export const createShuffleArtistButton = (currentMap) => {
     return res
 }
 
+const redirectToSpotifyArtistAcc = (link) => {
+    window.location.href = link
+}
+
 const shuffelArtistsHandler = async (currentMap) => {
-    console.log('x')
     axios.get(`${SERVER_URL}/dataBase/getArtists`)
         .then(res => {
             getRandomArtists(res.data)
                 .then(artist => {
                     createArtistProfilePopup(currentMap, artist[0]._id, artist[0].spotifyID)
+                    //redirectToSpotifyArtistAcc(artist[0].spotifyLink)
                 })
 
         })
