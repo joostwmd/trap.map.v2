@@ -30,7 +30,7 @@ function TypeBadge({ type }) {
     } else if (type === 'designer') {
         return (
             <Center
-                backgroundColor='#fff'
+                backgroundColor='#9381FF'
                 w='20vw'
                 h='20vw'
                 borderRadius='90%'
@@ -39,8 +39,8 @@ function TypeBadge({ type }) {
             >
                 <Image
                     src={designerIcon}
-                    w='15vw'
-                    h='15vw'
+                    w='12.5vw'
+                    h='12.5vw'
                 />
             </Center>
         )
@@ -48,7 +48,7 @@ function TypeBadge({ type }) {
     } else if (type === 'producer') {
         return (
             <Center
-                backgroundColor='#fff'
+                backgroundColor='#9381FF'
                 w='20vw'
                 h='20vw'
                 borderRadius='90%'
@@ -66,7 +66,7 @@ function TypeBadge({ type }) {
     } else if (type === 'studio') {
         return (
             <Center
-                backgroundColor='#fff'
+                backgroundColor='#9381FF'
                 w='20vw'
                 h='20vw'
                 borderRadius='90%'
@@ -84,7 +84,7 @@ function TypeBadge({ type }) {
     } else if (type === 'videograph') {
         return (
             <Center
-                backgroundColor='#fff'
+                backgroundColor='#9381FF'
                 w='20vw'
                 h='20vw'
                 borderRadius='90%'
@@ -93,8 +93,8 @@ function TypeBadge({ type }) {
             >
                 <Image
                     src={videographIcon}
-                    w='15wv'
-                    h='15wv'
+                    w='13.5vw'
+                    h='13.5vw'
                 />
             </Center>
         )

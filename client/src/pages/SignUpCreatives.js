@@ -46,9 +46,11 @@ function SignUpCreatives() {
 
 
     const createCreativeSignUp = () => {
-        setStatus('signedUp')
-        const requestBody = { name, location, discription, type, links, contactInfo }
-        axios.post(`${SERVER_URL}/dataBase/signUpCreative`, requestBody)
+        if (name !== '' && location !== '') {
+            setStatus('signedUp')
+            const requestBody = { name, location, discription, type, links, contactInfo }
+            axios.post(`${SERVER_URL}/dataBase/signUpCreative`, requestBody)
+        }
     }
 
     if (status === 'signUp') {
@@ -226,13 +228,7 @@ function SignUpCreatives() {
                         mb='5vh'
                         align='center'
                     >
-                        what do people need to know about you if they want to work with you:
-                        what do you like to create the most,
-                        how long have you been doing it,
-                        what software programs do you use,
-                        what hardware do you have,
-                        do you do it full time or part time,
-                        how much does it cost to work with you etc...
+                        what do people need to know about you if they want to work with you
                     </Text>
 
                     <Input

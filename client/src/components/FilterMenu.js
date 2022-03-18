@@ -51,6 +51,8 @@ function FilterMenu({ artistsArr, popup, currentMap }) {
                     </Heading>
                 </Flex>
 
+                
+
                 <Flex
                     flexDir='column'
                     alignItems='center'

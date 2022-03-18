@@ -56,11 +56,10 @@ function Map() {
 
     useEffect(() => {
 
-        // axios.get(`${SERVER_URL}/dataBase/getCreatives`)
-        //     .then(res => {
-        //         console.log(res.data)
-        //         creativesToFeatures(res.data, creativeFeatures)
-        //     })
+        axios.get(`${SERVER_URL}/dataBase/getCreatives`)
+            .then(res => {
+                creativesToFeatures(res.data, creativeFeatures)
+            })
 
         axios.get(`${SERVER_URL}/dataBase/getArtists`)
             .then(res => {

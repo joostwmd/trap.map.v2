@@ -60,6 +60,12 @@ router.post('/signUpArtist', (req, res, next) => {
     })
 })
 
+router.post("/creativeProfile", (req, res, next) => {
+    Creative.findById(req.body.dataBaseId)
+        .then(creative => {
+            res.status(200).json(creative)
+        })
+})
 
 router.post('/signUpCreative', (req, res, next) => {
     CreativeSignUp.create({
