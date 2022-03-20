@@ -4,8 +4,13 @@
 
 
 //for deployment
-const CLIENT_URL = 'https://trapmap.herokuapp.com'
-const SERVER_URL = 'https://trapmap.herokuapp.com'
+// const CLIENT_URL = 'https://trapmap.herokuapp.com'
+// const SERVER_URL = 'https://trapmap.herokuapp.com'
+
+
+//for demo deployment
+const CLIENT_URL = 'https://trapmapdemo.herokuapp.com'
+const SERVER_URL = 'https://trapmapdemo.herokuapp.com'
 
 //for production
 // const CLIENT_URL = 'https://trapmap.eu'
