@@ -81,7 +81,7 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
 
         const marker = document.createElement('div')
         marker.className = 'artistMarker'
-        marker.innerHTML = `<img src=${artistIcon} />`
+        //marker.innerHTML = `<img src=${artistIcon} />`
         new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap)
         mapboxMarkerArray.push(new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap))
 
@@ -94,7 +94,7 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
 
             //artistMarkers[i].style.backgroundImage = `url(${artistIcon})`
            
-            //artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
+            artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
             //artistMarkers[i].innerHTML = `<p>${artistArr[i].properties.artistName}</p>`
 
             // currentMap.on('zoom', () => {

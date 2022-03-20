@@ -1,4 +1,4 @@
-import { Center, Text, Flex, Image } from '@chakra-ui/react'
+import { Center, Image } from '@chakra-ui/react'
 
 import artistIcon from '../style/icons/artist.png'
 import designerIcon from '../style/icons/designer.png'
