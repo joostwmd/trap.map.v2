@@ -27,7 +27,6 @@ app.use("/dataBase", dataBaseFunctions)
 const trafficFunctions = require("./routes/trafficFunctions")
 app.use("/traffic", trafficFunctions)
 
-
 //deployment
 const path = require('path');
 app.use(express.static(path.join(__dirname, "/client/build")));

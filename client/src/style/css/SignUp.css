@@ -119,4 +119,23 @@
     font-family: Montserrat;
 }
 
+.selectedDayIndicator{
+    width: 3.75vw;
+    height: 3.75vw;
+    background-color: #fff;
+    margin-left: 2.25vw;
+    margin-right: 2.25vw;
+    border-radius: 50%;
+}
+
+.releaseInput::placeholder {
+    font-family: Montserrat; 
+}
+
+.releaseInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+
 

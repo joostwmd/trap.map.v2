@@ -17,9 +17,10 @@ export const artistToFeatures = (artists, artistsArr) => {
                 'artistDatabaseId': artist._id,
                 'artistSpotifyId': artist.spotifyID,
                 'city': artist.city,
-                'genres' : artist.genres,
+                'genres': artist.genres,
                 'state': 'active',
-                'spotifyLink' : artist.spotifyLink
+                'spotifyLink': artist.spotifyLink,
+                'collaboration': artist.collaboration
             },
 
             'geometry': {
@@ -33,7 +34,7 @@ export const artistToFeatures = (artists, artistsArr) => {
 
 
 const hideMarkersNotInViewport = (currentMap, mapboxMarker, htmlMarker, artistProps) => {
-    if (artistProps.properties.state === 'active'){
+    if (artistProps.properties.state === 'active') {
         if (currentMap.getBounds().contains(mapboxMarker.getLngLat())) {
             htmlMarker.style.visibility = 'visible'
         } else if (!currentMap.getBounds().contains(mapboxMarker.getLngLat()) && htmlMarker.style.visibility === 'visible') {
@@ -85,15 +86,33 @@ export const loadArtistMarkers = (currentMap, artistArr) => {
         new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap)
         mapboxMarkerArray.push(new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap))
 
+        // if (artistArr[i].properties.collaboration === undefined) {
+        //     const marker = document.createElement('div')
+        //     marker.className = 'artistMarker'
+        //     marker.innerHTML = `<img src=${artistIcon} />`
+        //     new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap)
+        //     mapboxMarkerArray.push(new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap))
+
+        // } else if (artistArr[i].properties.collaboration !== undefined) {
+        //     const marker = document.createElement('div')
+        //     marker.className = 'artistMarker'
+        //     marker.innerHTML = `<img src=${artistIcon} />`
+        //     marker.style.outline = '0.25em solid #ff6f59'
+        //     new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap)
+        //     mapboxMarkerArray.push(new mapboxgl.Marker(marker).setLngLat(artistArr[i].geometry.coordinates).addTo(currentMap))
+
+        // }
+
+
         const artistMarkers = document.getElementsByClassName('artistMarker')
         for (let i = 0; i < artistMarkers.length; i++) {
             artistMarkers[i].addEventListener('click', () => {
                 createArtistProfilePopup(currentMap, artistArr[i].properties.artistDatabaseId, artistArr[i].properties.artistSpotifyId)
-                //edirectToSpotifyArtistAcc(artistArr[i].properties.spotifyLink)
+                //redirectToSpotifyArtistAcc(artistArr[i].properties.spotifyLink)
             })
 
             //artistMarkers[i].style.backgroundImage = `url(${artistIcon})`
-           
+
             //artistMarkers[i].style.backgroundImage = `url(${artistArr[i].properties.artistPicture})`
             //artistMarkers[i].innerHTML = `<p>${artistArr[i].properties.artistName}</p>`
 

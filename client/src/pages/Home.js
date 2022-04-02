@@ -17,6 +17,10 @@ function Home() {
 
     }
 
+    const redirectToReleases = () => {
+        window.location.href = `${CLIENT_URL}/releases`
+    }
+
 
     const [email, setEmail] = useState("")
     const singUpForBetaKey = () => {
@@ -79,6 +83,7 @@ function Home() {
                     rounded='md'
                     w='50vw'
                     h='15vw'
+                    mb='5vh'
                     onClick={() => { redirectToMap() }}
                 >
                     <Heading
@@ -87,6 +92,24 @@ function Home() {
                         letterSpacing='wider'
                     >
                         map
+                    </Heading>
+
+                </Button>
+
+
+                <Button
+                    bg='brand.200'
+                    rounded='md'
+                    w='65vw'
+                    h='15vw'
+                    onClick={() => { redirectToReleases() }}
+                >
+                    <Heading
+                        fontSize='10vw'
+                        color='#fff'
+                        letterSpacing='wider'
+                    >
+                        releases
                     </Heading>
 
                 </Button>
@@ -107,6 +130,27 @@ function Home() {
                             letterSpacing='wider'
                         >
                             sign up for artist
+                        </Heading>
+
+                    </Button>
+                </Link>
+            </Center>
+
+            <Center>
+                <Link to='/enterRelease'>
+                    <Button
+                        color='#fff'
+                        rounded='md'
+                        w='90vw'
+                        h='12.5vw'
+                        mb='5vh'
+                    >
+                        <Heading
+                            fontSize='7.5vw'
+                            color='brand.200'
+                            letterSpacing='wider'
+                        >
+                            add your release 
                         </Heading>
 
                     </Button>

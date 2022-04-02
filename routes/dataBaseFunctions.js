@@ -4,6 +4,8 @@ const ArtistSignUp = require('../models/ArtistSignUp')
 const City = require('../models/City')
 const Creative = require('../models/Creative')
 const CreativeSignUp = require('../models/CreativeSignUp')
+const Release = require('../models/Release')
+
 
 
 
@@ -69,19 +71,34 @@ router.post("/creativeProfile", (req, res, next) => {
 
 router.post('/signUpCreative', (req, res, next) => {
     CreativeSignUp.create({
-        location : req.body.location,
-        name : req.body.name,
-        type : req.body.type,
-        discription : req.body.discription,
-        links : req.body.links,
-        contactInfo : req.body.contactInfo
+        location: req.body.location,
+        name: req.body.name,
+        type: req.body.type,
+        discription: req.body.discription,
+        links: req.body.links,
+        contactInfo: req.body.contactInfo
     })
 })
 
+router.post('/createRelease', (req, res, next) => {
+    Release.create({
+        artistName: req.body.artistName,
+        title: req.body.title,
+        releaseDate: req.body.releaseDate,
+        typeOfRelease: req.body.typeOfRelease,
+        presafeLink: req.body.presafeLink
+    })
+    .then(release => {
+        res.status(200).json(release)
+    })
+})
 
-
-
-
-
+router.get('/getReleases', (req, res, next) => {
+    Release.find({})
+        .then(releases => {
+            res.status(200).json(releases)
+        })
+        .catch(err => next(err))
+})
 
 module.exports = router;

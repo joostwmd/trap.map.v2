@@ -10,10 +10,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //pages
 import Home from './pages/Home';
-import ArtistProfile from './pages/ArtistProfile';
 import Map from './pages/Map';
 import SignUpArtists from './pages/SignUpArtists';
 import SignUpCreatives from './pages/SignUpCreatives';
+import EnterRelease from './pages/EnterRelease';
+import ReleaseCalendar from './pages/ReleaseCalendar';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
 
@@ -46,11 +47,6 @@ function App() {
             element={<Map />}
           />
 
-          <Route 
-            exact path="/map/:artistName"
-            element={<ArtistProfile />}
-          />
-
           <Route  
             exact path='/signUpArtists'
             element={<SignUpArtists />}
@@ -59,6 +55,16 @@ function App() {
           <Route
             exact path='/signUpCreatives'
             element={<SignUpCreatives />}
+          />
+
+          <Route
+            exact path='/enterRelease'
+            element={<EnterRelease />}
+          />
+
+          <Route
+            exact path='/releases'
+            element={<ReleaseCalendar />}
           />
 
         </Routes>

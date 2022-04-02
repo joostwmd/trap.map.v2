@@ -1,5 +1,5 @@
 import { closeFilterMenuPopup, filterArtists } from '../mapboxApi/filterMenuPopup'
-import { Switch, Flex, Text, Heading, Button, Center } from '@chakra-ui/react'
+import { Switch, Flex, Text, Heading, Button } from '@chakra-ui/react'
 
 
 function FilterMenu({ artistsArr, popup, currentMap }) {

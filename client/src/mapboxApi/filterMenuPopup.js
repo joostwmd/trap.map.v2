@@ -72,7 +72,7 @@ export const filterArtists = (currentMap, artists, popup, selectedGenres) => {
                     if (selectedGenres.includes(genre) === true) {
                         artists[i].properties.state = 'active'
                         artistMarkers[i].style.visibility = 'visible'
-                        break
+                        break;
                     } 
                 }
             }

@@ -11,6 +11,7 @@ const artistSchema = new Schema({
     youtubeLink : String,
     instagramLink : String,
     genres : Array,
+    collaboration : String,
     
     connections : [{
         type : Schema.Types.ObjectId,
