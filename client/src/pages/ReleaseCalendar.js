@@ -69,20 +69,6 @@ function ReleaseCalendar() {
             <Center
                 mt='1vh'
             >
-                <Center
-                    onClick={() => redirectToHome()}
-                    w='7.5vw'
-                    h='7.5vw'
-                    pos='absolute'
-                    top='1vw'
-                    mr='85vw'
-
-                    backgroundColor='#fff'
-                    borderRadius='50%'
-                >
-                    {arrowLeftIconPurple}
-                </Center>
-
                 <Heading
                     fontSize='7.5vw'
                     color='#fff'
