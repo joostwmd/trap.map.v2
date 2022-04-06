@@ -13,6 +13,7 @@ function ReleaseCard({ release }) {
                 <Heading
                     fontSize='12.5vw'
                     color='#fff'
+                    textAlign='center'
                 >
                     {release.title}
                 </Heading>
