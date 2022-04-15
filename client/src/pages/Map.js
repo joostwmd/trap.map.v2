@@ -101,6 +101,18 @@ function Map() {
             openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
             closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
         })
+
+        // const marker = new mapboxgl.Marker({
+        //     draggable: true
+        // }).setLngLat(center).addTo(map.current);
+    
+        // function dragEnd() {
+        //     const lngLat = marker.getLngLat();
+        //     console.log(lngLat.lng,lngLat.lat )
+            
+        // }
+    
+        // marker.on('dragend', dragEnd);
     }, [])
 
     return (

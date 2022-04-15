@@ -22,11 +22,27 @@ function EnterRelease() {
     const typesOfRelease = ['single', 'ep', 'album']
     const [typeOfRelease, setTypeOfRelease] = useState('')
     const [title, setTitle] = useState('')
-    const [releaseDate, setReleaseDate] = useState('')
+    const [releaseDateDay, setReleaseDateDay] = useState('')
+    const [releaseDateMonth, setReleaseDateMonth] = useState('')
     const [presafeLink, setPresafeLink] = useState('')
 
     const createNewRelease = () => {
-        if (artistName !== '' && typeOfRelease !== '' && title !== '' && releaseDate !== '') {
+        if (artistName !== '' && typeOfRelease !== '' && title !== '' && releaseDateDay !== '' && releaseDateMonth !== '' && releaseDateDay.length <= 2 && releaseDateMonth.length <= 2) {
+            let releaseDate = ''
+            if (releaseDateDay[0] === '0'){
+                releaseDate += `${releaseDateDay[1]}.`
+            } else {
+                releaseDate += `${releaseDateDay}.`
+            }
+
+            if (releaseDateMonth[0] === '0'){
+                releaseDate += releaseDateMonth[1]
+            } else {
+                releaseDate += releaseDateMonth[1]
+            }
+
+            console.log(releaseDate)
+
             const requestBody = { artistName, typeOfRelease, title, releaseDate, presafeLink }
             axios.post(`${SERVER_URL}/dataBase/createRelease`, requestBody)
                 .then(res => {
@@ -36,6 +52,8 @@ function EnterRelease() {
                 })
         }
     }
+
+    
 
     if (status === 'enter') {
         return (
@@ -204,27 +222,36 @@ function EnterRelease() {
                         release date
                     </Text>
 
-                    <Text
-                        fontSize='4.5vw'
-                        ml='5vw'
-                        mr='5vw'
-                        mb='5vh'
-                        align='center'
-                    >
-                        required format: DD.MM, no useless zeros (01.01 - 1.1)
-                    </Text>
 
-                    <Input
-                        className='releaseInput'
-                        value={releaseDate}
-                        onChange={e => setReleaseDate(e.target.value)}
-                        focusBorderColor='brand.200'
-                        placeholder='required'
-                        errorBorderColor='brand.200'
-                        size='md'
-                        width='90vw'
-                        mb='2vh'
-                    />
+                    <Flex
+                        w='80vw'
+                        justifyContent='space-evenly'
+                    >
+                        <Input
+                            className='releaseInput'
+                            value={releaseDateDay}
+                            onChange={e => setReleaseDateDay(e.target.value)}
+                            focusBorderColor='brand.200'
+                            placeholder='DD'
+                            errorBorderColor='brand.200'
+                            size='md'
+                            width='20vw'
+                            mb='2vh'
+                        />
+
+
+                        <Input
+                            className='releaseInput'
+                            value={releaseDateMonth}
+                            onChange={e => setReleaseDateMonth(e.target.value)}
+                            focusBorderColor='brand.200'
+                            placeholder='MM'
+                            errorBorderColor='brand.200'
+                            size='md'
+                            width='20vw'
+                            mb='2vh'
+                        />
+                    </Flex>
 
                     <Text
                         mt='3.5vh'
