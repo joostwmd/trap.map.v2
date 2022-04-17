@@ -50,7 +50,7 @@ function Impressum() {
                 <Text
                     mt='5vh'
                 >
-                    Postadresse: Schwedter Straße 16, 10119 Berlin.
+                    Postadresse: Hüningerstraße 12, 14195 Berlin
                 </Text>
 
                 <Text
