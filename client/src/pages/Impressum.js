@@ -32,7 +32,7 @@ function Impressum() {
                     color='#fff'
                     letterSpacing='wider'
                 >
-                    impressum trapmap
+                    impressum TrapMap
                 </Heading>
             </Center>
 
