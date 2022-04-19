@@ -3,16 +3,20 @@ const { Schema, model } = require("mongoose");
 const artistSchema = new Schema({
     coordinates : Array,
     name : String,
-
-    
-    spotifyLink : String,
-    youtubeLink : String,
-    instagramLink : String,
-
+    picture : String,
     city : String,
     spotifyID : String,
-
-    picture : String
+    spotifyLink : String,
+    appleMusicLink : String,
+    youtubeLink : String,
+    instagramLink : String,
+    genres : Array,
+    collaboration : String,
+    
+    connections : [{
+        type : Schema.Types.ObjectId,
+        ref : 'Artist'
+    }],
 })
 
 

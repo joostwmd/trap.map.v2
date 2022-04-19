@@ -9,6 +9,8 @@ require("./db");
 // https://www.npmjs.com/package/express
 const express = require("express");
 
+
+
 const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
@@ -22,7 +24,8 @@ app.use("/spotify", spotifyFunctions);
 const dataBaseFunctions = require("./routes/dataBaseFunctions")
 app.use("/dataBase", dataBaseFunctions)
 
-
+const trafficFunctions = require("./routes/trafficFunctions")
+app.use("/traffic", trafficFunctions)
 
 //deployment
 const path = require('path');

@@ -1,0 +1,20 @@
+#emailInput, textarea{
+   color : #fff;
+   font-family: Montserrat;
+}
+
+#emailInput::placeholder{
+   font-family: Montserrat;
+}
+
+#keyInput, textarea{
+   color : #fff;
+   font-family: Montserrat;
+}
+
+#keyInput::placeholder{
+   font-family: Montserrat;
+}
+
+
+

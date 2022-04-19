@@ -1,12 +1,24 @@
-import React from 'react';
+import * as React from 'react'
 import ReactDOM from 'react-dom';
 import './index.css';
+import '../src/style/css/Map.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { ChakraProvider } from '@chakra-ui/react'
+
+import Fonts from '../src/style/fonts/Fonts'
+import theme from './style/theme'
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider theme={theme}>
+      <Fonts />
+        <App />
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

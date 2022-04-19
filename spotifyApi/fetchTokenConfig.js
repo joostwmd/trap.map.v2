@@ -10,7 +10,6 @@ const tokenEndpoint = "https://accounts.spotify.com/api/token"
 
 
 //PUBLIC TOKEN
-
 const fetchPublicToken = async () => {
   const result = await fetch(`${tokenEndpoint}`, {
       method : 'POST',

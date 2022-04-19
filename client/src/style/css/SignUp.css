@@ -1,0 +1,141 @@
+#signUpInputName, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputName::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#signUpInputLocation, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputLocation::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#signUpInputSpotify, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputSpotify::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputAppleMusic, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputAppleMusic::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputInsta, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputInsta::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputYoutube, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputYoutube::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+
+#signUpInputFavSong, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#signUpInputFavSong::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#nameOfWebsiteInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#nameOfWebsiteInput::placeholder{
+    font-family: Montserrat;
+}
+
+
+#linkToWebsiteInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#linkToWebsiteInput::placeholder{
+    font-family: Montserrat;
+}
+
+
+
+#channelOfContactInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#channelOfContactInput::placeholder{
+    font-family: Montserrat;
+}
+
+
+#contactInfoInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+#contactInfoInput::placeholder{
+    font-family: Montserrat;
+}
+
+.selectedDayIndicator{
+    width: 3.75vw;
+    height: 3.75vw;
+    background-color: #fff;
+    margin-left: 2.25vw;
+    margin-right: 2.25vw;
+    border-radius: 50%;
+}
+
+.releaseInput::placeholder {
+    font-family: Montserrat; 
+}
+
+.releaseInput, textarea{
+    color : #fff;
+    font-family: Montserrat;
+}
+
+
+

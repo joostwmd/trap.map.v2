@@ -1,109 +1,125 @@
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useEffect, useRef } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+//import Nav from '../components/Nav';
+import { ICONS } from '../clientVariables';
 
-import ReactMapGl, {Marker} from "react-map-gl"
-
-//components
-import MapMarker from '../components/MapMarker'
-
-
-
-//deployment bug fix
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import 'mapbox-gl/dist/mapbox-gl.css';
-import mapboxgl from 'mapbox-gl';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
-mapboxgl.workerClass = MapboxWorker
+import { SERVER_URL, MAPBOX_TOKEN } from '../clientVariables'
 
-
+// import { citysToFeatures, loadCityMarker, handleZoomCityMarkers } from '../mapboxApi/cityMarkerLayer'
+import { artistToFeatures, loadArtistMarkers } from '../mapboxApi/artistMarkerLayer'
+import { createHomeButton } from '../mapboxApi/homeButton'
+import { createShuffleArtistButton } from '../mapboxApi/shuffelArtistsButton';
+import { createCloseConnectionsButton } from '../mapboxApi/artistConnectionsLayer'
+import { getHomeButtonCoordinates, getShuffleArtistsButtonCoordinates, getOpenFilterMenuButtonCoordinares, getCloseConnectionsButtonCoordinates } from '../mapboxApi/general'
+import { createFilterMenuButton } from '../mapboxApi/filterMenuPopup'
+//import { createOpenSearchBarButton } from '../mapboxApi/searchBar'
+import { creativesToFeatures, loadCreativeMarkers } from '../mapboxApi/creativeMarkerLayer'
 
 
 function Map() {
+    //map props
+    mapboxgl.accessToken = MAPBOX_TOKEN
+    const mapContainer = useRef(null);
+    const map = useRef(null);
 
-    const berlinViewport = {
-        latitude : 52.520008, 
-        longitude : 13.404954,
-        width : "100vw",
-        height : "100vh",
-        zoom : 9,
-        minZoom : 9,
-        berlinBounds : [[13.192625881080286, 52.38949809002746], [13.659758765765956, 52.64256574061617]]
+    const center = [10.172946185256103, 50.70767729701806]
+    const bounds = [
+        [-2.6751938897195346, 41.314258227976836],
+        [33.44692831623758, 60.83696282472915]
+    ]
+
+
+    const creativeFeatures = []
+    const artistFeatures = []
+    //const cityFeatures = []
+
+    const createMap = (mapContainer) => {
+        //if (map.current) return;
+        map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/joostwmd/ckucoygnc51gn18s0xu6mjltv',
+            center: center,
+            zoom: 4.2,
+            minZoom: 4,
+            maxBounds: bounds,
+            attributionControl: false,
+        })
+
+        return map.current
     }
-
-
-    const isOutOfMaxBounds = (latitude, longitude, maxBounds) => {
-        const [[swLng, swLat], [neLng, neLat]] = maxBounds;
-    
-        return longitude < swLng || longitude > neLng || latitude < swLat || latitude > neLat;
-    };
-
-
-
-    
-    const [viewport, setViewport] = useState(berlinViewport)
-    const [allArtists, setAllArtists] = useState([])
-    //const API_URL = process.env.API_URL
-    //const API_URL = 'http://localhost:5005'
-    const API_URL = 'https://trapmapversion2.herokuapp.com'
-
-
-
-    let size = 40
 
 
 
     useEffect(() => {
-        axios.get(`${API_URL}/dataBase/map`)
+
+        axios.get(`${SERVER_URL}/dataBase/getCreatives`)
             .then(res => {
-                console.log("all artists", res.data)
-                setAllArtists(res.data)
-                // => spotify name and picture already in db
+                creativesToFeatures(res.data, creativeFeatures)
             })
 
-        
+        axios.get(`${SERVER_URL}/dataBase/getArtists`)
+            .then(res => {
+                artistToFeatures(res.data, artistFeatures)
+            })
+
+        // axios.get(`${SERVER_URL}/dataBase/getCities`)
+        //     .then(res => {
+        //         citysToFeatures(res.data, cityFeatures)
+        //     })
+
+
+        map.current = createMap(mapContainer)
+        map.current.dragRotate.disable()
+        map.current.touchZoomRotate.disableRotation()
+
+        map.current.on('load', () => {
+            //loadCityMarker(map.current, cityFeatures)
+            loadArtistMarkers(map.current, artistFeatures)
+            loadCreativeMarkers(map.current, creativeFeatures)
+        })
+
+        const homeButtonMarker = createHomeButton(map.current)
+        const shuffleArtistMarker = createShuffleArtistButton(map.current)
+        const closeConnectionsButton = createCloseConnectionsButton(map.current)
+        //const openFilterMenuBotton = createFilterMenuButton(map.current, artitsFeatures)
+        const openFilterMenuBotton = createFilterMenuButton(map.current, artistFeatures)
+
+        map.current.on('zoom', () => {
+            homeButtonMarker.setLngLat(getHomeButtonCoordinates(map.current))
+            shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))
+            openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
+            closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
+        })
+
+        map.current.on('move', () => {
+            homeButtonMarker.setLngLat(getHomeButtonCoordinates(map.current))
+            shuffleArtistMarker.setLngLat(getShuffleArtistsButtonCoordinates(map.current))
+            openFilterMenuBotton.setLngLat(getOpenFilterMenuButtonCoordinares(map.current))
+            closeConnectionsButton.setLngLat(getCloseConnectionsButtonCoordinates(map.current))
+        })
+
+        // const marker = new mapboxgl.Marker({
+        //     draggable: true
+        // }).setLngLat(center).addTo(map.current);
+    
+        // function dragEnd() {
+        //     const lngLat = marker.getLngLat();
+        //     console.log(lngLat.lng,lngLat.lat )
+            
+        // }
+    
+        // marker.on('dragend', dragEnd);
     }, [])
 
     return (
-    <div id="mapWrapper">
-        <ReactMapGl
-            {...viewport}
-            mapboxApiAccessToken = "pk.eyJ1Ijoiam9vc3R3bWQiLCJhIjoiY2t1NDQ3NmJqMXRwbzJwcGM5a3FuY3B3dCJ9.yyon_mO5Y9sI1WgD-XFDRQ"
-            mapStyle = "mapbox://styles/joostwmd/ckvwifepf21kj15pflu8gbkdd"
-
-            onViewportChange={newViewport => {
-            
-                if (!isOutOfMaxBounds(
-                    newViewport.latitude,
-                    newViewport.longitude,
-                    berlinViewport.berlinBounds
-                ))
-                {
-                    setViewport(newViewport)
-                }
-            }}
-        >   
-            {allArtists.map(artist => {
-                return (
-                    <Marker
-                        latitude={artist.coordinates[1]}
-                        longitude={artist.coordinates[0]}
-
-                    >
-                        <div style={{ transform: `translate(${-size / 2}px,${-size}px)`}}>
-                            <Link to={`${artist._id}`}>
-                                
-                                 <MapMarker artist={artist} />
-                                
-                            </Link>
-                        </div>
-                    </Marker>
-            )})}
-        </ReactMapGl>
-    </div>
+        <div>
+            <div ref={mapContainer} className="map-container" />
+        </div>
     )
+
 }
-
 export default Map
-
