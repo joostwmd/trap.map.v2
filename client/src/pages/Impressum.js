@@ -44,7 +44,7 @@ function Impressum() {
                 <Text
                     mt='10vh'
                 >
-                    Die Trapmap Website ist ein Angebot der TrapMap UG (haftungsbeschränkt) i.G.
+                    Die Trapmap Website ist ein Angebot der TrapMap UG (haftungsbeschränkt) i.G. 
                 </Text>
 
                 <Text
